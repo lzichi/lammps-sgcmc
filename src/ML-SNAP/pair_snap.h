@@ -29,6 +29,7 @@ class PairSNAP : public Pair {
   PairSNAP(class LAMMPS *);
   ~PairSNAP() override;
   void compute(int, int) override;
+  double compute_atomic_energy(int, NeighList *) override;
   void settings(int, char **) override;
   void coeff(int, char **) override;
   void init_style() override;

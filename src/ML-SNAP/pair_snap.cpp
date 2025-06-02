@@ -40,6 +40,7 @@ PairSNAP::PairSNAP(LAMMPS *lmp) : Pair(lmp)
   restartinfo = 0;
   one_coeff = 1;
   manybody_flag = 1;
+  atomic_energy_enable = 1;
   centroidstressflag = CENTROID_NOTAVAIL;
 
   radelem = nullptr;
@@ -236,6 +237,110 @@ void PairSNAP::compute(int eflag, int vflag)
   }
 
   if (vflag_fdotr) virial_fdotr_compute();
+}
+
+/* ----------------------------------------------------------------------
+   compute the atomic energy of atom i
+------------------------------------------------------------------------- */
+
+double PairSNAP::compute_atomic_energy(int i, NieghList *neighborList)
+{
+  double Ei = 0.0; // atomic energy of atom i
+
+  // only need beta and bispectrum for atom i 
+  double *bispectrum_i;
+  double *beta_i;
+  memory->create(bispectrum_i, ncoeff, "pair:bispectrum_i");
+
+  // get position, type etc. about atom i
+  const double xi = atom->x[i][0]; 
+  const double yi = atom->x[i][1];
+  const double zi = atom->x[i][2];
+  const int itype = atom->type[i];
+  const int ielem = map[itype];
+  const double radi = radelem[ielem];
+
+  int *jlist = neighborList->firstneigh[i];
+  int jnum = neighborList->numneigh[i];
+
+  // compute bispectrum for i
+  // ensure rij, inside, wj, and rcutij are of size jnum
+  snaptr->grow_rij(jnum);
+  
+  // rij[][3] = displacement between atom i and those neighbors
+  // inside = indices of neighbors of i within cutoff
+  // wj = weights for neighbors of i within cutoff
+  // rcutij = cutoffs for neighbors of i within cutoff
+  // note Rij sign convention => dU/dRij = dU/dRj = -dU/dRi
+
+  ninside = 0;
+  for (int jj = 0; jj < jnum; j++) {
+    j = jlist[jj];
+    j&=NEIGHMASK;
+    delx = atom->x[j][0] - xi;
+    dely = atom->x[j][1] - yi;
+    delz = atom->x[j][2] - zi;
+    rsq = delx*delx + dely*dely + delz*delz;
+    int jtype = type[j];
+    int jelem = map[jtype];
+
+    if(rsq < cutsq[itype][jtype] && rsq > 1e-20) {
+      snaptr->rij[ninside][0] = delx;
+      snaptr->rij[ninside][1] = dely;
+      snaptr->rij[ninside][2] = delz;
+      snaptr->inside[ninside] = j;
+      snaptr->rcutij[ninside] = (radi + radelem[jelem])*rcutfac;
+      if (switchinnerflag) {
+        snaptr->sinnerij[ninside] = 0.5*(sinnerelem[ielem]+sinnerelem[jelem]);
+        snaptr->dinnerij[ninside] = 0.5*(dinnerelem[ielem]+dinnerelem[jelem]);
+      }
+      if (chemflag) snaptr->element[ninside] = jelem;
+      ninside++;
+    }
+  }
+
+  if (chemflag)
+    snaptr->compute_ui(ninside, ielem);
+  else
+    snaptr->compute_ui(ninside, 0);
+  snaptr->compute_bi(ielem);
+
+  if(chemflag)
+    snaptr->compute_bi(ielem);
+  else
+    snaptr->compute_bi(0);
+
+  for (int icoeff = 0; icoeff < ncoeff; icoeff++) {
+    bispectrum_i[icoeff] = snaptr->blist[icoeff];
+  }
+
+  // compute Ei as sum over coeffs_k * Bi_k
+  double *coeffi = coeffelem[ielem];
+
+  Ei += coeffi[0];
+
+  // linear contributions
+  for (int icoeff = 0; icoeff < ncoeff; icoeff++) {
+    Ei += coeffi[icoeff+1]*bispectrum_i[icoeff];
+
+    // quadratic contributions
+    if (quadraticflag) {
+      int k = ncoeff + 1;
+      for (int icoeff = 0; i coeff < ncoeff; icoeff++) {
+        double bveci = bispectrum_i[icoeff];
+        Ei += 0.5*coeffi[k++]*bveci*bveci;
+        for (int jcoeff = icoeff+1; jcoeff < ncoeff; jcoeff++) {
+          double bvecj = bispectrum_i[jcoeff];
+          Ei += coeffi[k++]*bveci*bvecj;
+        }
+      }
+    }
+    Ei *= scale[itype][jtype];
+  }
+
+  memory->destroy(bispectrum_i);
+
+  return Ei;
 }
 
 /* ----------------------------------------------------------------------
