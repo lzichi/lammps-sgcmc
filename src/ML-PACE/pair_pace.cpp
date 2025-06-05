@@ -87,6 +87,7 @@ PairPACE::PairPACE(LAMMPS *lmp) : Pair(lmp)
   single_enable = 0;
   restartinfo = 0;
   one_coeff = 1;
+  atomic_energy_enable = 1;
   manybody_flag = 1;
 
   nmax_corerep = 0;
@@ -237,6 +238,41 @@ void PairPACE::compute(int eflag, int vflag)
   if (vflag_fdotr) virial_fdotr_compute();
 
   // end modifications YL
+}
+
+/* ---------------------------------------------------------------------- */
+
+double PairPACE::compute_atomic_energy(int i, NeighList *neighborList) {
+
+  // TODO: what is corerep_factor
+  if (flag_corerep_factor && atom->nlocal > nmax_corerep) {
+    memory->destroy(corerep_factor);
+    nmax_corerep = atom->nlocal;
+    memory->create(corerep_factor, nmax_corerep, "pace/atom:corerep_factor");
+    //zeroify array
+    memset(corerep_factor, 0, nmax_corerep * sizeof(*corerep_factor));
+  }
+
+  double Ei = 0.0; // atomic energy of atom i
+
+  const int itype = atom->type[i];
+  const double xi = atom->x[i][0];
+  const double yi = atom->x[i][1];
+  const double zi = atom->x[i][2];
+
+  int *jlist = neighborList->firstneigh[i];
+  int jnum = neighborList->numneigh[i];
+
+  // TODO: compute_atom also computes forces (not needed)
+  try {
+    aceimpl->ace->compute_atom(i, atom->x, atom->type, jnum, jlist);
+  } catch (std::exception &e) {
+    error->one(FLERR, e.what());
+  }
+
+  Ei += scale[itype][itype] * aceimpl->ace->e_atom;
+
+  return Ei;
 }
 
 /* ---------------------------------------------------------------------- */

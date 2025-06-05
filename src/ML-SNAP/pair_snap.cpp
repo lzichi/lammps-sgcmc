@@ -243,7 +243,7 @@ void PairSNAP::compute(int eflag, int vflag)
    compute the atomic energy of atom i
 ------------------------------------------------------------------------- */
 
-double PairSNAP::compute_atomic_energy(int i, NieghList *neighborList)
+double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
 {
   double Ei = 0.0; // atomic energy of atom i
 
@@ -273,15 +273,15 @@ double PairSNAP::compute_atomic_energy(int i, NieghList *neighborList)
   // rcutij = cutoffs for neighbors of i within cutoff
   // note Rij sign convention => dU/dRij = dU/dRj = -dU/dRi
 
-  ninside = 0;
-  for (int jj = 0; jj < jnum; j++) {
-    j = jlist[jj];
+  int ninside = 0;
+  for (int jj = 0; jj < jnum; jj++) {
+    int j = jlist[jj];
     j&=NEIGHMASK;
-    delx = atom->x[j][0] - xi;
-    dely = atom->x[j][1] - yi;
-    delz = atom->x[j][2] - zi;
-    rsq = delx*delx + dely*dely + delz*delz;
-    int jtype = type[j];
+    double delx = atom->x[j][0] - xi;
+    double dely = atom->x[j][1] - yi;
+    double delz = atom->x[j][2] - zi;
+    double rsq = delx*delx + dely*dely + delz*delz;
+    int jtype = atom->type[j];
     int jelem = map[jtype];
 
     if(rsq < cutsq[itype][jtype] && rsq > 1e-20) {
@@ -326,7 +326,7 @@ double PairSNAP::compute_atomic_energy(int i, NieghList *neighborList)
     // quadratic contributions
     if (quadraticflag) {
       int k = ncoeff + 1;
-      for (int icoeff = 0; i coeff < ncoeff; icoeff++) {
+      for (int icoeff = 0; icoeff < ncoeff; icoeff++) {
         double bveci = bispectrum_i[icoeff];
         Ei += 0.5*coeffi[k++]*bveci*bveci;
         for (int jcoeff = icoeff+1; jcoeff < ncoeff; jcoeff++) {
@@ -335,7 +335,7 @@ double PairSNAP::compute_atomic_energy(int i, NieghList *neighborList)
         }
       }
     }
-    Ei *= scale[itype][jtype];
+    Ei *= scale[itype][itype];
   }
 
   memory->destroy(bispectrum_i);
