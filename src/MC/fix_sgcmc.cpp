@@ -256,9 +256,9 @@ void FixSemiGrandCanonicalMC::init()
       error->all(FLERR, "SGC - Pair style does not support atomic energy method");
     }
   } else {
-    // Save a pointer to the EAM potential.
-    pairEAM = dynamic_cast<PairEAM*>(force->pair);
-    if (!pairEAM) {
+    // // Save a pointer to the EAM potential.
+    // pairEAM = dynamic_cast<PairEAM*>(force->pair);
+    // if (!pairEAM) {
 
       if (comm->me == 0)
         utils::logmesg(lmp, "  SGC - Using naive total energy calculation for MC -> SLOW!\n");
@@ -270,7 +270,7 @@ void FixSemiGrandCanonicalMC::init()
       // Get reference to a compute that will provide the total energy of the system.
       // This is needed by computeTotalEnergy().
       compute_pe = modify->get_compute_by_id("thermo_pe");
-    }
+   // }
   }
 
   interactionRadius = force->pair->cutforce;
@@ -406,12 +406,12 @@ void FixSemiGrandCanonicalMC::doMC()
           deltaE = computeEnergyChangeEatom(selectedAtom, oldSpecies, newSpecies);
         } else {
           // EAM method:
-          if (pairEAM) {
-            deltaE = computeEnergyChangeEAM(selectedAtom, selectedAtomNL, oldSpecies, newSpecies);
-          } else {
+          //if (pairEAM) {
+           // deltaE = computeEnergyChangeEAM(selectedAtom, selectedAtomNL, oldSpecies, newSpecies);
+         // } else {
             // Generic method
             deltaE = computeEnergyChangeGeneric(selectedAtom, oldSpecies, newSpecies);
-          }
+          //}
         }
 
         // Perform inner MC acceptance test.
@@ -471,9 +471,9 @@ void FixSemiGrandCanonicalMC::doMC()
         if(atomicenergyflag) {
           flipAtomEatom(selectedAtom, oldSpecies, newSpecies);
         } else {
-          if (pairEAM)
-            flipAtomEAM(selectedAtom, selectedAtomNL, oldSpecies, newSpecies);
-          else
+          //if (pairEAM)
+            //flipAtomEAM(selectedAtom, selectedAtomNL, oldSpecies, newSpecies);
+         // else
             flipAtomGeneric(selectedAtom, oldSpecies, newSpecies);
         }
         nAcceptedSwapsLocal++;
@@ -518,11 +518,11 @@ void FixSemiGrandCanonicalMC::doMC()
  *********************************************************************/
 void FixSemiGrandCanonicalMC::fetchGhostAtomElectronDensities()
 {
-  if (pairEAM) {
-    // Transfer original EAM rho values.
-    communicationStage = 1;
-    comm->forward_comm(this);
-  }
+  // if (pairEAM) {
+  //   // Transfer original EAM rho values.
+  //   communicationStage = 1;
+  //   comm->forward_comm(this);
+  // }
 }
 
 /*********************************************************************
@@ -536,11 +536,11 @@ void FixSemiGrandCanonicalMC::communicateRhoAndTypes()
   // In the array changedAtoms we kept track of which rhos have been changed by the MC. This helps us
   // here to not overwrite values when doing the bidirectional exchange.
 
-  if (pairEAM) {
-    // Transfer changed electron densities of ghost atoms to the real atoms.
-    communicationStage = 2;
-    comm->reverse_comm(this);
-  }
+  // if (pairEAM) {
+  //   // Transfer changed electron densities of ghost atoms to the real atoms.
+  //   communicationStage = 2;
+  //   comm->reverse_comm(this);
+  // }
 
   // Transfer changed atom types and electron densities of the real atoms to the ghost atoms.
   communicationStage = 3;
@@ -558,18 +558,18 @@ int FixSemiGrandCanonicalMC::pack_forward_comm(int n, int *list, double *buf, in
     // Send electron densities of local atoms to neighbors.
     for (int i = 0; i < n; i++) buf[m++] = pairEAM->rho[list[i]];
   } else if (communicationStage == 3) {
-    if (pairEAM) {
-      // Send types and rhos of real atoms to the ghost atoms of the neighbor proc.
-      for (int i = 0; i < n; i++) {
-        buf[m++] = atom->type[list[i]];
-        buf[m++] = pairEAM->rho[list[i]];
-      }
-    } else {
+    // if (pairEAM) {
+    //   // Send types and rhos of real atoms to the ghost atoms of the neighbor proc.
+    //   for (int i = 0; i < n; i++) {
+    //     buf[m++] = atom->type[list[i]];
+    //     buf[m++] = pairEAM->rho[list[i]];
+    //   }
+    // } else {
       // Generic potential case:
       for (int i = 0; i < n; i++) {
         buf[m++] = atom->type[list[i]];
       }
-    }
+    //}
   }
   return m;
 }
@@ -585,22 +585,22 @@ void FixSemiGrandCanonicalMC::unpack_forward_comm(int n, int first, double* buf)
     for (int i = first; i < last; i++) pairEAM->rho[i] = *buf++;
   } else if (communicationStage == 3) {
     int last = first + n;
-    if (pairEAM) {
-      // Receive types and rhos of real atoms of the neighbor proc and assign them
-      // to the local ghost atoms.
-      for (int i = first; i < last; i++, buf += 2) {
-        atom->type[i] = (int)buf[0];
-        // We have to make sure that rhos changed locally do not get overridden by the rhos
-        // sent by the neighbor procs.
-        if (!changedAtoms[i])
-          pairEAM->rho[i] = buf[1];
-      }
-    } else {
+    // if (pairEAM) {
+    //   // Receive types and rhos of real atoms of the neighbor proc and assign them
+    //   // to the local ghost atoms.
+    //   for (int i = first; i < last; i++, buf += 2) {
+    //     atom->type[i] = (int)buf[0];
+    //     // We have to make sure that rhos changed locally do not get overridden by the rhos
+    //     // sent by the neighbor procs.
+    //     if (!changedAtoms[i])
+    //       pairEAM->rho[i] = buf[1];
+    //   }
+    // } else {
       // Generic potential case:
       for (int i = first; i < last; i++, buf += 1) {
         atom->type[i] = (int)buf[0];
       }
-    }
+    //}
   }
 }
 
