@@ -732,7 +732,7 @@ bool FixSemiGrandCanonicalMC::placeSamplingWindow()
  *
  * Return value:
  *   The expected change in total potential energy.
- *********************************************************************/
+ ***************************************************ACE******************/
 double FixSemiGrandCanonicalMC::computeEnergyChangeEAM(int flipAtom, int flipAtomNL, int oldSpecies, int newSpecies)
 {
   double p;
@@ -1031,7 +1031,6 @@ double FixSemiGrandCanonicalMC::computeEnergyChangeEatom(int flipAtom, int oldSp
   double Eold, Enew, deltaE;
 
   // Calculate old atomic energy of selected atom
-
   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
   // calculate the old per-atom energy of neighbors
