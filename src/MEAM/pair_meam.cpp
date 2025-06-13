@@ -51,6 +51,7 @@ PairMEAM::PairMEAM(LAMMPS *lmp) : Pair(lmp)
   restartinfo = 0;
   one_coeff = 1;
   manybody_flag = 1;
+  atomic_energy_enable = 1;
   centroidstressflag = CENTROID_NOTAVAIL;
 
   allocated = 0;
@@ -62,6 +63,9 @@ PairMEAM::PairMEAM(LAMMPS *lmp) : Pair(lmp)
   myname = "meam";
 
   scale = nullptr;
+
+  // TODO find a better way
+  memory->create(eatom_local, atom->nmax*comm->nthreads, "pair::eatom_local");
 }
 
 /* ----------------------------------------------------------------------
@@ -80,6 +84,8 @@ PairMEAM::~PairMEAM()
     memory->destroy(cutsq);
     memory->destroy(scale);
   }
+
+  memory->destroy(eatom_local);
 }
 
 /* ---------------------------------------------------------------------- */
@@ -157,6 +163,255 @@ void PairMEAM::compute(int eflag, int vflag)
   }
   if (vflag_fdotr) virial_fdotr_compute();
 }
+
+/* ---------------------------------------------------------------------- */
+
+// double PairMEAM::compute_atomic_energy(int i, NeighList *neighborList) 
+// {
+
+//   double Ei = 0.0
+
+//   // strip neighbor list
+//   int *jlist = neighborList->firstneigh[i]; 
+//   for (int jj = 0; jj < neighborList->numneigh; jj++) {
+//     jlist[jj] &=NEIGHMASK;
+//   }
+
+//   // zero out local arrays (inside meam_dens_setup)
+//   rho0[i] = 0.0;
+//   arho2b[i] = 0.0;
+//   arho1[i][0] = arho1[i][1] = arho1[i][2] = 0.0;
+//   if (msmeamflag) {
+//     arho2mb[i] = 0.0;
+//     arho1m[i][0] = arho1m[i][1] = arho1m[i][2] = 0.0;
+//   }
+//   for (j = 0; j < 6; j++) {
+//     arho2[i][j] = 0.0;
+//     if (msmeamflag) { arho2m[i][j] = 0.0; }
+//   }
+//   for (j = 0; j < 10; j++) {
+//     arho3[i][j] = 0.0;
+//     if (msmeamflag) { arho3m[i][j] = 0.0; }
+//   }
+//   arho3b[i][0] = arho3b[i][1] = arho3b[i][2] = 0.0;
+//   if (msmeamflag) { arho3mb[i][0] = arho3mb[i][1] = arho3mb[i][2] = 0.0; }
+//   t_ave[i][0] = t_ave[i][1] = t_ave[i][2] = 0.0;
+//   tsq_ave[i][0] = tsq_ave[i][1] = tsq_ave[i][2] = 0.0;
+
+//   // for ease of use
+//   double **x = atom->x;
+//   double **f = atom->f;
+//   int *type = atom->type;
+//   int ntype = atom->ntypes;
+
+//   // three stages of MEAM calculation
+//   int offset = 0;
+//   int errorflag = 0;
+
+//   // TODO: find better way to calculate offset
+//   int ii = 0;
+//   while (neigh)
+
+
+
+//   return Ei;
+// }
+
+// for understanding of pair style, computes ALL LOCAL ENERGIES VERY SLOW
+/*
+double PairMEAM::compute_atomic_energy(int i, NeighList *neighborList) 
+{
+  double Ei = 0.0; // atomic energy of atom i
+
+
+  int ii, n, inum_half, errorflag;
+  int *ilist_half, *numneigh_half, **firstneigh_half;
+  int *numneigh_full, **firstneigh_full;
+
+  // neighbor list info
+
+  inum_half = listhalf->inum;
+  ilist_half = listhalf->ilist;
+  numneigh_half = listhalf->numneigh;
+  firstneigh_half = listhalf->firstneigh;
+  numneigh_full = listfull->numneigh;
+  firstneigh_full = listfull->firstneigh;
+
+  for (int iii = 0; iii < atom->nlocal + atom->nghost; iii++) {
+    eatom_local[iii] = 0.0;
+  }
+  
+
+  if (neighbor->ago == 0) {
+    neigh_strip(inum_half, ilist_half, numneigh_half, firstneigh_half);
+    neigh_strip(inum_half, ilist_half, numneigh_full, firstneigh_full);
+  }
+
+  int nlocal = atom->nlocal;
+  int nall = nlocal + atom->nghost;
+
+  n = 0;
+  for (ii = 0; ii < inum_half; ii++) n += numneigh_half[ilist_half[ii]];
+
+  meam_inst->meam_dens_setup(atom->nmax, nall, n);
+
+  double **x = atom->x;
+  double **f = atom->f;
+  int *type = atom->type;
+  int ntype = atom->ntypes;
+
+  int offset = 0;
+
+  for (int ii = 0; ii < inum_half; ii++) {
+    int tempi = ilist_half[ii];
+    meam_inst->meam_dens_init(tempi, ntype, type, map, x, numneigh_half[tempi], firstneigh_half[tempi],
+                              numneigh_full[tempi], firstneigh_full[tempi], offset);
+    offset += numneigh_half[tempi];
+  }
+
+  // meam dens final
+
+  comm->reverse_comm(this);
+  
+  for (int l = 0; l < atom->nlocal; l++) {
+    int errorflag = 0;
+    meam_inst->meam_dens_final_one_atom(l, &eng_vdwl, eatom_local, atom->type[l], 
+                                        map[atom->type[l]], scale[atom->type[l]], 
+                                        errorflag);
+    if (errorflag) error->one(FLERR, Error::NOLASTLINE, "MEAM library error {}", errorflag);
+  }
+
+  comm->forward_comm(this);
+
+  offset = 0;
+  for (int ii = 0; ii < inum_half; ii++) {
+    int tempi = ilist_half[ii];
+
+    meam_inst->meam_force_one_atom_engy(tempi, eatom_local, atom->type, map, scale, 
+                                        x, numneigh_half[tempi], firstneigh_half[tempi],
+                                        numneigh_full[tempi], firstneigh_full[tempi], offset);
+    offset += numneigh_half[tempi];
+  }
+  
+  Ei = Ei + eatom_local[i];
+
+  return Ei;
+}*/
+
+// for understanding of pair style, computes ALL LOCAL ENERGIES VERY SLOW
+double PairMEAM::compute_atomic_energy(int i, NeighList *neighborList) 
+{
+  double Ei = 0.0; // atomic energy of atom i
+
+  int ii, n, inum_half, errorflag, inum_full;
+  int *ilist_half, *numneigh_half, **firstneigh_half;
+  int *numneigh_full, **firstneigh_full;
+
+  // neighbor list info
+
+  inum_half = listhalf->inum;
+  ilist_half = listhalf->ilist;
+  numneigh_half = listhalf->numneigh;
+  firstneigh_half = listhalf->firstneigh;
+
+  inum_full = listfull->inum;
+  ilist_half = listfull->ilist;
+  numneigh_full = listfull->numneigh;
+  firstneigh_full = listfull->firstneigh;
+
+  for (int iii = 0; iii < atom->nlocal + atom->nghost; iii++) {
+    eatom_local[iii] = 0.0;
+  }
+  
+
+  if (neighbor->ago == 0) {
+    neigh_strip(inum_half, ilist_half, numneigh_half, firstneigh_half);
+    neigh_strip(inum_half, ilist_half, numneigh_full, firstneigh_full);
+  }
+
+  int nlocal = atom->nlocal;
+  int nall = nlocal + atom->nghost;
+
+  n = 0;
+  for (ii = 0; ii < inum_half; ii++) n += numneigh_half[ilist_half[ii]];
+
+  meam_inst->meam_dens_setup(atom->nmax, nall, n);
+
+  double **x = atom->x;
+  double **f = atom->f;
+  int *type = atom->type;
+  int ntype = atom->ntypes;
+
+  // precompute offset TODO: assumes that ii = i
+
+  int *offseti;
+  memory->create(offseti, inum_half, "pair::offset");
+  offseti[0] = 0;
+
+  for (int ii = 0; ii < inum_half; ii++) {
+    int tempi = ilist_half[ii];
+    offseti[ii + 1] = offseti[ii] + numneigh_half[tempi];
+  }
+
+  for (int ii = 0; ii < inum_half; ii++) {
+    int tempi = ilist_half[ii];
+    meam_inst->meam_dens_init(tempi, ntype, type, map, x, numneigh_half[tempi], firstneigh_half[tempi],
+                              numneigh_full[tempi], firstneigh_full[tempi], offseti[ii]);
+  }
+
+  // meam dens final
+
+  comm->reverse_comm(this);
+  
+  if (i < atom->nlocal) {
+    int errorflag = 0;
+    meam_inst->meam_dens_final_one_atom(i, &eng_vdwl, eatom_local, atom->type[i], 
+                                        map[atom->type[i]], scale[atom->type[i]], 
+                                        errorflag);
+    if (errorflag) error->one(FLERR, Error::NOLASTLINE, "MEAM library error {}", errorflag);
+  }
+
+  comm->forward_comm(this);
+
+  // loop through ull neighbor list
+  // offset based on i to j from half neighbor list
+
+  for (int jj = 0; jj < numneigh_full[i]; jj++) {
+    int tempi = i;
+    int j_in = firstneigh_full[i][jj];
+
+    // check if listed as i-j in half neighborlist
+    bool in_half = false;
+    int jn_in = -1;
+    int offset_in = offseti[i];
+    for (int jjj = 0; jjj < numneigh_half[i]; jjj++) {
+      if ( j_in == firstneigh_half[i][jjj]) {
+        in_half = true;
+        jn_in = jjj;
+      }
+    }
+
+    // not in half neighbor list, so listed as j-i
+    // go through j's half neighbor list and find offset and jn
+    if(in_half == false) {
+      offset_in = offseti[j_in];
+      for (int jjj = 0; jjj < numneigh_half[j_in]; jjj++) {
+        if (i == firstneigh_half[j_in][jjj]) {
+          jn_in = jjj;
+        }
+      }
+    }
+    
+    meam_inst->meam_force_one_atom_engy(tempi, eatom_local, atom->type, map, scale, 
+                                        x, numneigh_half[tempi], firstneigh_half[tempi],
+                                        numneigh_full[tempi], firstneigh_full[tempi], offset_in,
+                                        j_in, jn_in);
+  }
+  
+  Ei = Ei + eatom_local[i];
+  memory->destroy(offseti);
+  return Ei;
+} 
 
 /* ---------------------------------------------------------------------- */
 
@@ -635,6 +890,7 @@ void PairMEAM::read_user_meam_file(const std::string &userfile, int uidx)
 int PairMEAM::pack_forward_comm(int n, int *list, double *buf, int /*pbc_flag*/, int * /*pbc*/)
 {
   int i, j, k, m;
+  //printf("pack_forward_comm %d \n", n);
 
   m = 0;
   for (i = 0; i < n; i++) {

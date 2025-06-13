@@ -29,6 +29,7 @@ class PairMEAM : public Pair {
   PairMEAM(class LAMMPS *);
   ~PairMEAM() override;
   void compute(int, int) override;
+  double compute_atomic_energy(int, NeighList *) override;
   void settings(int, char **) override;
   void coeff(int, char **) override;
   void init_style() override;
@@ -52,6 +53,8 @@ class PairMEAM : public Pair {
   std::vector<double> mass;                // mass of library element
 
   double **scale;    // scaling factor for adapt
+    
+  double *eatom_local; // compute_atomic_energy
 
   void allocate();
   void read_files(const std::string &, const std::string &, int);

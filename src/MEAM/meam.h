@@ -145,6 +145,11 @@ class MEAM {
   double stheta_meam[MAXELT][MAXELT];
   double ctheta_meam[MAXELT][MAXELT];
 
+  // compute_atomic_energy
+  double *rho1_eng, *rho2_eng, *rho3_eng;
+  double *gamma_eng, *dgamma1_eng, *dgamma2_eng, *dgamma3_eng;
+  double **t_ave_eng; 
+
  protected:
   // meam_funcs.cpp
 
@@ -314,10 +319,15 @@ class MEAM {
   void meam_dens_final(int nlocal, int eflag_either, int eflag_global, int eflag_atom,
                        double *eng_vdwl, double *eatom, int ntype, int *type, int *fmap,
                        double **scale, int &errorflag);
+  void meam_dens_final_one_atom(int i, double *eng_vdwl, double *eatom, int itype, 
+                                    int ifmap, double *iscale, int &errorflag);
   void meam_force(int i, int eflag_global, int eflag_atom, int vflag_global, int vflag_atom,
                   double *eng_vdwl, double *eatom, int ntype, int *type, int *fmap, double **scale,
                   double **x, int numneigh, int *firstneigh, int numneigh_full,
                   int *firstneigh_full, int fnoffset, double **f, double **vatom, double *virial);
+  void meam_force_one_atom_engy(int i, double *eatom, int *type, int *fmap,
+                      double **scale, double **x, int numneigh, int *firstneigh, int numneigh_full,
+                      int *firstneigh_full, int fnoffset, int j_in, int jn_in);
 };
 
 // Functions we need for compat

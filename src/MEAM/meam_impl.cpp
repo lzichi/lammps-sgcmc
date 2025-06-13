@@ -54,6 +54,7 @@ MEAM::MEAM(Memory *mem) : memory(mem)
       nn2_meam[i][j] = zbl_meam[i][j] = eltind[i][j] = 0;
     }
   }
+
 }
 
 MEAM::~MEAM()

@@ -70,6 +70,9 @@ void MEAM::meam_dens_setup(int atom_nmax, int nall, int n_neigh)
     memory->create(arho3, nmax, 10, "pair:arho3");
     memory->create(arho3b, nmax, 3, "pair:arho3b");
     memory->create(t_ave, nmax, 3, "pair:t_ave");
+    // compute_atomic_energy
+    int size = 3;
+    memory->create(t_ave_eng, nmax, 3, "pair:t_ave_eng");
     memory->create(tsq_ave, nmax, 3, "pair:tsq_ave");
     // msmeam params
     if (msmeamflag) {

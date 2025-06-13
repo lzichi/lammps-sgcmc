@@ -767,3 +767,66 @@ void MEAM::meam_force(int i, int eflag_global, int eflag_atom, int vflag_global,
     //     end of j loop
   }
 }
+
+void MEAM::meam_force_one_atom_engy(int i, double *eatom_local, int *type, int *fmap,
+                      double **scale, double **x, int numneigh, int *firstneigh, int numneigh_full,
+                      int *firstneigh_full, int fnoffset, int j_in, int jn_in)
+{
+  // Ei component from meam_force
+
+  int elti = fmap[type[i]];
+  //if (elti < 0) return; // TODO: is this correct for energy?
+
+  double xitmp, yitmp, zitmp;
+
+  xitmp = x[i][0];
+  yitmp = x[i][1];
+  zitmp = x[i][2];
+
+  // Treat each pair
+  double scaleij, rij, recip, pp, phi, phip, rij2, sij;
+  double delij[3];
+  int j, ind, kk, eltj;
+
+  yitmp = x[i][1];
+  //for (int jn = 0; jn < numneigh; jn++) {
+    //j = firstneigh[jn];
+
+    j = j_in;
+
+    eltj = fmap[type[j]];
+    scaleij = scale[type[i]][type[j]];
+
+    if (!iszero(scrfcn[fnoffset + jn_in]) && eltj >= 0) {
+
+      sij = scrfcn[fnoffset + jn_in] * fcpair[fnoffset + jn_in];
+      delij[0] = x[j][0] - xitmp;
+      delij[1] = x[j][1] - yitmp;
+      delij[2] = x[j][2] - zitmp;
+      rij2 = delij[0] * delij[0] + delij[1] * delij[1] + delij[2] * delij[2];
+      if (rij2 < cutforcesq) {
+        rij = sqrt(rij2);
+        recip = 1.0 / rij;
+        //     Compute phi and phip
+        ind = eltind[elti][eltj];
+        pp = rij * rdrar;
+        kk = (int)pp;
+        kk = std::min(kk, nrar - 2);
+        pp = pp - kk;
+        pp = std::min(pp, 1.0);
+        phi = ((phirar3[ind][kk] * pp + phirar2[ind][kk]) * pp + phirar1[ind][kk]) * pp + phirar[ind][kk];
+        phip = (phirar6[ind][kk] * pp + phirar5[ind][kk]) * pp + phirar4[ind][kk];
+
+        double phi_sc = phi * scaleij;
+        
+
+        eatom_local[i] = eatom_local[i] + 0.5 * phi_sc * sij;
+        //eatom_local[j] = eatom_local[j] + 0.5 * phi_sc * sij;
+
+        // if(i == 1 || j == 1) {
+        //   printf("eatom 1 = %g \n", eatom_local[i]);
+        // }
+      }
+    }
+  //}
+}
