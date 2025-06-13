@@ -249,7 +249,7 @@ double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
 
   // only need beta and bispectrum for atom i 
   double *bispectrum_i;
-  double *beta_i;
+
   memory->create(bispectrum_i, ncoeff, "pair:bispectrum_i");
 
   // get position, type etc. about atom i
@@ -259,6 +259,10 @@ double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
   const int itype = atom->type[i];
   const int ielem = map[itype];
   const double radi = radelem[ielem];
+
+  
+  // printf("compute energy, itype = %d\n", itype);
+  // printf("compute energy, ielem = %d\n", ielem);
 
   int *jlist = neighborList->firstneigh[i];
   int jnum = neighborList->numneigh[i];
@@ -289,6 +293,7 @@ double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
       snaptr->rij[ninside][1] = dely;
       snaptr->rij[ninside][2] = delz;
       snaptr->inside[ninside] = j;
+      snaptr->wj[ninside] = wjelem[jelem];
       snaptr->rcutij[ninside] = (radi + radelem[jelem])*rcutfac;
       if (switchinnerflag) {
         snaptr->sinnerij[ninside] = 0.5*(sinnerelem[ielem]+sinnerelem[jelem]);
@@ -305,6 +310,7 @@ double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
     snaptr->compute_ui(ninside, 0);
   snaptr->compute_bi(ielem);
 
+  snaptr->compute_zi();
   if(chemflag)
     snaptr->compute_bi(ielem);
   else
@@ -313,6 +319,7 @@ double PairSNAP::compute_atomic_energy(int i, NeighList *neighborList)
   for (int icoeff = 0; icoeff < ncoeff; icoeff++) {
     bispectrum_i[icoeff] = snaptr->blist[icoeff];
   }
+
 
   // compute Ei as sum over coeffs_k * Bi_k
   double *coeffi = coeffelem[ielem];
