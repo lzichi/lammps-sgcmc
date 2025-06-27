@@ -48,8 +48,6 @@ Compute(lmp, narg, arg), energy(nullptr), list(nullptr)
       error->all(FLERR, "compute localenergy/atom - Pair style does not support atomic energy method");
    }
 
-   printf("Inside compute localenergy!");
-
    nmax = 0;
    comm_reverse = 1;
 }
@@ -117,12 +115,12 @@ void ComputeLocalenergyAtom::compute_peratom()
       energy[ii] = Ei;
    }
 
-   comm->reverse_comm(this);
+   //comm->reverse_comm(this);
 
-   int *mask = atom->mask;
+//    int *mask = atom->mask;
 
-  for (i = 0; i < atom->nlocal; i++)
-    if (!(mask[i] & groupbit)) energy[i] = 0.0;
+//   for (i = 0; i < atom->nlocal; i++)
+//     if (!(mask[i] & groupbit)) energy[i] = 0.0;
 }
 
 /*********************************************************************
