@@ -172,21 +172,16 @@ class FixSemiGrandCanonicalMCSector : public Fix {
 
   // stacking variables for sectoring algorithm
 
-  // index of first atom in backward_stacks
-  int *stack_head;
 
   // index of first atom in forward_stacks
-  int *stack_foot;
+//   int *stack_foot;
 
-  // index of next atom in backward stack
-  int *backward_stacks;
-
-  // index of next atom in forward stack
-  int *forward_stacks;
+//   // index of next atom in forward stack
+//   int *forward_stacks;
 
   // number of atoms in each sector
   int *num_atoms_per_sector;
-  int *test;
+
   int *atoms_in_sector;
 
   // number of atoms a processor owns

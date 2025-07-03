@@ -61,8 +61,11 @@ using namespace FixConst;
  *********************************************************************/
 FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int narg, char **arg) :
     Fix(_lmp, narg, arg), random(nullptr), localRandom(nullptr), neighborList(nullptr),
-    compute_pe(nullptr), rsec(nullptr), stack_head(nullptr), stack_foot(nullptr),
-    backward_stacks(nullptr), forward_stacks(nullptr)
+    compute_pe(nullptr), rsec(nullptr), num_atoms_per_sector(nullptr), atoms_in_sector(nullptr)
+    // stack_foot(nullptr), forward_stacks(nullptr)
+    
+    //stack_head(nullptr), stack_foot(nullptr),
+    //backward_stacks(nullptr), forward_stacks(nullptr)
 {
   scalar_flag = 0;
   vector_flag = 1;
@@ -183,8 +186,8 @@ FixSemiGrandCanonicalMCSector::~FixSemiGrandCanonicalMCSector()
 {
   memory->destroy(rsec);
   //memory->destroy(stack_head);
-  memory->destroy(stack_foot);
-  memory->destroy(forward_stacks);
+//   memory->destroy(stack_foot);
+//   memory->destroy(forward_stacks);
   //memory->destroy(backward_stacks);
   memory->destroy(num_atoms_per_sector);
   memory->destroy(atoms_in_sector);
@@ -278,19 +281,18 @@ void FixSemiGrandCanonicalMCSector::init()
 
   // setting the sector variables/lists
   nsectors = 0;
-  memory->create(rsec,3,"sgcmcs:rsec");
-  memory->create(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
+  memory->grow(rsec,3,"sgcmcs:rsec");
+  memory->grow(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
 
   // perform the sectoring operation
   if (sector_flag) sectoring();
   
   // init. size of stacking lists (sectoring)
   nlocal_max = atom->nlocal;
-  //memory->create(stack_head,nsectors,"sgcmcs:stack_head");
-  memory->create(stack_foot,nsectors,"sgcmcs:stack_foot");
-  //memory->create(backward_stacks,nlocal_max,"sgcmcs:backward_stacks");
-  memory->create(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
-  memory->create(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
+
+//   memory->grow(stack_foot,nsectors,"sgcmcs:stack_foot");
+//   memory->grow(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
+  memory->grow(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
   setup_pre_neighbor();
 }
 
@@ -353,8 +355,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
     // This number must be synchronized with the other nodes. We take the largest
     // of all nodes and skip trial moves later.
-    int largestnDice;
-    MPI_Allreduce(&nDice, &largestnDice, 1, MPI_INT, MPI_MAX, world);
+    int largestnDice = nDice;
+    // MPI_Allreduce(&nDice, &largestnDice, 1, MPI_INT, MPI_MAX, world);
 
     // The probability to do one swap step.
     double diceProbability = (double)nDice / (double)largestnDice;
@@ -425,27 +427,22 @@ void FixSemiGrandCanonicalMCSector::doMC()
         // semi-grandcanonical method.
 
         // MPI sum of total change in number of particles.
-        MPI_Allreduce(deltaN.data(), deltaNGlobal.data(), deltaN.size(), MPI_INT, MPI_SUM, world);
+       // MPI_Allreduce(deltaN.data(), deltaNGlobal.data(), deltaN.size(), MPI_INT, MPI_SUM, world);
 
         // Perform outer MC acceptance test.
         // This is done in sync by all processors.
         double A = 0.0;
         for (int i = 1; i <= atom->ntypes; i++) {
-          A += deltaNGlobal[i] * deltaNGlobal[i];
-          A += 2.0 * deltaNGlobal[i] * (speciesCounts[i] - (int)(targetConcentration[i] * atom->natoms));
+          A += deltaN[i] * deltaN[i];
+          A += 2.0 * deltaN[i] * (speciesCounts[i] - (int)(targetConcentration[i] * atom->natoms));
         }
         double deltaB = -(kappa / atom->natoms) * A;
         if (deltaB < 0.0) {
           if (deltaB < log(random->uniform())) {
             std::fill(deltaN.begin(), deltaN.end(), 0);
-            std::fill(deltaNGlobal.begin(), deltaNGlobal.end(), 0);
             selectedAtom = -1;
           }
         }
-
-        // Update global species counters.
-        for (int i = 1; i <= atom->ntypes; i++)
-          speciesCounts[i] += deltaNGlobal[i];
       } else if (!sector_flag) {
         // Update the local species counters.
         for (int i = 1; i <= atom->ntypes; i++)
@@ -481,7 +478,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
   // For (parallelized) semi-grandcanonical MC we have to determine the current concentrations now.
   // For the serial version and variance-constrained MC it has already been done in the loop.
-  if (kappa == 0.0 && sector_flag) {
+  //if (kappa == 0.0 && sector_flag) {
+  if(sector_flag) {
     const int *type = atom->type;
     std::vector<int> localSpeciesCounts(atom->ntypes+1, 0);
     for (int i = 0; i < atom->nlocal; i++, ++type) {
@@ -751,6 +749,7 @@ void FixSemiGrandCanonicalMCSector::sectoring()
   const double rsy = subhi[1] - sublo[1];
   const double rsz = subhi[2] - sublo[2];
 
+
   // extract larger cutoff from pair_style
 
   double rv, cutoff;
@@ -830,27 +829,20 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
   int nlocal = atom->nlocal;
   const int *mask = atom->mask;
 
+  int *stack_foot;
+  int *forward_stacks;
+  memory->create(stack_foot,nsectors,"sgcmcs:stack_foot");
+  memory->create(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
+
   if (nlocal_max < nlocal) {                    // grow linked lists if necessary
     nlocal_max = nlocal;
-    //memory->grow(backward_stacks,nlocal_max,"sgcmcs:backward_stacks");
     memory->grow(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
   }
   for (int j = 0; j < nsectors; j++) {
-    //stack_head[j] = -1;
     stack_foot[j] = -1;
   }
   int nseci;
-//   for (int j = 0; j < nsectors; j++) {          // stacking backward order
-//     int num_atoms = 0;
-//     for (int i = 0; i < nlocal; i++) {
-//       nseci = coords2sector(x[i]);
-//       if (j != nseci) continue;
-//       backward_stacks[i] = stack_head[j];
-//       stack_head[j] = i;
-//       num_atoms += 1;
-//     }
-//     num_atoms_per_sector[j] = num_atoms;
-//   }
+
   for (int j = nsectors-1; j >= 0; j--) {       // stacking forward order
     int num_atoms = 0;
     for (int i = nlocal-1; i >= 0; i--) {
@@ -873,5 +865,8 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
         }
     }
   }
+
+  memory->destroy(stack_foot);
+  memory->destroy(forward_stacks);
 
 }
