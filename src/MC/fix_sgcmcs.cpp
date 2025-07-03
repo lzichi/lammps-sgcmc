@@ -61,8 +61,7 @@ using namespace FixConst;
  *********************************************************************/
 FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int narg, char **arg) :
     Fix(_lmp, narg, arg), random(nullptr), localRandom(nullptr), neighborList(nullptr),
-    compute_pe(nullptr), rsec(nullptr), stack_head(nullptr), stack_foot(nullptr),
-    backward_stacks(nullptr), forward_stacks(nullptr)
+    compute_pe(nullptr), rsec(nullptr), atoms_in_sector(nullptr), num_atoms_per_sector(nullptr)
 {
   scalar_flag = 0;
   vector_flag = 1;
@@ -82,7 +81,7 @@ FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int n
 
   // Determine if using parallel sectoring algorithm or serial run
   //sector_flag = (comm->nprocs > 1) ? 1 : 0;
-  sector_flag = 1;
+  sector_flag = 1; // for now do sectoring in serial
 
   if (domain->triclinic)
     error->all(FLERR, "Fix sgcmcs does not support non-orthogonal simulation boxes.");
@@ -182,10 +181,6 @@ FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int n
 FixSemiGrandCanonicalMCSector::~FixSemiGrandCanonicalMCSector()
 {
   memory->destroy(rsec);
-  //memory->destroy(stack_head);
-  memory->destroy(stack_foot);
-  memory->destroy(forward_stacks);
-  //memory->destroy(backward_stacks);
   memory->destroy(num_atoms_per_sector);
   memory->destroy(atoms_in_sector);
   delete random;
@@ -278,19 +273,14 @@ void FixSemiGrandCanonicalMCSector::init()
 
   // setting the sector variables/lists
   nsectors = 0;
-  memory->create(rsec,3,"sgcmcs:rsec");
-  memory->create(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
+  memory->grow(rsec,3,"sgcmcs:rsec");
+  memory->grow(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
 
   // perform the sectoring operation
   if (sector_flag) sectoring();
   
   // init. size of stacking lists (sectoring)
-  nlocal_max = atom->nlocal;
-  //memory->create(stack_head,nsectors,"sgcmcs:stack_head");
-  memory->create(stack_foot,nsectors,"sgcmcs:stack_foot");
-  //memory->create(backward_stacks,nlocal_max,"sgcmcs:backward_stacks");
-  memory->create(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
-  memory->create(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
+  memory->grow(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
   setup_pre_neighbor();
 }
 
@@ -830,27 +820,22 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
   int nlocal = atom->nlocal;
   const int *mask = atom->mask;
 
+  int *stack_foot;
+  int *forward_stacks;
+
+  memory->create(forward_stacks,nlocal,"sgcmcs:forward_stacks");
+  memory->create(stack_foot,nsectors,"sgcmcs:stack_foot");
+
   if (nlocal_max < nlocal) {                    // grow linked lists if necessary
     nlocal_max = nlocal;
-    //memory->grow(backward_stacks,nlocal_max,"sgcmcs:backward_stacks");
-    memory->grow(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
+    memory->grow(atoms_in_sector,nlocal_max,"sgcmcs:atoms_in_sector");
   }
   for (int j = 0; j < nsectors; j++) {
     //stack_head[j] = -1;
     stack_foot[j] = -1;
   }
   int nseci;
-//   for (int j = 0; j < nsectors; j++) {          // stacking backward order
-//     int num_atoms = 0;
-//     for (int i = 0; i < nlocal; i++) {
-//       nseci = coords2sector(x[i]);
-//       if (j != nseci) continue;
-//       backward_stacks[i] = stack_head[j];
-//       stack_head[j] = i;
-//       num_atoms += 1;
-//     }
-//     num_atoms_per_sector[j] = num_atoms;
-//   }
+
   for (int j = nsectors-1; j >= 0; j--) {       // stacking forward order
     int num_atoms = 0;
     for (int i = nlocal-1; i >= 0; i--) {
@@ -863,7 +848,7 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
     num_atoms_per_sector[j] = num_atoms;
   }
   int index = 0;
-  for (int j = 0; j < nsectors; j++) {
+  for (int j = 0; j < nsectors; j++) {          // store ids for each sector in order
     int ii = stack_foot[j];
     while (ii >= 0) {
         if(mask[ii] & groupbit) {
@@ -873,5 +858,8 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
         }
     }
   }
+
+  memory->destroy(forward_stacks);
+  memory->destroy(stack_foot);
 
 }
