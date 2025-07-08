@@ -43,8 +43,6 @@ PairEAMKokkos<DeviceType>::PairEAMKokkos(LAMMPS *lmp) : PairEAM(lmp)
   respa_enable = 0;
   single_enable = 0;
 
-  atomic_energy_enable = 1;
-
   kokkosable = 1;
   atomKK = (AtomKokkos *) atom;
   execution_space = ExecutionSpaceFromDevice<DeviceType>::space;

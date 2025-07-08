@@ -199,8 +199,6 @@ class PairEAMKokkos : public PairEAM, public KokkosBase {
   int neighflag,newton_pair;
   int nlocal,nall,eflag,vflag;
 
-  int atomic_energy_enable;
-
   friend void pair_virial_fdotr_compute<PairEAMKokkos>(PairEAMKokkos*);
 };
 
