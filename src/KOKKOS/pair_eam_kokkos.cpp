@@ -339,7 +339,7 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
   // loop over all neighbors of the selected atom
   const int jnum = d_numneigh[i];
 
-  Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), Ei, rhoi);
+  Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, Ei, rhoi);
 
   // compute the change in embedding energy of atom i
   p = rhoi * rdrho + 1.0;
