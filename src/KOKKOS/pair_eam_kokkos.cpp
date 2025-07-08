@@ -43,6 +43,8 @@ PairEAMKokkos<DeviceType>::PairEAMKokkos(LAMMPS *lmp) : PairEAM(lmp)
   respa_enable = 0;
   single_enable = 0;
 
+  atomic_energy_enable = 1;
+
   kokkosable = 1;
   atomKK = (AtomKokkos *) atom;
   execution_space = ExecutionSpaceFromDevice<DeviceType>::space;
@@ -309,6 +311,50 @@ void PairEAMKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
     dup_eatom = {};
     dup_vatom = {};
   }
+}
+
+/* ----------------------------------------------------------------------
+  compute atomic energy of atom i
+------------------------------------------------------------------------- */
+
+template<class DeviceType>
+double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighborList)
+{
+  F_FLOAT p;
+  int m;
+  E_FLOAT Ei = 0.0;
+  F_FLOAT rhoi = 0.0;
+
+  x = atomKK->k_x.view<DeviceType>();
+  const X_FLOAT xi = x(i, 0);
+  const X_FLOAT yi = x(i, 1);
+  const X_FLOAT zi = x(i, 2);
+
+  type = atomKK->k_type.view<DeviceType>();
+
+  NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(list);
+  d_numneigh = k_list->d_numneigh;
+  d_neighbors = k_list->d_neighbors;
+
+  // loop over all neighbors of the selected atom
+  const int jnum = d_numneigh[i];
+
+  Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), Ei, rhoi);
+
+  // compute the change in embedding energy of atom i
+  p = rhoi * rdrho + 1.0;
+  m = static_cast<int>(p);
+  m = MAX(1, MIN(m, nrho - 1));
+  p -= m;
+  p = MIN(p, 1.0);
+  const int d_type2frho_i = d_type2frho(type(i));
+  Ei += (d_frho_spline(d_type2frho_i, m, 3)*p + 
+         d_frho_spline(d_type2frho_i, m, 4)*p + 
+         d_frho_spline(d_type2frho_i, m, 5))*p + 
+         d_frho_spline(d_type2frho_i, m, 6);
+
+
+  return Ei;
 }
 
 /* ----------------------------------------------------------------------
@@ -1056,6 +1102,51 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelC<NEIGHFLAG,NEWTON_PA
                 const typename Kokkos::TeamPolicy<DeviceType>::member_type& team_member) const {
   EV_FLOAT ev;
   this->template operator()<NEIGHFLAG,NEWTON_PAIR,EVFLAG>(TagPairEAMKernelC<NEIGHFLAG,NEWTON_PAIR,EVFLAG>(), team_member, ev);
+}
+
+/* ---------------------------------------------------------------------- */
+
+template<class DeviceType>
+KOKKOS_INLINE_FUNCTION
+void operator()(TagPairEAMKernelD, const int& jj, double& Ei_partial, double& rhoi_partial) const {
+
+  int j = d_neighbors(i, jj);
+  j &= NEIGHMASK;
+
+  const X_FLOAT delx = xi - x(j, 0);
+  const X_FLOAT dely = yi - x(j, 1);
+  const X_FLOAT delz = zi - x(j, 2);
+
+  const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
+  const int jtype = type(j);
+
+  if(rsq < cutforcesq) {
+    const F_FLOAT r = sqrt(rsq);
+    F_FLOAT p = r * rdr + 1.0;
+    int m = static_cast<int> (p);
+    m = MIN(m, nr - 1);
+    p -= m;
+    p = MIN(p, 1.0);
+
+    // sum pair energy ij
+    // divide by 2 to avoid double counting energy
+
+    const int d_type2z2r_ij = d_type2z2r(itype, jtype);
+    F_FLOAT z2 = (d_z2r_spline(d_type2z2r_ij, m, 3) * p +
+                  d_z2r_spline(d_type2z2r_ij, m, 4) * p +
+                  d_z2r_spline(d_type2z2r_ij, m, 5)) * p + 
+                  d_z2r_spline(d_type2z2r_ij, m, 6);
+
+    Ei_partial += 0.5 * z2 / r; 
+
+    // sum rho_ij to rho_i
+    const int d_type2rhor_ij = d_type2rhor(itype, jtype);
+    rhoi_partial += (d_rhor_spline(d_type2rhor_ij, m, 3) * p +
+                     d_rhor_spline(d_type2rhor_ij, m, 4) * p +
+                     d_rhor_spline(d_type2rhor_ij, m, 5)) * p +
+                     d_rhor_spline(d_type2rhor_ij, m, 6);
+  }
+
 }
 
 /* ---------------------------------------------------------------------- */
