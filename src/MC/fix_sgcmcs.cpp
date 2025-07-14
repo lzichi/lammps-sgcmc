@@ -208,6 +208,7 @@ int FixSemiGrandCanonicalMCSector::setmask()
   int mask = 0;
   mask |= POST_FORCE;
   mask |= POST_FORCE_RESPA;
+  mask |= PRE_NEIGHBOR;
   return mask;
 }
 
@@ -293,7 +294,7 @@ void FixSemiGrandCanonicalMCSector::init()
 //   memory->grow(stack_foot,nsectors,"sgcmcs:stack_foot");
 //   memory->grow(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
   memory->grow(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
-  setup_pre_neighbor();
+  //setup_pre_neighbor();
 }
 
 /*********************************************************************
@@ -814,6 +815,7 @@ int FixSemiGrandCanonicalMCSector::coords2sector(double *x)
 
 void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
 {
+  printf("inside steup pre neighbor()! \n");
   pre_neighbor();
 }
 
@@ -824,6 +826,7 @@ void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
 
 void FixSemiGrandCanonicalMCSector::pre_neighbor()
 {
+  printf("inside pre neighbor()! \n");
 
   double **x = atom->x;
   int nlocal = atom->nlocal;
