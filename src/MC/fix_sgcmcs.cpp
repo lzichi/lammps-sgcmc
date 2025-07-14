@@ -339,11 +339,11 @@ void FixSemiGrandCanonicalMCSector::doMC()
   numFixAtomsLocal = 0; // number of atoms that a processor owns
 
   for (int ii = 0; ii < neighborList->inum; ii++) {
-        int i = neighborList->ilist[ii];
-        if (mask[i] & groupbit) {
-            numFixAtomsLocal++;
-        }
+    int i = neighborList->ilist[ii];
+    if (mask[i] & groupbit) {
+        numFixAtomsLocal++;
     }
+  }
 
   int offset = 0;
   // loop through each sector and run MC
