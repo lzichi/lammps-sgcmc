@@ -200,6 +200,8 @@ int FixSemiGrandCanonicalMCSector::setmask()
   int mask = 0;
   mask |= POST_FORCE;
   mask |= POST_FORCE_RESPA;
+  mask |= PRE_NEIGHBOR;
+
   return mask;
 }
 
@@ -281,7 +283,6 @@ void FixSemiGrandCanonicalMCSector::init()
   
   // init. size of stacking lists (sectoring)
   memory->grow(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
-  setup_pre_neighbor();
 }
 
 /*********************************************************************
@@ -327,11 +328,11 @@ void FixSemiGrandCanonicalMCSector::doMC()
   numFixAtomsLocal = 0; // number of atoms that a processor owns
 
   for (int ii = 0; ii < neighborList->inum; ii++) {
-        int i = neighborList->ilist[ii];
-        if (mask[i] & groupbit) {
-            numFixAtomsLocal++;
-        }
+    int i = neighborList->ilist[ii];
+    if (mask[i] & groupbit) {
+        numFixAtomsLocal++;
     }
+  }
 
   int offset = 0;
   // loop through each sector and run MC
@@ -446,10 +447,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
       if (selectedAtom >= 0) {
         if(atomicenergyflag) {
           flipAtomEatom(selectedAtom, oldSpecies, newSpecies);
-          //double energy = computeTotalEnergy();
         } else {
           flipAtomGeneric(selectedAtom, oldSpecies, newSpecies);
-          //double energy = computeTotalEnergy();
         }
         nAcceptedSwapsLocal++;
       } else {
@@ -831,7 +830,6 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
     memory->grow(atoms_in_sector,nlocal_max,"sgcmcs:atoms_in_sector");
   }
   for (int j = 0; j < nsectors; j++) {
-    //stack_head[j] = -1;
     stack_foot[j] = -1;
   }
   int nseci;
