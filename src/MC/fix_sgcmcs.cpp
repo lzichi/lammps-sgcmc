@@ -471,7 +471,7 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
     // communicate ghost atom information to neighboring processors
     // before moving onto the next sector
-    communicateTypes();
+    //communicateTypes();
   }
 
   // MPI sum total number of accepted/rejected swaps.
@@ -815,7 +815,6 @@ int FixSemiGrandCanonicalMCSector::coords2sector(double *x)
 
 void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
 {
-  printf("inside steup pre neighbor()! \n");
   pre_neighbor();
 }
 
@@ -826,8 +825,6 @@ void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
 
 void FixSemiGrandCanonicalMCSector::pre_neighbor()
 {
-  printf("inside pre neighbor()! \n");
-
   double **x = atom->x;
   int nlocal = atom->nlocal;
   const int *mask = atom->mask;

@@ -496,8 +496,8 @@ void FixSemiGrandCanonicalMC::doMC()
   }
 
   // MPI sum total number of accepted/rejected swaps.
-  MPI_Allreduce(&nAcceptedSwapsLocal, &nAcceptedSwaps, 1, MPI_INT, MPI_SUM, world);
-  MPI_Allreduce(&nRejectedSwapsLocal, &nRejectedSwaps, 1, MPI_INT, MPI_SUM, world);
+  //MPI_Allreduce(&nAcceptedSwapsLocal, &nAcceptedSwaps, 1, MPI_INT, MPI_SUM, world);
+  //MPI_Allreduce(&nRejectedSwapsLocal, &nRejectedSwaps, 1, MPI_INT, MPI_SUM, world);
 
   // For (parallelized) semi-grandcanonical MC we have to determine the current concentrations now.
   // For the serial version and variance-constrained MC it has already been done in the loop.
