@@ -291,10 +291,8 @@ void FixSemiGrandCanonicalMCSector::init()
   // init. size of stacking lists (sectoring)
   nlocal_max = atom->nlocal;
 
-//   memory->grow(stack_foot,nsectors,"sgcmcs:stack_foot");
-//   memory->grow(forward_stacks,nlocal_max,"sgcmcs:forward_stacks");
   memory->grow(num_atoms_per_sector,nsectors,"sgcmcs:num_atoms_per_sector");
-  //setup_pre_neighbor();
+
 }
 
 /*********************************************************************
@@ -360,7 +358,7 @@ void FixSemiGrandCanonicalMCSector::doMC()
     // MPI_Allreduce(&nDice, &largestnDice, 1, MPI_INT, MPI_MAX, world);
 
     // The probability to do one swap step.
-    double diceProbability = (double)nDice / (double)largestnDice;
+    //double diceProbability = (double)nDice / (double)largestnDice;
 
     // Inner MC loop that swaps atom types.
     for (int j = 0; j < largestnDice; j++) {
@@ -371,56 +369,56 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
       // As already said above, we have to do swap steps only with a certain probability
       // to keep nodes in sync.
-      if (localRandom->uniform() <= diceProbability) {
+      //if (localRandom->uniform() <= diceProbability) {
 
-        // Choose a random atom from the pool of atoms that are inside the sampling window.
-        int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
-        selectedAtomNL = atoms_in_sector[index + offset];
+      // Choose a random atom from the pool of atoms that are inside the sampling window.
+      int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
+      selectedAtomNL = atoms_in_sector[index + offset];
 
-        // Get the real atom index.
-        selectedAtom = neighborList->ilist[selectedAtomNL];
-        oldSpecies = atom->type[selectedAtom];
+      // Get the real atom index.
+      selectedAtom = neighborList->ilist[selectedAtomNL];
+      oldSpecies = atom->type[selectedAtom];
 
-        // Choose the new type for the swapping atom by random.
-        if (atom->ntypes > 2) {
-          // Use a random number to choose the new species if there are three or more atom types.
-          newSpecies = (int)(localRandom->uniform() * (atom->ntypes-1)) + 1;
-          if (newSpecies >= oldSpecies) newSpecies++;
-        } else {
-          // If there are only two atom types, then the decision is clear.
-          newSpecies = (oldSpecies == 1) ? 2 : 1;
-        }
-        deltaN[oldSpecies] = -1;
-        deltaN[newSpecies] = +1;
+      // Choose the new type for the swapping atom by random.
+      if (atom->ntypes > 2) {
+        // Use a random number to choose the new species if there are three or more atom types.
+        newSpecies = (int)(localRandom->uniform() * (atom->ntypes-1)) + 1;
+        if (newSpecies >= oldSpecies) newSpecies++;
+      } else {
+        // If there are only two atom types, then the decision is clear.
+        newSpecies = (oldSpecies == 1) ? 2 : 1;
+      }
+      deltaN[oldSpecies] = -1;
+      deltaN[newSpecies] = +1;
 
-        // Compute the energy difference that swapping this atom would cost or gain.
+      // Compute the energy difference that swapping this atom would cost or gain.
 
-        // Atomic energy method:
-        if(atomicenergyflag) {
-          deltaE = computeEnergyChangeEatom(selectedAtom, oldSpecies, newSpecies);
-        // Slow generic method:
-        } else {
-            deltaE = computeEnergyChangeGeneric(selectedAtom, oldSpecies, newSpecies);
-        }
+      // Atomic energy method:
+      if(atomicenergyflag) {
+        deltaE = computeEnergyChangeEatom(selectedAtom, oldSpecies, newSpecies);
+      // Slow generic method:
+      } else {
+          deltaE = computeEnergyChangeGeneric(selectedAtom, oldSpecies, newSpecies);
+      }
 
-        // Perform inner MC acceptance test.
-        double dm = 0.0;
-        if (!sector_flag && kappa != 0.0) {
-          for (int i = 2; i <= atom->ntypes; i++)
-            dm += (deltamu[i] + kappa / atom->natoms * (2.0 * speciesCounts[i] + deltaN[i])) * deltaN[i];
-        } else {
-          for (int i = 2; i <= atom->ntypes; i++)
-            dm += deltamu[i] * deltaN[i];
-        }
-        double deltaB = -(deltaE + dm) * beta;
-        if (deltaB < 0.0) {
-          if (deltaB < log(localRandom->uniform())) {
-            std::fill(deltaN.begin(), deltaN.end(), 0);
-            selectedAtom = -1;
-            deltaE = 0;
-          }
+      // Perform inner MC acceptance test.
+      double dm = 0.0;
+      if (!sector_flag && kappa != 0.0) {
+        for (int i = 2; i <= atom->ntypes; i++)
+          dm += (deltamu[i] + kappa / atom->natoms * (2.0 * speciesCounts[i] + deltaN[i])) * deltaN[i];
+      } else {
+        for (int i = 2; i <= atom->ntypes; i++)
+          dm += deltamu[i] * deltaN[i];
+      }
+      double deltaB = -(deltaE + dm) * beta;
+      if (deltaB < 0.0) {
+        if (deltaB < log(localRandom->uniform())) {
+          std::fill(deltaN.begin(), deltaN.end(), 0);
+          selectedAtom = -1;
+          deltaE = 0;
         }
       }
+      //}
 
       if (kappa != 0.0 && sector_flag) {
 
@@ -444,6 +442,11 @@ void FixSemiGrandCanonicalMCSector::doMC()
             selectedAtom = -1;
           }
         }
+
+        // Update species counters
+        for (int i = 1; i <= atom->ntypes; i++)
+          speciesCounts[i] += deltaN[i];
+        
       } else if (!sector_flag) {
         // Update the local species counters.
         for (int i = 1; i <= atom->ntypes; i++)
@@ -454,10 +457,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
       if (selectedAtom >= 0) {
         if(atomicenergyflag) {
           flipAtomEatom(selectedAtom, oldSpecies, newSpecies);
-          //double energy = computeTotalEnergy();
         } else {
           flipAtomGeneric(selectedAtom, oldSpecies, newSpecies);
-          //double energy = computeTotalEnergy();
         }
         nAcceptedSwapsLocal++;
       } else {
@@ -479,8 +480,7 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
   // For (parallelized) semi-grandcanonical MC we have to determine the current concentrations now.
   // For the serial version and variance-constrained MC it has already been done in the loop.
-  //if (kappa == 0.0 && sector_flag) {
-  if(sector_flag) {
+  if (kappa == 0.0 && sector_flag) {
     const int *type = atom->type;
     std::vector<int> localSpeciesCounts(atom->ntypes+1, 0);
     for (int i = 0; i < atom->nlocal; i++, ++type) {
