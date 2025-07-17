@@ -277,8 +277,8 @@ void FixSemiGrandCanonicalMCSector::init()
 
   // MPI sum to get global concentrations.
   speciesCounts.resize(atom->ntypes+1);
-  MPI_Allreduce(localSpeciesCounts.data(), speciesCounts.data(), localSpeciesCounts.size(),
-                MPI_INT, MPI_SUM, world);
+  //MPI_Allreduce(localSpeciesCounts.data(), speciesCounts.data(), localSpeciesCounts.size(),
+  //              MPI_INT, MPI_SUM, world);
 
   // setting the sector variables/lists
   nsectors = 0;
@@ -337,12 +337,13 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
   numFixAtomsLocal = 0; // number of atoms that a processor owns
 
-  for (int ii = 0; ii < neighborList->inum; ii++) {
-        int i = neighborList->ilist[ii];
-        if (mask[i] & groupbit) {
-            numFixAtomsLocal++;
-        }
-    }
+  //for (int ii = 0; ii < neighborList->inum; ii++) {
+  //      int i = neighborList->ilist[ii];
+  //      if (mask[i] & groupbit) {
+  //          numFixAtomsLocal++;
+  //      }
+  //  }
+  numFixAtomsLocal = atom->nlocal;
 
   int offset = 0;
   // loop through each sector and run MC
@@ -471,12 +472,12 @@ void FixSemiGrandCanonicalMCSector::doMC()
 
     // communicate ghost atom information to neighboring processors
     // before moving onto the next sector
-    //communicateTypes();
+    communicateTypes();
   }
 
   // MPI sum total number of accepted/rejected swaps.
-  MPI_Allreduce(&nAcceptedSwapsLocal, &nAcceptedSwaps, 1, MPI_INT, MPI_SUM, world);
-  MPI_Allreduce(&nRejectedSwapsLocal, &nRejectedSwaps, 1, MPI_INT, MPI_SUM, world);
+  //MPI_Allreduce(&nAcceptedSwapsLocal, &nAcceptedSwaps, 1, MPI_INT, MPI_SUM, world);
+  //MPI_Allreduce(&nRejectedSwapsLocal, &nRejectedSwaps, 1, MPI_INT, MPI_SUM, world);
 
   // For (parallelized) semi-grandcanonical MC we have to determine the current concentrations now.
   // For the serial version and variance-constrained MC it has already been done in the loop.
