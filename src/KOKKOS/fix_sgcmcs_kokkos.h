@@ -39,24 +39,16 @@ namespace LAMMPS_NS {
 
 struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
 struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
-// struct TagFixSemiGrandCanonicalMCSector{};
 
-// TODO: do i need virtual in the baseclass??
 template<class DeviceType>
 class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector {
  public:
   typedef DeviceType device_type;
   typedef ArrayTypes<DeviceType> AT;
 
-  NeighListKokkos<DeviceType> *k_neighborlist;
-
   FixSemiGrandCanonicalMCSectorKokkos(class LAMMPS *, int, char **);
   ~FixSemiGrandCanonicalMCSectorKokkos() override;
 
-  void init() override;
-  void init_list(int id, class NeighList *ptr) override;
-  void setup(int) override;
-  double compute_vector(int index) override;
   double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
 
   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
@@ -66,62 +58,6 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
   void unpack_forward_comm(int, int, double *) override;
   int pack_reverse_comm(int, int, double *) override;
   void unpack_reverse_comm(int, int *, double *) override;
-
-  void doMC() override;
-
-  /* Sectoring method routines */
-  void sectoring() override;
-  int coords2sector(double *) override;
-  void setup_pre_neighbor() override;
-  void pre_neighbor() override;
-
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int&) const;
-
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCSectorUnPackForwardComm, const int&) const;
-
-//   KOKKOS_INLINE_FUNCTION
-//   void operator()(TagFixSemiGrandCanonicalMCSector, const int&) const;
-
- protected:
-  DAT::tdual_int_1d k_speciesCounts;     // dual view
-  typename AT::t_int_1d d_speciesCounts; // device view
-  HAT::t_int_1d h_speciesCounts;         // host view
-
-  // random number generator in sync with all the processors
-  RandPoolWrap rand_pool;
-  typedef RandWrap rand_type;
-  
-  // random number generator for each processor
-  RandPoolWrap rand_pool_local;
-
-  typename AT::t_x_array x;
-  typename AT::t_f_array f;
-  typename AT::t_int_1d type;
-  typename AT::t_int_1d mask;
-
-  // Used for comm
-  int first; 
-  typename AT::t_int_1d d_sendlist;
-  typename AT::t_xfloat_1d_um v_buf;
-
-  // Neighbor list views
-  typename AT::t_neighbors_2d d_neighbors;
-  typename AT::t_int_1d d_ilist;
-  typename AT::t_int_1d d_numneigh;
-
-  int inum, nlocal, ntypes;
-
-  /* Sectoring method member variables */
-  // TODO: don't want stack_foot or forward_stacks to be member variables
-  // for now this is b/c operator only accesses member variables
-  typename AT::t_int_1d d_rsec;
-  typename AT::t_int_1d d_num_atoms_per_sector;
-  typename AT::t_int_1d d_atoms_in_sector;
-//   typename AT::t_int_1d d_stack_foot;
-//   typename AT::t_int_1d d_forward_stacks;
 
 };
 
