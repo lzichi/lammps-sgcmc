@@ -23,37 +23,41 @@
 
 #ifdef FIX_CLASS
 // clang-format off
-FixStyle(sgcmc/kk,FixSemiGrandCanonicalMC<LMPDeviceType>);
-FixStyle(sgcmc/kk/device,FixSemiGrandCanonicalMC<LMPDeviceType>);
-FixStyle(sgcmc/kk/host,FixSemiGrandCanonicalMC<LMPHostType>);
+FixStyle(sgcmcs/kk,FixSemiGrandCanonicalMCSector<LMPDeviceType>);
+FixStyle(sgcmcs/kk/device,FixSemiGrandCanonicalMCSector<LMPDeviceType>);
+FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSector<LMPHostType>);
 // clang-format on
 #else
 
 #ifndef FIX_SGCMC_KOKKOS_H
 #define FIX_SGCMC_KOKKOS_H
 
-#include "fix_sgcmc.h"
+#include "fix_sgcmcs.h"
 #include "kokkos_type.h"
 
 namespace LAMMPS_NS {
 
-struct TagFixSemiGrandCanonicalMCPackForwardComm{};
-struct TagFixSemiGrandCanonicalMCUnPackForwardComm{};
-struct TagFixSemiGrandCanonicalMC{};
+struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
+struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
+// struct TagFixSemiGrandCanonicalMCSector{};
 
-// TODO: define structs
+// TODO: do i need virtual in the baseclass??
 template<class DeviceType>
-class FixSemiGrandCanonicalMCKokkos : public FixSemiGrandCanonicalMC {
+class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector {
  public:
   typedef DeviceType device_type;
   typedef ArrayTypes<DeviceType> AT;
 
-  FixSemiGrandCanonicalMCKokkos(class LAMMPS *, int, char **);
-  ~FixSemiGrandCanonicalMCKokkos() override;
+  NeighListKokkos<DeviceType> *k_neighborlist;
+
+  FixSemiGrandCanonicalMCSectorKokkos(class LAMMPS *, int, char **);
+  ~FixSemiGrandCanonicalMCSectorKokkos() override;
+
   void init() override;
-  void init_list() override;
-  void post_force(int vflag) override;
+  void init_list(int id, class NeighList *ptr) override;
+  void setup(int) override;
   double compute_vector(int index) override;
+  double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
 
   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
                        int, int *) override;
@@ -63,34 +67,28 @@ class FixSemiGrandCanonicalMCKokkos : public FixSemiGrandCanonicalMC {
   int pack_reverse_comm(int, int, double *) override;
   void unpack_reverse_comm(int, int *, double *) override;
 
-  bool placeSamplingWindow() override;
-
   void doMC() override;
 
+  /* Sectoring method routines */
+  void sectoring() override;
+  int coords2sector(double *) override;
+  void setup_pre_neighbor() override;
+  void pre_neighbor() override;
+
+
   KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCPackForwardComm, const int&) const;
+  void operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int&) const;
 
   KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCUnPackForwardComm, const int&) const;
+  void operator()(TagFixSemiGrandCanonicalMCSectorUnPackForwardComm, const int&) const;
 
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMC, const int&) const;
+//   KOKKOS_INLINE_FUNCTION
+//   void operator()(TagFixSemiGrandCanonicalMCSector, const int&) const;
 
-
-
- private:
-  // AT templated and defined when template is instantiated
-  // Dual View of ints, 1D, see kokkos_type.h for definition
-  typename AT::tdual_int_1d k_speciesCounts; 
-
-  // TODO: is this the correct  type? should this be a member variable?
-  // this probably does not need to be a dual view? idk
-  typename AT::tdual_int_1d k_samplingWindowAtomsTemp;
-  typename AT::tdual_int_1d k_samplingWindowAtoms;
-
-  // TODO: this should be inherited, so i probably dont need this?
-  // TODO: sam for numFixAtomsLocal
-  int numSamplingWindowAtoms;
+ protected:
+  DAT::tdual_int_1d k_speciesCounts;     // dual view
+  typename AT::t_int_1d d_speciesCounts; // device view
+  HAT::t_int_1d h_speciesCounts;         // host view
 
   // random number generator in sync with all the processors
   RandPoolWrap rand_pool;
@@ -99,11 +97,10 @@ class FixSemiGrandCanonicalMCKokkos : public FixSemiGrandCanonicalMC {
   // random number generator for each processor
   RandPoolWrap rand_pool_local;
 
-
- protected:
   typename AT::t_x_array x;
   typename AT::t_f_array f;
   typename AT::t_int_1d type;
+  typename AT::t_int_1d mask;
 
   // Used for comm
   int first; 
@@ -117,6 +114,14 @@ class FixSemiGrandCanonicalMCKokkos : public FixSemiGrandCanonicalMC {
 
   int inum, nlocal, ntypes;
 
+  /* Sectoring method member variables */
+  // TODO: don't want stack_foot or forward_stacks to be member variables
+  // for now this is b/c operator only accesses member variables
+  typename AT::t_int_1d d_rsec;
+  typename AT::t_int_1d d_num_atoms_per_sector;
+  typename AT::t_int_1d d_atoms_in_sector;
+//   typename AT::t_int_1d d_stack_foot;
+//   typename AT::t_int_1d d_forward_stacks;
 
 };
 

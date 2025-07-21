@@ -38,7 +38,7 @@
 
 template<class DeviceType>
 FixSemiGrandCanonicalMCKokkos<DeviceType>::FixSemiGrandCanonicalMCKokkos(LAMMPS *lmp, int narg, char **arg) :
- FixSemiGrandCanonicalMC(lmp, narg, arg)
+ FixSemiGrandCanonicalMC(lmp, narg, arg), rand_pool(seed), rand_pool_local(seed + comm->me)
 {
     kokkosable = 1;
     atomKK = (AtomKokkos *) atom;
@@ -271,12 +271,20 @@ bool FixSemiGrandCanonicalMCKokkos<DeviceType>::placeSamplingWindow()
     // TODO: probably bad to allocate a view each time
     // TODO: should i be accessing the k_list here?
     // Each atom can have up to multiplicity 8
-    Kokkos::reserve(k_samplingWindowAtoms, inum * 8);
+    Kokkos::reserve(k_samplingWindowAtomsTemp, inum * 8);
+    Kokkos::parallel_for("FillArray", inum * 8, KOKKOS_LAMBDA(const int i) {
+        k_samplingWindowAtomsTemp(i) = -1;
+    });
+
+    // Optionally, you can print the values to verify
+    Kokkos::fence(); // Ensure all operations are complete
+
     numSamplingWindowAtoms = 0;
     numFixAtomsLocal = 0;
     
     // TODO: is this the correct type? should this be a member variable?
     typename AT::t_int_1d_randomread d_mask = atom->mask.view<DeviceType>();
+    int sampleAtomsCount = 0;
 
     Kokkos::parallel_for("placeSamplingWindow:listAtomsInWindow", inum, KOKKOS_LAMBDA (const int ii) {
         int i = d_ilist(ii);
@@ -293,9 +301,10 @@ bool FixSemiGrandCanonicalMCKokkos<DeviceType>::placeSamplingWindow()
                             x(i, k) > d_subhi(k) - k_margin(k))
                             multiplicity *= 2;
                     }
+                    sampleAtomsCount += multiplicity;
 
                     for (int m = 0; m < multiplicity; m++)
-                        k_smaplingWindowAtoms(ii + m) = ii;
+                        k_samplingWindowAtomsTemp(ii + m) = ii;
 
                     numSamplingWindowAtoms++;
             }
@@ -304,6 +313,18 @@ bool FixSemiGrandCanonicalMCKokkos<DeviceType>::placeSamplingWindow()
 
     // fill in the gaps
     // TODO: figure out the best way!
+    Kokkos::reserve(k_samplingWindowAtoms, numFixAtomsLocal);
+    int index = 0;
+
+    // TODO: idk how to parallelize without a race condition
+
+    //Kokkos::parallel_for("placeSamplingWindow:fillAtomsInWindow", inum*8, KOKKOS_LAMBDA (const int ii) {
+    for (int ii = 0; ii < inum * 8; ii++) {
+        if (k_samplingWindowAtomsTemp[ii] != -1) {
+            k_samplingWindowAtoms[index] = k_samplingWindowAtomsTemp[ii];
+            index += 1;
+        }
+    }
 
     return oversizeWindow;
 }
@@ -364,6 +385,41 @@ void FixSemiGrandCanonicalMCKokkos<DeviceType>::doMC() {
         }
 
         MPI_ALLreduce(localSpeciesCounts.data(), speciesCounts.data(), localSpeciesCounts.size(), MPI_INT, MPI_SUM, world);
+    }
+}
+
+
+template<class DeviceType>
+KOKKOS_INLINE_FUNCTION
+void FixSemiGrandCanonicalMCKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMC, const int &i) {
+    
+    double deltaE = 0;
+    std::fill(d_deltaN.begin(), d_deltaN.end(), 0);
+    int selectedAtom = -1, selectedAtomNL = -1;
+    rand_type rand_gen = rand_pool_local.get_state();
+
+    if(rand_gen.drand() <= diceProbability) {
+        int index = (int)(rand_gen.drand() * (double)k_samplingWindowAtoms.extent(0));
+        selectedAtomNL = k_samplingWindowAtoms(index);
+
+        selectedAtom = d_ilist(selectedAtomNL);
+        oldSpecies = type(selectedAtom);
+
+        // TODO can i access atom->ntypes
+        if (atom->ntypes > 2) {
+            newSpecies = (int)(rand_gen.drand() * (atom->ntypes - 1)) + 1;
+            if (newSpecies >= oldSpecies) newSpecies++;
+        } else {
+            newSpecies = (oldSpecies == 1) ? 2 : 1;
+        }
+        // this could be a race condition
+        d_deltaN(oldSpecies) = -1;
+        d_deltaN(newSpecies) = +1;
+
+        fence();
+
+        // Perform inner MC acceptance test
+        
     }
 }
 

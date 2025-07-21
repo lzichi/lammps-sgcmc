@@ -330,7 +330,7 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
 
   type = atomKK->k_type.view<DeviceType>();
 
-  NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(list);
+  NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
   d_numneigh = k_list->d_numneigh;
   d_neighbors = k_list->d_neighbors;
 
