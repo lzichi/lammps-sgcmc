@@ -118,7 +118,7 @@ class PairEAMKokkos : public PairEAM, public KokkosBase {
   void operator()(TagPairEAMKernelC<NEIGHFLAG,NEWTON_PAIR,EVFLAG>, const typename Kokkos::TeamPolicy<DeviceType>::member_type&) const;
  
   KOKKOS_INLINE_FUNCTION
-  void operator()(TagPairEAMKernelD, const int&, double&, double&) const;
+  void operator()(TagPairEAMKernelD, const int&, const int&, double&, double&) const;
 
   template<int NEIGHFLAG, int NEWTON_PAIR>
   KOKKOS_INLINE_FUNCTION
