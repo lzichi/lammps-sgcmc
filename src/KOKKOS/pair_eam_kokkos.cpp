@@ -1106,7 +1106,7 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelC<NEIGHFLAG,NEWTON_PA
 
 template<class DeviceType>
 KOKKOS_INLINE_FUNCTION
-void operator()(TagPairEAMKernelD, const int& jj, double& Ei_partial, double& rhoi_partial) const {
+void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, double& Ei_partial, double& rhoi_partial) const {
 
   int j = d_neighbors(i, jj);
   j &= NEIGHMASK;
