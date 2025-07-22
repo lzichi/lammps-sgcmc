@@ -323,19 +323,8 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
   E_FLOAT Ei = 0.0;
   F_FLOAT rhoi = 0.0;
 
-  x = atomKK->k_x.view<DeviceType>();
-  const X_FLOAT xi = x(i, 0);
-  const X_FLOAT yi = x(i, 1);
-  const X_FLOAT zi = x(i, 2);
-
-  type = atomKK->k_type.view<DeviceType>();
-
-  NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-  d_numneigh = k_list->d_numneigh;
-  d_neighbors = k_list->d_neighbors;
-
   // loop over all neighbors of the selected atom
-  const int jnum = d_numneigh[i];
+  const int jnum = d_numneigh(i);
 
   Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
 
@@ -1110,6 +1099,10 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, con
 
   int j = d_neighbors(i, jj);
   j &= NEIGHMASK;
+
+  const X_FLOAT xi = x(i, 0);
+  const X_FLOAT yi = x(i, 1);
+  const X_FLOAT zi = x(i, 2);
 
   const X_FLOAT delx = xi - x(j, 0);
   const X_FLOAT dely = yi - x(j, 1);
