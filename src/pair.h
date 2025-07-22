@@ -159,6 +159,7 @@ class Pair : protected Pointers {
   virtual void compute_middle() {}
   virtual void compute_outer(int, int) {}
   virtual double compute_atomic_energy(int, NeighList *) { return 0.0; }
+  virtual double compute_atomic_energy_batch(int *, NeighList *, int) {return 0.0; }
 
   virtual double single(int, int, int, int, double, double, double, double &fforce)
   {

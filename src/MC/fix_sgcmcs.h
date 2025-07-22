@@ -98,7 +98,7 @@ class FixSemiGrandCanonicalMCSector : public Fix {
 
   void pre_neighbor() override;
 
- private:
+ protected:
   // The number of MD steps between each MC cycle.
   int nevery_mdsteps;
 

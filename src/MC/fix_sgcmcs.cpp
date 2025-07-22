@@ -642,10 +642,15 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
+  int *ids;
+  memory->create(ids, jnum, "sgcmcs:ids");
+
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
-    Eold += force->pair->compute_atomic_energy(j, neighborList);
+    ids[jj] = j;
+    // Eold += force->pair->compute_atomic_energy(j, neighborList);
   }
+  Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
 
@@ -657,12 +662,16 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
 
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
-    Enew += force->pair->compute_atomic_energy(j, neighborList);
+    //Enew += force->pair->compute_atomic_energy(j, neighborList);
+    ids[jj] = j;
   }
+  Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
 
   deltaE = Enew - Eold;
+
+  memory->destroy(ids);
 
   return deltaE;
 }

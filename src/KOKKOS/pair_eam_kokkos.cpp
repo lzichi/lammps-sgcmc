@@ -345,6 +345,47 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
 }
 
 /* ----------------------------------------------------------------------
+  compute atomic energy of a list of atoms
+------------------------------------------------------------------------- */
+
+template<class DeviceType>
+double PairEAMKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
+{
+  double E_total = 0.0;
+
+  for (int ii = 0; ii < size; ii++) {
+    
+    int i = ids[ii];
+    F_FLOAT p;
+    int m;
+    E_FLOAT Ei = 0.0;
+    F_FLOAT rhoi = 0.0;
+
+    // loop over all neighbors of the selected atom
+    const int jnum = d_numneigh(i);
+
+    Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
+
+    // compute the change in embedding energy of atom i
+    p = rhoi * rdrho + 1.0;
+    m = static_cast<int>(p);
+    m = MAX(1, MIN(m, nrho - 1));
+    p -= m;
+    p = MIN(p, 1.0);
+    const int d_type2frho_i = d_type2frho(type(i));
+    Ei += (d_frho_spline(d_type2frho_i, m, 3)*p + 
+          d_frho_spline(d_type2frho_i, m, 4)*p + 
+          d_frho_spline(d_type2frho_i, m, 5))*p + 
+          d_frho_spline(d_type2frho_i, m, 6);
+  
+    E_total += Ei;
+
+  }
+  return E_total;
+}
+
+
+/* ----------------------------------------------------------------------
    init specific to this pair style
 ------------------------------------------------------------------------- */
 
