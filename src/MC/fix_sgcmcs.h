@@ -70,7 +70,7 @@ class FixSemiGrandCanonicalMCSector : public Fix {
 
   // Calculates the change in energy that swapping the given atom would produce.
   // This uses the atomic energy method
-  double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies);
+  virtual double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies);
 
   // Lets LAMMPS calculate the total potential energy of the system.
   double computeTotalEnergy();

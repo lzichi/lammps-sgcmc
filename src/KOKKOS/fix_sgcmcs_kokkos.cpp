@@ -151,7 +151,7 @@ FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::~FixSemiGrandCanonicalMCSectorK
 /* ---------------------------------------------------------------------- */
 
 template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) {
+double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) {
 
     double Eold, Enew, deltaE;
 
