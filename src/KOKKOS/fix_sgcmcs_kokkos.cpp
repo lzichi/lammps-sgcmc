@@ -182,5 +182,10 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
     return deltaE;
 }
 
-
+namespace LAMMPS_NS {
+template class FixSemiGrandCanonicalMCSectorKokkos<LMPDeviceType>;
+#ifdef LMP_KOKKOS_GPU
+template class FixSemiGrandCanonicalMCSectorKokkos<LMPHostType>;
+#endif
+}
 
