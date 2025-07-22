@@ -23,9 +23,9 @@
 
 #ifdef FIX_CLASS
 // clang-format off
-FixStyle(sgcmcs/kk,FixSemiGrandCanonicalMCSector<LMPDeviceType>);
-FixStyle(sgcmcs/kk/device,FixSemiGrandCanonicalMCSector<LMPDeviceType>);
-FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSector<LMPHostType>);
+FixStyle(sgcmcs/kk,FixSemiGrandCanonicalMCSectorKokkos<LMPDeviceType>);
+FixStyle(sgcmcs/kk/device,FixSemiGrandCanonicalMCSectorKokkos<LMPDeviceType>);
+FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSectorKokkos<LMPHostType>);
 // clang-format on
 #else
 
