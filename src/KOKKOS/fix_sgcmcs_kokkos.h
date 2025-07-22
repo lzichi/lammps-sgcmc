@@ -29,8 +29,8 @@ FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSector<LMPHostType>);
 // clang-format on
 #else
 
-#ifndef FIX_SGCMC_KOKKOS_H
-#define FIX_SGCMC_KOKKOS_H
+#ifndef FIX_SGCMCS_KOKKOS_H
+#define FIX_SGCMCS_KOKKOS_H
 
 #include "fix_sgcmcs.h"
 #include "kokkos_type.h"
@@ -41,7 +41,7 @@ struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
 struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
 
 template<class DeviceType>
-class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector {
+class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector, public KokkosBase {
  public:
   typedef DeviceType device_type;
   typedef ArrayTypes<DeviceType> AT;
