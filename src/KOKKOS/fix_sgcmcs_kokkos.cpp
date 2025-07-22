@@ -57,96 +57,96 @@ FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::~FixSemiGrandCanonicalMCSectorK
     if (copymode) return;
 }
 
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm_kokkos(int n, DAT::tdual_int_1d k_sendlist,
-                                                            DAT::tdual_xfloat_1d &buf,
-                                                            int /*pbc_flag*/, int * /*pbc*/)
-{
-    d_sendlist = k_sendlist.view<DeviceType>();
-    v_buf = buf.view<DeviceType>();
-    Kokkos::parallel_for(Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorPackForwardComm>(0, n), *this);
-    return n;
-}
+// template<class DeviceType>
+// int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm_kokkos(int n, DAT::tdual_int_1d k_sendlist,
+//                                                             DAT::tdual_xfloat_1d &buf,
+//                                                             int /*pbc_flag*/, int * /*pbc*/)
+// {
+//     d_sendlist = k_sendlist.view<DeviceType>();
+//     v_buf = buf.view<DeviceType>();
+//     Kokkos::parallel_for(Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorPackForwardComm>(0, n), *this);
+//     return n;
+// }
 
-template<class DeviceType>
-KOKKOS_INLINE_FUNCTION
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int &i) const {
-    int j = d_sendlist(i);
-    v_buf[i] =  type[j];
-}
+// template<class DeviceType>
+// KOKKOS_INLINE_FUNCTION
+// void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int &i) const {
+//     int j = d_sendlist(i);
+//     v_buf[i] =  type[j];
+// }
 
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm_kokkos(int n, int first_in, DAT::tdual_xfloat_1d &buf)
-{
-    first = first_in;
-    v_buf = buf.view<DeviceType>();
-    Kokkos::parallel_for(Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorUnpackForwardComm>(0,n), *this);
-}
+// template<class DeviceType>
+// void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm_kokkos(int n, int first_in, DAT::tdual_xfloat_1d &buf)
+// {
+//     first = first_in;
+//     v_buf = buf.view<DeviceType>();
+//     Kokkos::parallel_for(Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorUnpackForwardComm>(0,n), *this);
+// }
 
-template<class DeviceType>
-KOKKOS_INLINE_FUNCTION
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int &i) const {
-    type[i + first] = (int)v_buf[i];
-}
+// template<class DeviceType>
+// KOKKOS_INLINE_FUNCTION
+// void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int &i) const {
+//     type[i + first] = (int)v_buf[i];
+// }
 
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm(int n, int *list, double *buf,
-                                                                 int /*pbc_flag*/, int * /*pbc*/)
-{
-    // TODO: call sync ?
-    int i,j;
+// template<class DeviceType>
+// int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm(int n, int *list, double *buf,
+//                                                                  int /*pbc_flag*/, int * /*pbc*/)
+// {
+//     // TODO: call sync ?
+//     int i,j;
 
-    for (i = 0; i < n; i++) {
-        j = list[i];
-        buf[i] = atom->type[j];
-    }
-    return n;
-}            
+//     for (i = 0; i < n; i++) {
+//         j = list[i];
+//         buf[i] = atom->type[j];
+//     }
+//     return n;
+// }            
 
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm(int n, int first, double *buf)
-{
-    // TODO: do i need to sync or modify host?
-    for (int i = 0; i < n; i++) {
-        atom->type[i + first] = buf[i];
-    }
-}
+// template<class DeviceType>
+// void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm(int n, int first, double *buf)
+// {
+//     // TODO: do i need to sync or modify host?
+//     for (int i = 0; i < n; i++) {
+//         atom->type[i + first] = buf[i];
+//     }
+// }
                                  
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_reverse_comm(int n, int first, double *buf)
-{
-    // TODO: do i need to sync host?
-    int i, m, last;
-    m = 0;
-    last = last + n;
-    for (i = first; i < last; i++) buf[m++] = atom->type[i];
-    return m;
-}
+// template<class DeviceType>
+// int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_reverse_comm(int n, int first, double *buf)
+// {
+//     // TODO: do i need to sync host?
+//     int i, m, last;
+//     m = 0;
+//     last = last + n;
+//     for (i = first; i < last; i++) buf[m++] = atom->type[i];
+//     return m;
+// }
 
-/* ---------------------------------------------------------------------- */
+// /* ---------------------------------------------------------------------- */
 
-template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_reverse_comm(int n, int *list, double *buf)
-{
-    // TODO: do i need to sync and modify the host?
+// template<class DeviceType>
+// void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_reverse_comm(int n, int *list, double *buf)
+// {
+//     // TODO: do i need to sync and modify the host?
 
-    int i, j, m;
-    m = 0;
-    for (i = 0; i < n; i++) {
-        j = list[i];
-        atom->type += buf[m++];
-    }
-}
+//     int i, j, m;
+//     m = 0;
+//     for (i = 0; i < n; i++) {
+//         j = list[i];
+//         atom->type += buf[m++];
+//     }
+// }
 
 /* ---------------------------------------------------------------------- */
 

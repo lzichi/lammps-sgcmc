@@ -38,8 +38,8 @@ FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSectorKokkos<LMPHostType>);
 
 namespace LAMMPS_NS {
 
-struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
-struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
+// struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
+// struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
 
 template<class DeviceType>
 class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector, public KokkosBase {
@@ -52,19 +52,19 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
 
   double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
 
-  int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
-                       int, int *) override;
-  void unpack_forward_comm_kokkos(int, int, DAT::tdual_xfloat_1d&) override;
-  int pack_forward_comm(int, int *, double *, int, int *) override;
-  void unpack_forward_comm(int, int, double *) override;
-  int pack_reverse_comm(int, int, double *) override;
-  void unpack_reverse_comm(int, int *, double *) override;
+//   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
+//                        int, int *) override;
+//   void unpack_forward_comm_kokkos(int, int, DAT::tdual_xfloat_1d&) override;
+//   int pack_forward_comm(int, int *, double *, int, int *) override;
+//   void unpack_forward_comm(int, int, double *) override;
+//   int pack_reverse_comm(int, int, double *) override;
+//   void unpack_reverse_comm(int, int *, double *) override;
 
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int&) const;
+//   KOKKOS_INLINE_FUNCTION
+//   void operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int&) const;
 
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int&) const;
+//   KOKKOS_INLINE_FUNCTION
+//   void operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int&) const;
 
 
 };
