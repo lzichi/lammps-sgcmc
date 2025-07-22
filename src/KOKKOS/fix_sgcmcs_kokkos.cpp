@@ -155,6 +155,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
 
     double Eold, Enew, deltaE;
 
+    atomKK->sync(force->pair->execution_space,force->pair->datamask_read);
     Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
     int jnum = neighborList->numneigh[flipAtom];
@@ -164,8 +165,9 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
     }, Eold);
 
     atom->type[flipAtom] = newSpecies;
-    atomKK.modify_host(); // TODO: is this correct?
+    atomKK->modified(force->pair->execution_space,force->pair->datamask_modify);
 
+    atomKK->sync(force->pair->execution_space,force->pair->datamask_read);
     Enew = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
     Kokkos::parallel_reduce("computeEnergyChangeEatom:Eold", jnum, KOKKOS_LAMBDA(const int& jj, double& E_par) {
@@ -173,7 +175,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
     }, Enew);
 
     atom->type[flipAtom] = oldSpecies;
-    atomKK.modify_host();
+    atomKK->modified(force->pair->execution_space,force->pair->datamask_modify);
 
     deltaE = Enew - Eold;
 
