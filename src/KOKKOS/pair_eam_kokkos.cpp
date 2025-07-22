@@ -1110,6 +1110,7 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, con
 
   const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
   const int jtype = type(j);
+  const int itype = type(i);
 
   if(rsq < cutforcesq) {
     const F_FLOAT r = sqrt(rsq);
