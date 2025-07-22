@@ -60,6 +60,13 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
   int pack_reverse_comm(int, int, double *) override;
   void unpack_reverse_comm(int, int *, double *) override;
 
+  KOKKOS_INLINE_FUNCTION
+  void operator()(TagFixSemiGrandCanonicalMCSectorPackForwardComm, const int&) const;
+
+  KOKKOS_INLINE_FUNCTION
+  void operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int&) const;
+
+
 };
 
 }

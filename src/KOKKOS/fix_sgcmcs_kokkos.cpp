@@ -40,7 +40,7 @@ using namespace LAMMPS_NS;
 
 template<class DeviceType>
 FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::FixSemiGrandCanonicalMCSectorKokkos(LAMMPS *lmp, int narg, char **arg) :
- FixSemiGrandCanonicalMCSector(lmp, narg, arg), rand_pool(seed), rand_pool_local(seed + comm->me)
+ FixSemiGrandCanonicalMCSector(lmp, narg, arg)
 {
     kokkosable = 1;
     atomKK = (AtomKokkos *) atom;
@@ -60,7 +60,7 @@ FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::~FixSemiGrandCanonicalMCSectorK
 /* ---------------------------------------------------------------------- */
 
 template<class DeviceType>
-int FixSemiGrandCanonicalMCSectorKokkos::pack_forward_comm_kokkos(int n, DAT::tdual_int_1d k_sendlist,
+int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm_kokkos(int n, DAT::tdual_int_1d k_sendlist,
                                                             DAT::tdual_xfloat_1d &buf,
                                                             int /*pbc_flag*/, int * /*pbc*/)
 {
@@ -80,7 +80,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrand
 /* ---------------------------------------------------------------------- */
 
 template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos::unpack_forward_comm_kokkos(int n, int first_in, DAT::tdual_xfloat_1d &buf)
+void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm_kokkos(int n, int first_in, DAT::tdual_xfloat_1d &buf)
 {
     first = first_in;
     v_buf = buf.view<DeviceType>();
@@ -112,7 +112,7 @@ int FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::pack_forward_comm(int n, in
 /* ---------------------------------------------------------------------- */
 
 template<class DeviceType>
-void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm(int n, int first, double *buf);
+void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::unpack_forward_comm(int n, int first, double *buf)
 {
     // TODO: do i need to sync or modify host?
     for (int i = 0; i < n; i++) {
