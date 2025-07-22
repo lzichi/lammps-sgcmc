@@ -34,6 +34,7 @@ FixStyle(sgcmcs/kk/host,FixSemiGrandCanonicalMCSectorKokkos<LMPHostType>);
 
 #include "fix_sgcmcs.h"
 #include "kokkos_type.h"
+#include "kokkos_base.h"
 
 namespace LAMMPS_NS {
 
