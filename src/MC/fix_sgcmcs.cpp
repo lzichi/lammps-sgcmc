@@ -333,6 +333,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
         numFixAtomsLocal++;
     }
   }
+  //numFixAtomsLocal = atom->nlocal;
+
 
   int offset = 0;
   // loop through each sector and run MC
@@ -642,6 +644,7 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
+   #pragma omp parallel for reduction(+:Eold)
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
     Eold += force->pair->compute_atomic_energy(j, neighborList);
@@ -654,7 +657,7 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   Enew = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
   // calculate the new per-atom energy of neighbors
-
+   #pragma omp parallel for reduction(+:Enew)
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
     Enew += force->pair->compute_atomic_energy(j, neighborList);
