@@ -405,6 +405,11 @@ double PairEAM::compute_atomic_energy(int i, NeighList *neighborList)
   return Ei;
 }
 
+double PairEAM::compute_atomic_energy_batch(int *, NeighList *, int size) {
+  printf("inside non kokkos compute atomic energy batch!");
+  return 0.0;
+}
+
 /* ----------------------------------------------------------------------
    allocate all arrays
 ------------------------------------------------------------------------- */
