@@ -61,7 +61,8 @@ using namespace FixConst;
  *********************************************************************/
 FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int narg, char **arg) :
     Fix(_lmp, narg, arg), random(nullptr), localRandom(nullptr), neighborList(nullptr),
-    compute_pe(nullptr), rsec(nullptr), atoms_in_sector(nullptr), num_atoms_per_sector(nullptr)
+    compute_pe(nullptr), rsec(nullptr), atoms_in_sector(nullptr), num_atoms_per_sector(nullptr),
+    ids(nullptr)
 {
   scalar_flag = 0;
   vector_flag = 1;
@@ -183,6 +184,7 @@ FixSemiGrandCanonicalMCSector::~FixSemiGrandCanonicalMCSector()
   memory->destroy(rsec);
   memory->destroy(num_atoms_per_sector);
   memory->destroy(atoms_in_sector);
+  memory->destroy(ids);
   delete random;
   delete localRandom;
 }
@@ -277,6 +279,8 @@ void FixSemiGrandCanonicalMCSector::init()
   nsectors = 0;
   memory->grow(rsec,3,"sgcmcs:rsec");
   memory->grow(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
+
+  ids_size = 0;
 
   // perform the sectoring operation
   if (sector_flag) sectoring();
@@ -642,14 +646,17 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
-  int *ids;
-  memory->create(ids, jnum, "sgcmcs:ids");
-
+  if (jnum > ids_size) {
+    ids_size = jnum;
+    memory->grow(ids, ids_size, "sgcmcs:ids");
+  }
+  
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
     ids[jj] = j;
     // Eold += force->pair->compute_atomic_energy(j, neighborList);
   }
+  printf("filled ids and calling kokkos kernel! \n");
   Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
@@ -670,8 +677,6 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   atom->type[flipAtom] = oldSpecies;
 
   deltaE = Enew - Eold;
-
-  memory->destroy(ids);
 
   return deltaE;
 }

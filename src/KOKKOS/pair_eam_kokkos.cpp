@@ -352,9 +352,10 @@ template<class DeviceType>
 double PairEAMKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
 {
   double E_total = 0.0;
+  printf("inside kokkos kernel \n");
 
   for (int ii = 0; ii < size; ii++) {
-    
+
     int i = ids[ii];
     F_FLOAT p;
     int m;
@@ -362,10 +363,11 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighLi
     F_FLOAT rhoi = 0.0;
 
     // loop over all neighbors of the selected atom
+    printf("accessing d_numneigh inside of kernel \n");
     const int jnum = d_numneigh(i);
-
+    printf("calling parallel reduce \n");
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
-
+    printf("finished parallel_reduce \n");
     // compute the change in embedding energy of atom i
     p = rhoi * rdrho + 1.0;
     m = static_cast<int>(p);

@@ -180,6 +180,10 @@ class FixSemiGrandCanonicalMCSector : public Fix {
 
   // number of atoms a processor owns
   int numFixAtomsLocal;
+
+  // list of atom ids to calculate energy of all at once
+  int *ids;
+  int ids_size;
             
 };
 }
