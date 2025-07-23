@@ -324,7 +324,8 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
   F_FLOAT rhoi = 0.0;
 
   // loop over all neighbors of the selected atom
-  const int jnum = d_numneigh(i);
+  printf("inside compute_atomic_energy \n");
+  const int jnum = d_numneig[i];
   printf("indexed d_numneigh \n");
 
   Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
@@ -365,7 +366,7 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighLi
 
     // loop over all neighbors of the selected atom
     printf("accessing d_numneigh inside of kernel \n");
-    const int jnum = d_numneigh(i);
+    const int jnum = d_numneigh[i];
     printf("calling parallel reduce \n");
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
     printf("finished parallel_reduce \n");
