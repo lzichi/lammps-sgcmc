@@ -325,9 +325,10 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
 
   // loop over all neighbors of the selected atom
   const int jnum = d_numneigh(i);
+  printf("indexed d_numneigh \n");
 
   Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
-
+  printf("finished calling parallel reduce \n");
   // compute the change in embedding energy of atom i
   p = rhoi * rdrho + 1.0;
   m = static_cast<int>(p);
@@ -1154,6 +1155,7 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, con
   const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
   const int jtype = type(j);
   const int itype = type(i);
+  printf("finished d_neighbors, type \n");
 
   if(rsq < cutforcesq) {
     const F_FLOAT r = sqrt(rsq);
@@ -1173,6 +1175,7 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, con
                   d_z2r_spline(d_type2z2r_ij, m, 6);
 
     Ei_partial += 0.5 * z2 / r; 
+    printf("finished Ei_partial \n");
 
     // sum rho_ij to rho_i
     const int d_type2rhor_ij = d_type2rhor(itype, jtype);
@@ -1180,6 +1183,8 @@ void PairEAMKokkos<DeviceType>::operator()(TagPairEAMKernelD, const int& jj, con
                      d_rhor_spline(d_type2rhor_ij, m, 4) * p +
                      d_rhor_spline(d_type2rhor_ij, m, 5)) * p +
                      d_rhor_spline(d_type2rhor_ij, m, 6);
+
+    printf("finished rhoi_partial \n");
   }
 
 }
