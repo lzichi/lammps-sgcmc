@@ -47,7 +47,7 @@ class PairEAM : public Pair {
   PairEAM(class LAMMPS *);
   ~PairEAM() override;
   void compute(int, int) override;
-  double compute_atomic_energy(int, NeighList *) override;
+  virtual double compute_atomic_energy(int, NeighList *) override;
   double compute_atomic_energy_batch(int *, NeighList *, int size) override;
   void settings(int, char **) override;
   void coeff(int, char **) override;

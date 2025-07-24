@@ -46,6 +46,8 @@ struct TagPairEAMFSKernelAB{};
 template<int NEIGHFLAG, int NEWTON_PAIR, int EVFLAG>
 struct TagPairEAMFSKernelC{};
 
+struct TagPairEAMFSKernelD{};
+
 // Cannot use virtual inheritance on the GPU
 
 template<class DeviceType>
@@ -60,6 +62,9 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   PairEAMFSKokkos(class LAMMPS *);
   ~PairEAMFSKokkos() override;
   void compute(int, int) override;
+  double compute_atomic_energy(int, NeighList *) override;
+  double compute_atomic_energy_batch(int *, NeighList *, int size) override;
+  
   void init_style() override;
   void coeff(int, char **) override;
 
@@ -115,6 +120,9 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   template<int NEIGHFLAG, int NEWTON_PAIR, int EVFLAG>
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPairEAMFSKernelC<NEIGHFLAG,NEWTON_PAIR,EVFLAG>, const typename Kokkos::TeamPolicy<DeviceType>::member_type&) const;
+
+  KOKKOS_INLINE_FUNCTION
+  void operator()(TagPairEAMFSKernelD, const int&, double&, double&) const;
 
   template<int NEIGHFLAG, int NEWTON_PAIR>
   KOKKOS_INLINE_FUNCTION
@@ -187,8 +195,10 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   struct policyInstance;
 
   typename AT::t_neighbors_2d d_neighbors;
+  typename AT::t_neighbors_2d d_fullneighbors; // TODO: do this better
   typename AT::t_int_1d d_ilist;
   typename AT::t_int_1d d_numneigh;
+  typename AT::t_int_1d d_fullnumneigh;
 
   int first;
   typename AT::t_int_1d d_sendlist;
@@ -196,6 +206,8 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
 
   int neighflag,newton_pair;
   int nlocal,nall,eflag,vflag;
+
+  int flipatom; // TODO: use class lambda to avoid this!
 
   friend void pair_virial_fdotr_compute<PairEAMFSKokkos>(PairEAMFSKokkos*);
 };

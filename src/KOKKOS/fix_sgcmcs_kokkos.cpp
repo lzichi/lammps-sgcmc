@@ -32,6 +32,7 @@
 #include "kokkos.h"
 #include "memory_kokkos.h"
 #include "neigh_list_kokkos.h"
+#include "force.h"
 
 using namespace LAMMPS_NS;
 
@@ -156,7 +157,6 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   double Eold, Enew, deltaE;
 
   // Calculate old atomic energy of selected atom
-  printf("trying to run compute atomic energy \n");
   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
   // calculate the old per-atom energy of neighbors
@@ -172,9 +172,8 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
     ids[jj] = j;
-    // Eold += force->pair->compute_atomic_energy(j, neighborList);
+    //Eold += force->pair->compute_atomic_energy(j, neighborList);
   }
-  printf("filled ids and calling kokkos kernel! \n");
   Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
