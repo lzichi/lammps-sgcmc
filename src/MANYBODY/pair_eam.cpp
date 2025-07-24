@@ -28,6 +28,8 @@
 #include "potential_file_reader.h"
 #include "update.h"
 
+#include "neigh_request.h"
+
 #include <cmath>
 #include <cstring>
 
@@ -134,6 +136,15 @@ PairEAM::~PairEAM()
   memory->destroy(frho_spline);
   memory->destroy(rhor_spline);
   memory->destroy(z2r_spline);
+}
+
+
+void PairEAM::init_list(int id, NeighList *ptr) {
+
+  if(id == 1) 
+    list = ptr;
+  else if (id == 2)
+    listfull = ptr;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -509,7 +520,8 @@ void PairEAM::init_style()
   file2array();
   array2spline();
 
-  neighbor->add_request(this);
+  neighbor->add_request(this)->set_id(1);
+  neighbor->add_request(this, NeighConst::REQ_FULL | NeighConst::REQ_GHOST)->set_id(2);
   embedstep = -1;
 
   exceeded_rhomax = 0;

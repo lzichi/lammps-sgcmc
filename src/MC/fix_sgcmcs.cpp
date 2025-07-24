@@ -277,6 +277,7 @@ void FixSemiGrandCanonicalMCSector::init()
 
   // setting the sector variables/lists
   nsectors = 0;
+  nlocal_max = 0;
   memory->grow(rsec,3,"sgcmcs:rsec");
   memory->grow(atoms_in_sector, atom->nlocal, "sgcmcs:atoms_in_sector");
 
@@ -295,6 +296,7 @@ void FixSemiGrandCanonicalMCSector::init()
 void FixSemiGrandCanonicalMCSector::init_list(int /*id*/, NeighList *ptr)
 {
   neighborList = ptr;
+
 }
 
 /*********************************************************************

@@ -331,11 +331,14 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neig
   flipatom = i; // TODO: use class lambda 
 
   // need a full neighbor list
-  NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-  
-  d_fullneighbors = k_list->d_neighbors;
+  NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(listfull);
+  if (k_listneigh == nullptr) {
+    printf("k_list is nullptr \n");
+    return 0.0;
+  }
+  d_fullneighbors = k_listneigh->d_neighbors;
 
-  //d_fullnumneigh = k_list->d_numneigh; // TODO: why won't this work??
+  d_fullnumneigh = k_listneigh->d_numneigh; // TODO: why won't this work??
 
   // loop over all neighbors of the selected atom
   const int jnum = neighborList->numneigh[i]; // TODO: why can't i use the kokkos neighbor list
@@ -415,11 +418,24 @@ void PairEAMFSKokkos<DeviceType>::init_style()
 
   // adjust neighbor list request for KOKKOS
 
+  // neighflag = lmp->kokkos->neighflag;
+  // auto request = neighbor->find_request(this);
+  // request->set_kokkos_host(std::is_same_v<DeviceType,LMPHostType> &&
+  //                          !std::is_same_v<DeviceType,LMPDeviceType>);
+  // request->set_kokkos_device(std::is_same_v<DeviceType,LMPDeviceType>);
+  
   neighflag = lmp->kokkos->neighflag;
-  auto request = neighbor->find_request(this);
+  auto request = neighbor->find_request(this,1);
   request->set_kokkos_host(std::is_same_v<DeviceType,LMPHostType> &&
                            !std::is_same_v<DeviceType,LMPDeviceType>);
   request->set_kokkos_device(std::is_same_v<DeviceType,LMPDeviceType>);
+
+  request = neighbor->find_request(this,2);
+  request->set_kokkos_host(std::is_same_v<DeviceType,LMPHostType> &&
+                           !std::is_same_v<DeviceType,LMPDeviceType>);
+  request->set_kokkos_device(std::is_same_v<DeviceType,LMPDeviceType>);
+
+  
   if (neighflag == FULL) request->enable_full();
 }
 
@@ -1158,7 +1174,7 @@ KOKKOS_INLINE_FUNCTION
 void PairEAMFSKokkos<DeviceType>::operator()(TagPairEAMFSKernelD, const int& jj, double& Ei_partial, double& rhoi_partial) const 
 {
 
-  int j = d_neighbors(flipatom, jj); // TODO: need to use full neighbor list
+  int j = d_fullneighbors(flipatom, jj); // TODO: need to use full neighbor list
   j &= NEIGHMASK;
 
   const X_FLOAT xi = x(flipatom, 0);

@@ -43,6 +43,8 @@ class PairMEAM : public Pair {
   void unpack_reverse_comm(int, int *, double *) override;
   double memory_usage() override;
 
+  
+
  protected:
   class MEAM *meam_inst;
   double cutmax;                           // max cutoff for all elements
