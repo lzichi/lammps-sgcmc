@@ -64,8 +64,6 @@ class PairEAM : public Pair {
   double memory_usage() override;
   void swap_eam(double *, double **) override;
 
-  void init_list(int, class NeighList *) override;
-
  protected:
   int nmax;    // allocated size of per-atom arrays
   double cutforcesq;

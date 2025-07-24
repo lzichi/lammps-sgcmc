@@ -50,6 +50,8 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
   FixSemiGrandCanonicalMCSectorKokkos(class LAMMPS *, int, char **);
   ~FixSemiGrandCanonicalMCSectorKokkos() override;
 
+  void init() override; 
+
   double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
 
 //   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,

@@ -32,6 +32,7 @@
 #include "kokkos.h"
 #include "memory_kokkos.h"
 #include "neigh_list_kokkos.h"
+#include "neigh_request.h"
 #include "force.h"
 
 using namespace LAMMPS_NS;
@@ -56,6 +57,21 @@ template<class DeviceType>
 FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::~FixSemiGrandCanonicalMCSectorKokkos()
 {
     if (copymode) return;
+}
+
+template<class DeviceType>
+void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::init() 
+{
+    FixSemiGrandCanonicalMCSector::init();
+
+    // adjust neighbor list request for KOKKOS
+
+   // neighflag = lmp->kokkos->neighflag; // TODO: do i need this?
+    auto request = neighbor->find_request(this);
+    request->set_kokkos_host(std::is_same_v<DeviceType,LMPHostType> &&
+                            !std::is_same_v<DeviceType,LMPDeviceType>);
+    request->set_kokkos_device(std::is_same_v<DeviceType,LMPDeviceType>);
+
 }
 
 // /* ---------------------------------------------------------------------- */
