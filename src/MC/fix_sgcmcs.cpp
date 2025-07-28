@@ -314,7 +314,6 @@ void FixSemiGrandCanonicalMCSector::post_force(int /*vflag*/)
  *********************************************************************/
 void FixSemiGrandCanonicalMCSector::doMC()
 {
-  printf("inside do MC\n");
   // Get information about local ghost atoms from neighboring nodes
   // TODO: Question: decide on this "communicationStage" parameter
   // TODO: Question: do we need to do this communication?
@@ -641,7 +640,6 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   double Eold, Enew, deltaE;
 
   // Calculate old atomic energy of selected atom
-  printf("trying to run compute atomic energy \n");
   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
   // calculate the old per-atom energy of neighbors
@@ -657,10 +655,9 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
     ids[jj] = j;
-    // Eold += force->pair->compute_atomic_energy(j, neighborList);
+    Eold += force->pair->compute_atomic_energy(j, neighborList);
   }
-  printf("filled ids and calling kokkos kernel! \n");
-  Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
+  //Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
 
@@ -672,10 +669,10 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
 
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
-    //Enew += force->pair->compute_atomic_energy(j, neighborList);
+    Enew += force->pair->compute_atomic_energy(j, neighborList);
     ids[jj] = j;
   }
-  Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
+  //Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
 

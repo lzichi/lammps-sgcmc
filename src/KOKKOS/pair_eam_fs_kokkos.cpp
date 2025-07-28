@@ -332,19 +332,15 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neig
 
   // need a full neighbor list
   NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-  if (k_listneigh == nullptr) {
-    printf("k_list is nullptr \n");
-    return 0.0;
-  }
   d_fullneighbors = k_listneigh->d_neighbors;
 
   // loop over all neighbors of the selected atom
-  const int jnum = k_listneigh->numneigh[i]; // TODO: why can't i use the kokkos neighbor list
+  const int jnum = k_listneigh->d_numneigh[i]; 
 
   copymode = 1;
   Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
   copymode = 0;
-  //printf("finished calling parallel reduce \n");
+
   // compute the change in embedding energy of atom i
   p = rhoi * rdrho + 1.0;
   m = static_cast<int>(p);
@@ -379,8 +375,12 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     E_FLOAT Ei = 0.0;
     F_FLOAT rhoi = 0.0;
 
+    // need a full neighbor list
+    NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
+    d_fullneighbors = k_listneigh->d_neighbors;
+
     // loop over all neighbors of the selected atom
-    const int jnum = neighborList->numneigh[i];
+    const int jnum = k_listneigh->d_numneigh[i];
 
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);

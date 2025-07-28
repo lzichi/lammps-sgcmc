@@ -59,7 +59,7 @@ class FixSemiGrandCanonicalMCSector : public Fix {
   /******************** Monte-Carlo routines ************************/
 
   // This routine does one full MC step.
-  void doMC();
+  virtual void doMC();
 
   // Calculates the change in energy that swapping the given atom would produce.
   // This routine is for the general case of an arbitrary potential and
