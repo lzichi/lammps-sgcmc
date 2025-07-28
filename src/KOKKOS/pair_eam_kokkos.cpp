@@ -66,7 +66,6 @@ PairEAMKokkos<DeviceType>::~PairEAMKokkos()
 template<class DeviceType>
 void PairEAMKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
 {
-  printf("inside compute kokkos \n");
   eflag = eflag_in;
   vflag = vflag_in;
 
@@ -325,12 +324,9 @@ double PairEAMKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighb
   F_FLOAT rhoi = 0.0;
 
   // loop over all neighbors of the selected atom
-  printf("inside compute_atomic_energy \n");
   const int jnum = d_numneigh[i];
-  printf("indexed d_numneigh \n");
 
   Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMKernelD>(0, jnum), *this, i, Ei, rhoi);
-  printf("finished calling parallel reduce \n");
   // compute the change in embedding energy of atom i
   p = rhoi * rdrho + 1.0;
   m = static_cast<int>(p);
@@ -355,7 +351,6 @@ template<class DeviceType>
 double PairEAMKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
 {
   double E_total = 0.0;
-  printf("inside kokkos kernel \n");
 
   for (int ii = 0; ii < size; ii++) {
 

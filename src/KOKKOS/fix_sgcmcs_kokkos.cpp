@@ -172,7 +172,7 @@ template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC() 
 {
     NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-
+    d_list = k_listneigh->d_ilist;
   // Get information about local ghost atoms from neighboring nodes
   // TODO: Question: decide on this "communicationStage" parameter
   // TODO: Question: do we need to do this communication?
@@ -192,7 +192,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
   numFixAtomsLocal = 0; // number of atoms that a processor owns
 
   for (int ii = 0; ii < neighborList->inum; ii++) {
-    int i = k_listneigh->d_ilist[ii];
+    int i = d_ilist[ii];
     if (mask[i] & groupbit) {
         numFixAtomsLocal++;
     }
@@ -230,7 +230,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
         selectedAtomNL = atoms_in_sector[index + offset];
 
         // Get the real atom index.
-        selectedAtom = k_listneigh->d_ilist[selectedAtomNL];
+        selectedAtom = d_ilist[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
         // Choose the new type for the swapping atom by random.
