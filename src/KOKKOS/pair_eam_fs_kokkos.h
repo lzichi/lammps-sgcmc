@@ -60,7 +60,7 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   typedef EV_FLOAT value_type;
 
   PairEAMFSKokkos(class LAMMPS *);
-  ~PairEAMFSKokkos() override;
+  virtual ~PairEAMFSKokkos() override;
   void compute(int, int) override;
   double compute_atomic_energy(int, NeighList *) override;
   double compute_atomic_energy_batch(int *, NeighList *, int size) override;

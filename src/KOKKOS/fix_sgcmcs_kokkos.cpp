@@ -172,7 +172,7 @@ template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC() 
 {
     NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-    d_list = k_listneigh->d_ilist;
+    d_ilist = k_listneigh->d_ilist;
   // Get information about local ghost atoms from neighboring nodes
   // TODO: Question: decide on this "communicationStage" parameter
   // TODO: Question: do we need to do this communication?

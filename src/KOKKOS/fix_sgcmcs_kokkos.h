@@ -55,7 +55,7 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
   double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
 
   typename AT::t_neighbors_2d d_neighbors;
-  typename AT::t_int_1d d_ilist
+  typename AT::t_int_1d d_ilist;
 //   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
 //                        int, int *) override;
 //   void unpack_forward_comm_kokkos(int, int, DAT::tdual_xfloat_1d&) override;
