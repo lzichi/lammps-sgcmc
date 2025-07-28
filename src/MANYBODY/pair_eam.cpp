@@ -142,7 +142,6 @@ PairEAM::~PairEAM()
 
 void PairEAM::compute(int eflag, int vflag)
 {
-  printf("inside compute non kokkos\n");
   int i,j,ii,jj,m,inum,jnum,itype,jtype;
   double xtmp,ytmp,ztmp,delx,dely,delz,evdwl,fpair;
   double rsq,r,p,rhoip,rhojp,z2,z2p,recip,phip,psip,phi;
@@ -349,7 +348,6 @@ void PairEAM::compute(int eflag, int vflag)
  *********************************************************************/
 double PairEAM::compute_atomic_energy(int i, NeighList *neighborList)
 {
-  printf("inside compute atomic energy non kokkos \n");
   double p;
   int m;
   double* coeff;
@@ -410,7 +408,6 @@ double PairEAM::compute_atomic_energy(int i, NeighList *neighborList)
 }
 
 double PairEAM::compute_atomic_energy_batch(int *, NeighList *, int size) {
-  printf("inside non kokkos compute atomic energy batch!");
   return 0.0;
 }
 
