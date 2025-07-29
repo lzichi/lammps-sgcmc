@@ -95,47 +95,46 @@ template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors() 
 {
    x = atomKK->k_x.view<DeviceType>();
-   f = atomKK->k_f.view<DeviceType>();
    type = atomKK->k_type.view<DeviceType>();
 
-    NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(list);
-    d_ilist = k_ilist->d_ilist;
+    NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
+    d_ilist_short = k_ilist->d_ilist;
     // allocate views as necessary
     if (atom->nmax > nmax) {
         nmax = atom->nmax;
-        k_numneigh = DAT::tdual_int_1d("fix:numneigh", nmax);
-        k_ilist = DAT::tdual_int_1d("fix:ilist", nmax);
+        k_numneigh_short = DAT::tdual_int_1d("fix:numneigh", nmax);
+        k_ilist_short = DAT::tdual_int_1d("fix:ilist", nmax);
         
     }
     
     int temp_maxj = k_list->d_neighbors.extent(1);
     if (temp_maxj > maxj) {
         maxj = temp_maxj;
-        k_neighbors = DAT::tdual_int_2d("fix:neighbors", namx, maxj);
+        k_neighbors_short = DAT::tdual_int_2d("fix:neighbors", nmax, maxj);
     }
 
-    d_numneigh = k_numneigh.template view<DeviceType>();
-    d_neighbors = k_neighbors.template view<DeviceType>();
-    d_ilist = k_ilist.template view<DeviceType>();
+    d_numneigh_short = k_numneigh.template view<DeviceType>();
+    d_neighbors_short = k_neighbors.template view<DeviceType>();
+    d_ilist_short = k_ilist.template view<DeviceType>();
 
-    h_numneigh = k_numneigh.h_view;
-    h_neighbors = k_neighbors.h_view;
-    h_ilist = k_ilist.h_view;
+    h_numneigh_short = k_numneigh.h_view;
+    h_neighbors_short = k_neighbors.h_view;
+    h_ilist_short = k_ilist.h_view;
 
     // fill views with atoms within the cutoff
     Kokkos::parallel_for("fix:filter_neighbors", nmax, KOKKOS_CLASS_LAMBDA(const int ii) 
         {
-            const int i = d_ilist[ii];
+            const int i = d_ilist_short[ii];
             const X_FLOAT xtmp = x(i, 0);
             const X_FLOAT ytmp = x(i, 1);
             const X_FLOAT ztmp = x(i, 2);
 
             const int itype = type(i);
-            const int jnum = d_numneigh[i];
+            const int jnum = d_numneigh_short[i];
 
             int inside = 0;
             for (int jj = 0; jj < jnum; jj++) {
-                int j = d_neighbors(i,jj);
+                int j = d_neighbors_short(i,jj);
                 j &= NEIGHMASK;
 
                 const X_FLOAT delx = xtmp - x(j, 0);
@@ -144,11 +143,11 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
                 const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
 
                 if (rsq < cutoff) {
-                    d_neighbors(ii, inside) = j;
+                    d_neighbors_short(ii, inside) = j;
                     inside++;
                 }
             }
-            d_numneigh(ii) = inside;
+            d_numneigh_short(ii) = inside;
         });
 
 }
@@ -432,7 +431,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
 //   d_neighbors = k_listneigh->d_neighbors;
 //   int jnum = k_listneigh->d_numneigh[flipAtom];
 
-  int jnum = h_numneigh[flipAtom];
+  int jnum = h_numneigh_short[flipAtom];
 
   if (jnum > ids_size) {
     ids_size = jnum + 1;
@@ -440,7 +439,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   
   for(int jj = 0; jj < jnum; jj++) {
-    int j = h_neighbors(flipAtom, jj);
+    int j = h_neighbors_short(flipAtom, jj);
     ids[jj] = j;
   }
   ids[jnum] = flipAtom;
@@ -459,11 +458,11 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   // calculate the new per-atom energy of neighbors
 
   for(int jj = 0; jj < jnum; jj++) {
-    int j = h_neighbors(flipAtom, jj);
+    int j = h_neighbors_short(flipAtom, jj);
     ids[jj] = j;
   }
   ids[jnum] = flipAtom;
-  
+
   Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;

@@ -76,17 +76,17 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
 
 protected:
 
- DAT::tdual_int_1d k_numneigh;
- typename AT::t_int_1d d_numneigh;
- HAT::t_int_1d h_numneigh;
+ DAT::tdual_int_1d k_numneigh_short;
+ typename AT::t_int_1d d_numneigh_short;
+ HAT::t_int_1d h_numneigh_short;
 
- DAT::tdual_int_2d k_neighbors;
- typename AT::t_int_2d d_neighbors;
- HAT::t_int_2d h_neighbors;
+ DAT::tdual_int_2d k_neighbors_short;
+ typename AT::t_int_2d d_neighbors_short;
+ HAT::t_int_2d h_neighbors_short;
 
- DAT::tdual_int_1d k_ilist;
- typename AT::t_int_1d d_ilist;
- HAT::t_int_1d h_ilist;
+ DAT::tdual_int_1d k_ilist_short;
+ typename AT::t_int_1d d_ilist_short;
+ HAT::t_int_1d h_ilist_short;
 
  int nmax, maxj, cutoff;
 
