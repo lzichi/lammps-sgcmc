@@ -316,6 +316,7 @@ void PairEAMFSKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
   }
 }
 
+
 /* ----------------------------------------------------------------------
   compute atomic energy of a list of atoms
 ------------------------------------------------------------------------- */
@@ -342,8 +343,8 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     Ei = 0.0;
     F_FLOAT rhoi = 0.0;
     // need a full neighbor list
-    NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-    d_fullneighbors = k_listneigh->d_neighbors;
+    // NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
+    // d_fullneighbors = k_listneigh->d_neighbors;
 
     // loop over all neighbors of the selected atom
     const int jnum = neighborList->numneigh[i];

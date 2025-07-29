@@ -52,7 +52,10 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
 
   void init() override; 
   void doMC() override;
+  void post_force(int vflag) override;
   double computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) override;
+
+  void filter_neighbors();
 
   typename AT::t_neighbors_2d d_neighbors;
   typename AT::t_int_1d d_ilist;
@@ -71,6 +74,24 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
 //   KOKKOS_INLINE_FUNCTION
 //   void operator()(TagFixSemiGrandCanonicalMCSectorUnpackForwardComm, const int&) const;
 
+protected:
+
+ DAT::tdual_int_1d k_numneigh;
+ typename AT::t_int_1d d_numneigh;
+ HAT::t_int_1d h_numneigh;
+
+ DAT::tdual_int_2d k_neighbors;
+ typename AT::t_int_2d d_neighbors;
+ HAT::t_int_2d h_neighbors;
+
+ DAT::tdual_int_1d k_ilist;
+ typename AT::t_int_1d d_ilist;
+ HAT::t_int_1d h_ilist;
+
+ int nmax, maxj, cutoff;
+
+ typename AT::t_x_array x;
+ typename AT::t_int_1d type;
 
 };
 
