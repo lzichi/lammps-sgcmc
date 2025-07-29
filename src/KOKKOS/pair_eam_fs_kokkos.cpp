@@ -317,89 +317,78 @@ void PairEAMFSKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
 }
 
 /* ----------------------------------------------------------------------
-  compute atomic energy of atom i
-------------------------------------------------------------------------- */
-
-template<class DeviceType>
-double PairEAMFSKokkos<DeviceType>::compute_atomic_energy(int i, NeighList *neighborList)
-{
-  F_FLOAT p;
-  int m;
-  E_FLOAT Ei = 0.0;
-  F_FLOAT rhoi = 0.0;
-
-  flipatom = i; // TODO: use class lambda 
-
-  // need a full neighbor list
-  NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-  d_fullneighbors = k_listneigh->d_neighbors;
-
-  // loop over all neighbors of the selected atom
-  const int jnum = k_listneigh->d_numneigh[i]; 
-
-  copymode = 1;
-  Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
-  copymode = 0;
-
-  // compute the change in embedding energy of atom i
-  p = rhoi * rdrho + 1.0;
-  m = static_cast<int>(p);
-  m = MAX(1, MIN(m, nrho - 1));
-  p -= m;
-  p = MIN(p, 1.0);
-  const int d_type2frho_i = d_type2frho(type(i));
-  Ei += (d_frho_spline(d_type2frho_i, m, 3)*p + 
-         d_frho_spline(d_type2frho_i, m, 4)*p + 
-         d_frho_spline(d_type2frho_i, m, 5))*p + 
-         d_frho_spline(d_type2frho_i, m, 6);
-
-
-  return Ei;
-}
-
-/* ----------------------------------------------------------------------
   compute atomic energy of a list of atoms
 ------------------------------------------------------------------------- */
-
 template<class DeviceType>
 double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
 {
   double E_total = 0.0;
+  double Ei;
+
+  // intermediate view to hold partial results
+  auto k_rhoi = DAT::tdual_ffloat_1d("pair:rhoi", size);
+  auto k_ids = DAT::tdual_int_1d("pai:ids", size);
+
+  auto h_rhoi = k_rhoi.h_view;
+  auto h_ids = k_ids.h_view;
 
   for (int ii = 0; ii < size; ii++) {
-
     int i = ids[ii];
-    flipatom = i; // TODO: find better way, class lambda
-    F_FLOAT p;
-    int m;
-    E_FLOAT Ei = 0.0;
-    F_FLOAT rhoi = 0.0;
+    h_ids[ii] = i;
 
+    flipatom = i; // TODO: find better way, class lambda
+    double p;
+    int m;
+    Ei = 0.0;
+    F_FLOAT rhoi = 0.0;
     // need a full neighbor list
     NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
     d_fullneighbors = k_listneigh->d_neighbors;
 
     // loop over all neighbors of the selected atom
-    const int jnum = k_listneigh->d_numneigh[i];
-
+    const int jnum = neighborList->numneigh[i];
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
     copymode = 0;
+
     // compute the change in embedding energy of atom i
     p = rhoi * rdrho + 1.0;
     m = static_cast<int>(p);
     m = MAX(1, MIN(m, nrho - 1));
     p -= m;
     p = MIN(p, 1.0);
-    const int d_type2frho_i = d_type2frho(type(i));
-    Ei += (d_frho_spline(d_type2frho_i, m, 3)*p + 
-          d_frho_spline(d_type2frho_i, m, 4)*p + 
-          d_frho_spline(d_type2frho_i, m, 5))*p + 
-          d_frho_spline(d_type2frho_i, m, 6);
-  
+
+    h_rhoi(ii) = rhoi;
     E_total += Ei;
 
   }
+
+  k_rhoi.template modify<LMPHostType>();
+  k_rhoi.template sync<DeviceType>();
+  auto d_rhoi = k_rhoi.template view<DeviceType>();
+
+  k_ids.template modify<LMPHostType>();
+  k_ids.template sync<DeviceType>();
+  auto d_ids = k_ids.template view<DeviceType>();
+
+  Ei = 0.0; // TODO fix this Ei and Etotal, can you sum into an already existing variable
+
+  copymode = 1;
+  Kokkos::parallel_reduce(size, KOKKOS_CLASS_LAMBDA(const int ii, double& Ei_partial) {
+    double p = d_rhoi(ii) * rdrho + 1.0;
+    int m = static_cast<int>(p);
+    m = MAX(1, MIN(m, nrho - 1));
+    p -= m;
+    p = MIN(p, 1.0);
+    int itype = type(d_ids(ii));
+    const int d_type2frho_i = d_type2frho(itype);
+    Ei_partial += (d_frho_spline(d_type2frho_i, m, 3)*p +
+          d_frho_spline(d_type2frho_i, m, 4)*p +
+          d_frho_spline(d_type2frho_i, m, 5))*p +
+          d_frho_spline(d_type2frho_i, m, 6);
+  },  Ei);
+  copymode = 0;
+  E_total += Ei;
   return E_total;
 }
 

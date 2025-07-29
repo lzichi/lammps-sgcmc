@@ -46,8 +46,6 @@ struct TagPairEAMKernelAB{};
 template<int NEIGHFLAG, int NEWTON_PAIR, int EVFLAG>
 struct TagPairEAMKernelC{};
 
-struct TagPairEAMKernelD{};
-
 template<class DeviceType>
 class PairEAMKokkos : public PairEAM, public KokkosBase {
  public:
@@ -60,10 +58,7 @@ class PairEAMKokkos : public PairEAM, public KokkosBase {
   PairEAMKokkos(class LAMMPS *);
   ~PairEAMKokkos() override;
   void compute(int, int) override;
-  double compute_atomic_energy(int, NeighList *) override;
-  double compute_atomic_energy_batch(int *, NeighList *, int size) override;
   void init_style() override;
-
 
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPairEAMPackForwardComm, const int&) const;
@@ -118,9 +113,6 @@ class PairEAMKokkos : public PairEAM, public KokkosBase {
   KOKKOS_INLINE_FUNCTION
   void operator()(TagPairEAMKernelC<NEIGHFLAG,NEWTON_PAIR,EVFLAG>, const typename Kokkos::TeamPolicy<DeviceType>::member_type&) const;
  
-  KOKKOS_INLINE_FUNCTION
-  void operator()(TagPairEAMKernelD, const int&, const int&, double&, double&) const;
-
   template<int NEIGHFLAG, int NEWTON_PAIR>
   KOKKOS_INLINE_FUNCTION
   void ev_tally(EV_FLOAT &ev, const int &i, const int &j,

@@ -191,12 +191,15 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
 
   numFixAtomsLocal = 0; // number of atoms that a processor owns
 
-  for (int ii = 0; ii < neighborList->inum; ii++) {
-    int i = d_ilist[ii];
-    if (mask[i] & groupbit) {
-        numFixAtomsLocal++;
-    }
-  }
+//   Kokkos::parallel_for()
+//   for (int ii = 0; ii < neighborList->inum; ii++) {
+//     int i = d_ilist[ii];
+//     if (mask[i] & groupbit) {
+//         numFixAtomsLocal++;
+//     }
+//   }
+
+  numFixAtomsLocal = atom->nlocal;
 
   int offset = 0;
   // loop through each sector and run MC
@@ -230,7 +233,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
         selectedAtomNL = atoms_in_sector[index + offset];
 
         // Get the real atom index.
-        selectedAtom = d_ilist[selectedAtomNL];
+        //selectedAtom = d_ilist[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
         // Choose the new type for the swapping atom by random.
@@ -249,7 +252,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
 
         // Atomic energy method:
         if(atomicenergyflag) {
-          deltaE = computeEnergyChangeEatom(selectedAtom, oldSpecies, newSpecies);
+          deltaE = computeEnergyChangeEatom(selectedAtomNL, oldSpecies, newSpecies);
         // Slow generic method:
         } else {
             deltaE = computeEnergyChangeGeneric(selectedAtom, oldSpecies, newSpecies);
