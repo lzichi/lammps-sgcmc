@@ -303,7 +303,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
         selectedAtomNL = atoms_in_sector[index + offset];
 
         // Get the real atom index.
-        selectedAtom = h_ilist[selectedAtomNL];
+        selectedAtom = h_ilist_short[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
         // Choose the new type for the swapping atom by random.
@@ -445,7 +445,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
+  Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
 
@@ -464,7 +464,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
+  Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
   atomKK->sync(execution_space,datamask_read);
