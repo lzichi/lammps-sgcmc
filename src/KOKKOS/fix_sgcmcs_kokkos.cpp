@@ -98,7 +98,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
    type = atomKK->k_type.view<DeviceType>();
 
     NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-    d_ilist_short = k_ilist->d_ilist;
+
     // allocate views as necessary
     if (atom->nmax > nmax) {
         nmax = atom->nmax;
@@ -113,13 +113,14 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
         k_neighbors_short = DAT::tdual_int_2d("fix:neighbors", nmax, maxj);
     }
 
-    d_numneigh_short = k_numneigh.template view<DeviceType>();
-    d_neighbors_short = k_neighbors.template view<DeviceType>();
-    d_ilist_short = k_ilist.template view<DeviceType>();
+    d_numneigh_short = k_numneigh_short.template view<DeviceType>();
+    d_neighbors_short = k_neighbors_short.template view<DeviceType>();
+    d_ilist_short = k_ilist_short.template view<DeviceType>();
+    d_ilist_short = k_list->d_ilist; // TODO: how do i do this correctly
 
-    h_numneigh_short = k_numneigh.h_view;
-    h_neighbors_short = k_neighbors.h_view;
-    h_ilist_short = k_ilist.h_view;
+    h_numneigh_short = k_numneigh_short.h_view;
+    h_neighbors_short = k_neighbors_short.h_view;
+    h_ilist_short = k_ilist_short.h_view;
 
     // fill views with atoms within the cutoff
     Kokkos::parallel_for("fix:filter_neighbors", nmax, KOKKOS_CLASS_LAMBDA(const int ii) 
