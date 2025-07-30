@@ -460,7 +460,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  printf("inside kokkos computeEnergyChangeEatom, i = %d, jnum = %d", flipAtom, jnum);
+  printf("inside kokkos computeEnergyChangeEatom, i = %d, jnum = %d \n", flipAtom, jnum);
 
   Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
   // Calculate new per-atom energy of selected atom

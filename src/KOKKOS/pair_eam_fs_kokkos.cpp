@@ -342,10 +342,12 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
   auto h_numneigh_view = k_numneigh_view.h_view;
   auto d_numneigh_view = k_numneigh_view.template view<DeviceType>();
 
+  copymode = 1;
   Kokkos::parallel_for(inum, KOKKOS_CLASS_LAMBDA(const int ii) {
     int jnum = d_numneigh[ii];
     d_numneigh_view[ii] = jnum;
   });
+  copymode = 0;
 
   for (int ii = 0; ii < size; ii++) {
     int i = ids[ii];
