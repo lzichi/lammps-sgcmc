@@ -117,7 +117,7 @@ FixSemiGrandCanonicalMC::FixSemiGrandCanonicalMC(LAMMPS *_lmp, int narg, char **
   for (int i = 2; i <= atom->ntypes; i++, iarg++) {
     if (iarg >= narg) error->all(FLERR, "Too few chemical potentials specified");
     deltamu[i] = utils::numeric(FLERR, arg[iarg], false, lmp);
-    printf("inside input deltamu = %g, i = %d \n", deltamu[i], i);
+    //printf("inside input deltamu = %g, i = %d \n", deltamu[i], i);
     if (comm->me == 0)
       utils::logmesg(lmp, "  SGC - Chemical potential of species {}: {}\n", i, deltamu[i]);
   }
@@ -474,7 +474,7 @@ void FixSemiGrandCanonicalMC::doMC()
       if (selectedAtom >= 0) {
         if(atomicenergyflag) {
                   if(oldSpecies == 2) {
-          printf("flipping atom of type 2! \n");
+          //printf("flipping atom of type 2! \n");
         }
           flipAtomEatom(selectedAtom, oldSpecies, newSpecies);
         } else {

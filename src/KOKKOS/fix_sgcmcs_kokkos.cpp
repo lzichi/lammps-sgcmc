@@ -104,8 +104,10 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
     NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
 
     // allocate views as necessary
-    if (neighborList->inum > nmax) {
-        nmax = neighborList->inum;
+    int temp_nmax = atom->nlocal + atom->nghost;
+    if (temp_nmax > nmax) {
+        //printf("inum = %d, numneigh length = %d, nghost = %d\n", neighborList->inum, k_list->d_numneigh.extent(0), atom->nghost);
+        nmax = temp_nmax;
         k_numneigh_short = DAT::tdual_int_1d("fix:numneigh", nmax);
         k_ilist_short = DAT::tdual_int_1d("fix:ilist", nmax);
         
@@ -157,17 +159,19 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrand
     int inside = 0;
     for (int jj = 0; jj < jnum; jj++) {
         int j = d_neighbors(i,jj);
-        j &= NEIGHMASK;
+        //j &= NEIGHMASK;
 
         const X_FLOAT delx = xtmp - x(j, 0);
         const X_FLOAT dely = ytmp - x(j, 1);
         const X_FLOAT delz = ztmp - x(j, 2);
         const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
 
-        if (rsq < cutoff*cutoff) {
-            d_neighbors_short(i, inside) = j;
-            inside++;
-        }
+        // if (rsq < cutoff*cutoff) {
+        //     d_neighbors_short(i, inside) = j;
+        //     inside++;
+        // }
+        d_neighbors_short(i, inside) = j;
+        inside++;
     }
     d_numneigh_short(i) = inside;
 }
@@ -467,7 +471,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  printf("inside kokkos computeEnergyChangeEatom, i = %d, jnum = %d \n", flipAtom, jnum);
+  //printf("inside kokkos computeEnergyChangeEatom, i = %d, jnum = %d \n", flipAtom, jnum);
 
   Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
   // Calculate new per-atom energy of selected atom

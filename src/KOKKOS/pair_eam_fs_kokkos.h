@@ -197,6 +197,8 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   typename AT::t_neighbors_2d d_fullneighbors; // TODO: do this better
   typename AT::t_int_1d d_ilist;
   typename AT::t_int_1d d_numneigh;
+  typename AT::t_int_1d d_fullnumneigh;
+
 
   int first;
   typename AT::t_int_1d d_sendlist;

@@ -329,7 +329,7 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
 
   NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
   d_fullneighbors = k_listneigh->d_neighbors;
-  d_numneigh = k_listneigh->d_numneigh;
+  d_fullnumneigh = k_listneigh->d_numneigh;
 
   // intermediate view to hold partial results
   auto k_rhoi = DAT::tdual_ffloat_1d("pair:rhoi", size);
@@ -339,18 +339,18 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
   auto h_ids = k_ids.h_view;
 
   // TODO find a better way to do this
-  auto k_numneigh_view = DAT::tdual_int_1d("pair:numneigh", neighborList->inum);
+  int nmax = atom->nlocal + atom->nghost;
+  auto k_numneigh_view = DAT::tdual_int_1d("pair:numneigh", nmax);
   auto h_numneigh_view = k_numneigh_view.h_view;
   auto d_numneigh_view = k_numneigh_view.template view<DeviceType>();
 
   copymode = 1;
-  Kokkos::parallel_for(inum, KOKKOS_CLASS_LAMBDA(const int ii) {
-    int jnum = d_numneigh[ii];
-    d_numneigh_view[ii] = jnum;
+  Kokkos::parallel_for(nmax, KOKKOS_CLASS_LAMBDA(const int ii) {
+    d_numneigh_view[ii] = d_fullnumneigh[ii];
   });
   copymode = 0;
-  k_rhoi.template modify<DeviceType>();
-  k_rhoi.template sync<LMPHostType>();
+  k_numneigh_view.template modify<DeviceType>();
+  k_numneigh_view.template sync<LMPHostType>();
 
   for (int ii = 0; ii < size; ii++) {
     int i = ids[ii];
@@ -365,6 +365,7 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
 
     // loop over all neighbors of the selected atom
     const int jnum = h_numneigh_view[i];
+    //printf("i = %d, h_numneigh_view[i] = %d \n", i, h_numneigh_view[i]);
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
     copymode = 0;
