@@ -48,6 +48,8 @@ FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::FixSemiGrandCanonicalMCSectorKo
     kokkosable = 1;
     atomKK = (AtomKokkos *) atom;
     execution_space = ExecutionSpaceFromDevice<DeviceType>::space;
+    datamask_read = X_MASK | TYPE_MASK;
+    datamask_modify = TYPE_MASK;
 
     nmax = 0;
     maxj = 0;
@@ -95,8 +97,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::post_force(int /*vflag*/)
 template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors() 
 {
-    atomKK->sync(execution_space,datamask_read);
-    atomKK->modified(execution_space,F_MASK);
+    atomKK->sync(execution_space, datamask_read);
 
     x = atomKK->k_x.view<DeviceType>();
     type = atomKK->k_type.view<DeviceType>();
@@ -461,8 +462,9 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = newSpecies;
-  atomKK->sync(execution_space,datamask_read);
-  atomKK->modified(execution_space,F_MASK);
+  atomKK->modified(Host, TYPE_MASK);
+  atomKK->sync(execution_space, TYPE_MASK);
+  
 
   // calculate the new per-atom energy of neighbors
 
@@ -475,8 +477,8 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
-  atomKK->sync(execution_space,datamask_read);
-  atomKK->modified(execution_space,F_MASK);
+  atomKK->modified(Host, TYPE_MASK);
+  atomKK->sync(execution_space, TYPE_MASK);
 
   deltaE = Enew - Eold;
 

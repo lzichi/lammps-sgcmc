@@ -325,51 +325,84 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
 {
   double E_total = 0.0;
   double Ei_partial = 0.0;
-  double Ei;
+  double Ei = 0.0;
 
   NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
   d_fullneighbors = k_listneigh->d_neighbors;
   d_fullnumneigh = k_listneigh->d_numneigh;
 
   // intermediate view to hold partial results
-  auto k_rhoi = DAT::tdual_ffloat_1d("pair:rhoi", size);
-  auto k_ids = DAT::tdual_int_1d("pair:ids", size);
+  auto d_rhoi = Kokkos::View<double*>("pair:rhoi", size);
 
-  auto h_rhoi = k_rhoi.h_view;
+  // Make ids accessible on the device TODO: find a better way
+  auto k_ids = DAT::tdual_int_1d("pair:ids", size);
   auto h_ids = k_ids.h_view;
 
-  // TODO find a better way to do this
-  int nmax = atom->nlocal + atom->nghost;
-  auto k_numneigh_view = DAT::tdual_int_1d("pair:numneigh", nmax);
-  auto h_numneigh_view = k_numneigh_view.h_view;
-  auto d_numneigh_view = k_numneigh_view.template view<DeviceType>();
+  for (int ii = 0; ii < size; ii++) {
+    h_ids[ii] = ids[ii];
+  }
+
+  k_ids.template modify<LMPHostType>();
+  k_ids.template sync<DeviceType>();
+  auto d_ids = k_ids.template view<DeviceType>();
 
   copymode = 1;
-  Kokkos::parallel_for(nmax, KOKKOS_CLASS_LAMBDA(const int ii) {
-    d_numneigh_view[ii] = d_fullnumneigh[ii];
-  });
-  copymode = 0;
-  k_numneigh_view.template modify<DeviceType>();
-  k_numneigh_view.template sync<LMPHostType>();
-
-  for (int ii = 0; ii < size; ii++) {
-    int i = ids[ii];
-    h_ids[ii] = i;
-
-    flipatom = i; // TODO: find better way, class lambda
+  Kokkos::parallel_reduce (size, KOKKOS_CLASS_LAMBDA(const int ii, double Ei_partial_outer) {
+    int flipatom = d_ids[ii]; 
     double p;
     int m;
-    Ei = 0.0;
     F_FLOAT rhoi = 0.0;
-    // need a full neighbor list
 
     // loop over all neighbors of the selected atom
-    const int jnum = h_numneigh_view[i];
+    const int jnum = d_fullnumneigh[flipatom];
 
-    copymode = 1;
-    Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
-    copymode = 0;
+    Kokkos::parallel_reduce("pair:compute_atomic_energy_j", jnum, KOKKOS_CLASS_LAMBDA (const int jj, double Ei_partial, double rhoi_partial)
+    {
+        int j = d_fullneighbors(flipatom, jj); 
+        j &= NEIGHMASK;
 
+        const X_FLOAT xi = x(flipatom, 0);
+        const X_FLOAT yi = x(flipatom, 1);
+        const X_FLOAT zi = x(flipatom, 2);
+
+        const X_FLOAT delx = xi - x(j, 0);
+        const X_FLOAT dely = yi - x(j, 1);
+        const X_FLOAT delz = zi - x(j, 2);
+
+        const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
+        const int jtype = type(j);
+        const int itype = type(flipatom);
+
+        if(rsq < cutforcesq) {
+          const F_FLOAT r = sqrt(rsq);
+          F_FLOAT p = r * rdr + 1.0;
+          int m = static_cast<int> (p);
+          m = MIN(m, nr - 1);
+          p -= m;
+          p = MIN(p, 1.0);
+
+          // sum pair energy ij
+          // divide by 2 to avoid double counting energy
+
+          const int d_type2z2r_ij = d_type2z2r(itype, jtype);
+          F_FLOAT z2 = (d_z2r_spline(d_type2z2r_ij, m, 3) * p +
+                        d_z2r_spline(d_type2z2r_ij, m, 4) * p +
+                        d_z2r_spline(d_type2z2r_ij, m, 5)) * p + 
+                        d_z2r_spline(d_type2z2r_ij, m, 6);
+
+          Ei_partial += 0.5 * z2 / r; 
+
+          // sum rho_ij to rho_i
+          const int d_type2rhor_ij = d_type2rhor(itype, jtype);
+          rhoi_partial += (d_rhor_spline(d_type2rhor_ij, m, 3) * p +
+                          d_rhor_spline(d_type2rhor_ij, m, 4) * p +
+                          d_rhor_spline(d_type2rhor_ij, m, 5)) * p +
+                          d_rhor_spline(d_type2rhor_ij, m, 6);
+        }
+    }, Ei, rhoi);
+
+    d_rhoi[ii] = rhoi; // fill in for next parallel for
+    
     // compute the change in embedding energy of atom i
     p = rhoi * rdrho + 1.0;
     m = static_cast<int>(p);
@@ -377,18 +410,11 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     p -= m;
     p = MIN(p, 1.0);
 
-    h_rhoi(ii) = rhoi;
-    E_total += Ei;
+    Ei_partial_outer += Ei;
+  }, E_total);
 
-  }
-
-  k_rhoi.template modify<LMPHostType>();
-  k_rhoi.template sync<DeviceType>();
-  auto d_rhoi = k_rhoi.template view<DeviceType>();
-
-  k_ids.template modify<LMPHostType>();
-  k_ids.template sync<DeviceType>();
-  auto d_ids = k_ids.template view<DeviceType>();
+  E_total += Ei;
+  copymode = 0;
 
   Ei = 0.0; // TODO fix this Ei and Etotal, can you sum into an already existing variable
 

@@ -207,8 +207,6 @@ class PairEAMFSKokkos : public PairEAM, public KokkosBase {
   int neighflag,newton_pair;
   int nlocal,nall,eflag,vflag;
 
-  int flipatom; // TODO: use class lambda to avoid this!
-
   friend void pair_virial_fdotr_compute<PairEAMFSKokkos>(PairEAMFSKokkos*);
 };
 
