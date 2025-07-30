@@ -45,7 +45,7 @@ class PairEAM : public Pair {
   double ***rhor_spline, ***frho_spline, ***z2r_spline;
 
   PairEAM(class LAMMPS *);
-  ~PairEAM() override;
+  virtual ~PairEAM() override;
   void compute(int, int) override;
   virtual double compute_atomic_energy(int, NeighList *) override;
   double compute_atomic_energy_batch(int *, NeighList *, int size) override;

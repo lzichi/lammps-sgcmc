@@ -51,7 +51,6 @@ FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::FixSemiGrandCanonicalMCSectorKo
 
     nmax = 0;
     maxj = 0;
-    cutoff = force->pair->cutforce;
 
 }
 
@@ -77,6 +76,8 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::init()
                             !std::is_same_v<DeviceType,LMPDeviceType>);
     request->set_kokkos_device(std::is_same_v<DeviceType,LMPDeviceType>);
 
+    cutoff = force->pair->cutforce;
+
 }
 
 template<class DeviceType>
@@ -94,14 +95,17 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::post_force(int /*vflag*/)
 template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors() 
 {
+     atomKK->sync(execution_space,datamask_read);
+     atomKK->modified(execution_space,F_MASK);
+
    x = atomKK->k_x.view<DeviceType>();
    type = atomKK->k_type.view<DeviceType>();
 
     NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
 
     // allocate views as necessary
-    if (atom->nmax > nmax) {
-        nmax = atom->nmax;
+    if (neighborList->inum > nmax) {
+        nmax = neighborList->inum;
         k_numneigh_short = DAT::tdual_int_1d("fix:numneigh", nmax);
         k_ilist_short = DAT::tdual_int_1d("fix:ilist", nmax);
         
@@ -116,41 +120,50 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
     d_numneigh_short = k_numneigh_short.template view<DeviceType>();
     d_neighbors_short = k_neighbors_short.template view<DeviceType>();
     d_ilist_short = k_ilist_short.template view<DeviceType>();
-    d_ilist_short = k_list->d_ilist; // TODO: how do i do this correctly
+
+    d_ilist = k_list->d_ilist; // TODO: how do i do this correctly
+    d_neighbors = k_list->d_neighbors;
+    d_numneigh = k_list->d_numneigh;
 
     h_numneigh_short = k_numneigh_short.h_view;
     h_neighbors_short = k_neighbors_short.h_view;
     h_ilist_short = k_ilist_short.h_view;
 
+    copymode = 1;
     // fill views with atoms within the cutoff
-    Kokkos::parallel_for("fix:filter_neighbors", nmax, KOKKOS_CLASS_LAMBDA(const int ii) 
-        {
-            const int i = d_ilist_short[ii];
-            const X_FLOAT xtmp = x(i, 0);
-            const X_FLOAT ytmp = x(i, 1);
-            const X_FLOAT ztmp = x(i, 2);
+    Kokkos::parallel_for("fix:filter_neighbors", Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorFilterNeigh>(0, nmax), *this);
+    copymode = 0;
+    
 
-            const int itype = type(i);
-            const int jnum = d_numneigh_short[i];
+}
 
-            int inside = 0;
-            for (int jj = 0; jj < jnum; jj++) {
-                int j = d_neighbors_short(i,jj);
-                j &= NEIGHMASK;
+template<class DeviceType>
+KOKKOS_INLINE_FUNCTION
+void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrandCanonicalMCSectorFilterNeigh, const int &ii) const{
+    const int i = d_ilist[ii];
+    d_ilist_short[ii] = i;
+    const X_FLOAT xtmp = x(i, 0);
+    const X_FLOAT ytmp = x(i, 1);
+    const X_FLOAT ztmp = x(i, 2);
+    
+    const int jnum = d_numneigh[i];
+    
+    int inside = 0;
+    for (int jj = 0; jj < jnum; jj++) {
+        int j = d_neighbors(i,jj);
+        j &= NEIGHMASK;
 
-                const X_FLOAT delx = xtmp - x(j, 0);
-                const X_FLOAT dely = ytmp - x(j, 1);
-                const X_FLOAT delz = ztmp - x(j, 2);
-                const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
+        const X_FLOAT delx = xtmp - x(j, 0);
+        const X_FLOAT dely = ytmp - x(j, 1);
+        const X_FLOAT delz = ztmp - x(j, 2);
+        const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
 
-                if (rsq < cutoff) {
-                    d_neighbors_short(ii, inside) = j;
-                    inside++;
-                }
-            }
-            d_numneigh_short(ii) = inside;
-        });
-
+        if (rsq < cutoff) {
+            d_neighbors_short(i, inside) = j;
+            inside++;
+        }
+    }
+    d_numneigh_short(i) = inside;
 }
 
 // /* ---------------------------------------------------------------------- */
@@ -299,10 +312,14 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
       if (localRandom->uniform() <= diceProbability) {
 
         // Choose a random atom from the pool of atoms that are inside the sampling window.
+        double hi = (double)num_atoms_per_sector[j_sector];
+        int bye = (int)(localRandom->uniform());
+        printf("jsector num atoms %g, random number %d", hi,bye );
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
 
         // Get the real atom index.
+        printf("selecting atom \n");
         selectedAtom = h_ilist_short[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
@@ -423,6 +440,7 @@ template<class DeviceType>
 double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) 
 {
   double Eold, Enew, deltaE;
+  printf("inside of compute atomic energy \n");
 
   // Calculate old atomic energy of selected atom
 //   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
@@ -446,7 +464,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   ids[jnum] = flipAtom;
 
   Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
-
+  printf("called kernel in compute atomic energy \n");
   // Calculate new per-atom energy of selected atom
 
   atom->type[flipAtom] = newSpecies;

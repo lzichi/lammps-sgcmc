@@ -181,6 +181,7 @@ FixSemiGrandCanonicalMCSector::FixSemiGrandCanonicalMCSector(LAMMPS *_lmp, int n
  *********************************************************************/
 FixSemiGrandCanonicalMCSector::~FixSemiGrandCanonicalMCSector()
 {
+  if (copymode) return;
   memory->destroy(rsec);
   memory->destroy(num_atoms_per_sector);
   memory->destroy(atoms_in_sector);
@@ -857,6 +858,7 @@ void FixSemiGrandCanonicalMCSector::pre_neighbor()
       stack_foot[j] = i;
       num_atoms += 1;
     }
+    printf("num atoms %d, j %d", num_atoms, j);
     num_atoms_per_sector[j] = num_atoms;
   }
   int index = 0;

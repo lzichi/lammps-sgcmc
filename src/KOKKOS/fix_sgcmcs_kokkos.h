@@ -40,6 +40,7 @@ namespace LAMMPS_NS {
 
 // struct TagFixSemiGrandCanonicalMCSectorPackForwardComm{};
 // struct TagFixSemiGrandCanonicalMCSectorUnPackForwardComm{};
+struct TagFixSemiGrandCanonicalMCSectorFilterNeigh{};
 
 template<class DeviceType>
 class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector, public KokkosBase {
@@ -57,8 +58,8 @@ class FixSemiGrandCanonicalMCSectorKokkos : public FixSemiGrandCanonicalMCSector
 
   void filter_neighbors();
 
-  typename AT::t_neighbors_2d d_neighbors;
-  typename AT::t_int_1d d_ilist;
+  KOKKOS_INLINE_FUNCTION
+  void operator()(TagFixSemiGrandCanonicalMCSectorFilterNeigh, const int&) const;
 
 //   int pack_forward_comm_kokkos(int, DAT::tdual_int_1d, DAT::tdual_xfloat_1d&,
 //                        int, int *) override;
@@ -87,6 +88,10 @@ protected:
  DAT::tdual_int_1d k_ilist_short;
  typename AT::t_int_1d d_ilist_short;
  HAT::t_int_1d h_ilist_short;
+
+ typename AT::t_int_1d_randomread d_ilist;
+ typename AT::t_neighbors_2d d_neighbors;
+ typename AT::t_int_1d d_numneigh;
 
  int nmax, maxj, cutoff;
 
