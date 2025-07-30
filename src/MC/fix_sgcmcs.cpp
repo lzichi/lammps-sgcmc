@@ -371,6 +371,8 @@ void FixSemiGrandCanonicalMCSector::doMC()
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
 
+        //printf("index = %d, selectedAtom = %d", index, selectedAtomNL);
+
         // Get the real atom index.
         selectedAtom = neighborList->ilist[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];

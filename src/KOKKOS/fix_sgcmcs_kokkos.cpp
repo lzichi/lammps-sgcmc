@@ -322,10 +322,10 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
       if (localRandom->uniform() <= diceProbability) {
 
         // Choose a random atom from the pool of atoms that are inside the sampling window.
-        double hi = (double)num_atoms_per_sector[j_sector];
-        int bye = (int)(localRandom->uniform());
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
+
+        //printf("index = %d, selectedAtom = %d", index, selectedAtomNL);
 
         // Get the real atom index.
         selectedAtom = h_ilist_short[selectedAtomNL];
@@ -459,6 +459,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
 //printf("inside of computeEnergyChangeEatom \n");
 
   int jnum = h_numneigh_short[flipAtom];
+  
 
   if (jnum > ids_size) {
     ids_size = jnum + 1;
