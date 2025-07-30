@@ -321,7 +321,7 @@ void PairEAMFSKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
   compute atomic energy of a list of atoms
 ------------------------------------------------------------------------- */
 template<class DeviceType>
-double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
+double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size, HAT::t_int_1d h_numneigh_short)
 {
   double E_total = 0.0;
   double Ei;
@@ -347,7 +347,7 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     // d_fullneighbors = k_listneigh->d_neighbors;
 
     // loop over all neighbors of the selected atom
-    const int jnum = neighborList->numneigh[i];
+    const int jnum = h_numneigh_short[i];
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
     copymode = 0;

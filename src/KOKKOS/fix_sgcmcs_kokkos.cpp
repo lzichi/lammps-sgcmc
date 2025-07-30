@@ -314,12 +314,10 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
         // Choose a random atom from the pool of atoms that are inside the sampling window.
         double hi = (double)num_atoms_per_sector[j_sector];
         int bye = (int)(localRandom->uniform());
-        printf("jsector num atoms %g, random number %d", hi,bye );
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
 
         // Get the real atom index.
-        printf("selecting atom \n");
         selectedAtom = h_ilist_short[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
@@ -440,7 +438,6 @@ template<class DeviceType>
 double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom(int flipAtom, int oldSpecies, int newSpecies) 
 {
   double Eold, Enew, deltaE;
-  printf("inside of compute atomic energy \n");
 
   // Calculate old atomic energy of selected atom
 //   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
@@ -463,8 +460,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
-  printf("called kernel in compute atomic energy \n");
+  Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum, h_numneigh_short);
   // Calculate new per-atom energy of selected atom
 
   atom->type[flipAtom] = newSpecies;
@@ -482,7 +478,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
+  Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum, h_numneigh_short);
 
   atom->type[flipAtom] = oldSpecies;
   atomKK->sync(execution_space,datamask_read);
