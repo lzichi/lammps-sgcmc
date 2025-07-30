@@ -321,33 +321,42 @@ void PairEAMFSKokkos<DeviceType>::compute(int eflag_in, int vflag_in)
   compute atomic energy of a list of atoms
 ------------------------------------------------------------------------- */
 template<class DeviceType>
-double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size, HAT::t_int_1d h_numneigh_short)
+double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
 {
   double E_total = 0.0;
   double Ei;
 
-  // intermediate view to hold partial results
-  auto k_rhoi = DAT::tdual_ffloat_1d("pair:rhoi", size);
-  auto k_ids = DAT::tdual_int_1d("pai:ids", size);
+  // need a full neighbor list
+  NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
+  d_fullneighbors = k_listneigh->d_neighbors; // TODO: do i need a separate d_neighbors?
+  d_numneigh = k_listneigh->d_numneigh; 
 
-  auto h_rhoi = k_rhoi.h_view;
+  // dual view to translate ids from host to device
+  // TODO: send in view from device instead
+  auto k_ids = DAT::tdual_int_1d("pair:ids", size);
   auto h_ids = k_ids.h_view;
+  auto d_rhoi = Kokkos::view<double*> ("pair:rhoi", size);
 
-  for (int ii = 0; ii < size; ii++) {
-    int i = ids[ii];
-    h_ids[ii] = i;
+  // populate the dual view of ids
+  for (int ii = 0; ii < size; ii ++) {
+    h_ids[ii] = ids[ii];
+  }
+  
+  k_ids.template modify<LMPHostType>();
+  k_ids.template sync<DeviceType>();
+  auto d_ids = k_ids.template view<DeviceType>();
+
+  Kokkos::parallel_for(size, KOKKOS_CLASS_LAMBDA(const &int ii) {
+    int i = d_ids[ii];
 
     flipatom = i; // TODO: find better way, class lambda
     double p;
     int m;
     Ei = 0.0;
     F_FLOAT rhoi = 0.0;
-    // need a full neighbor list
-    // NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
-    // d_fullneighbors = k_listneigh->d_neighbors;
 
     // loop over all neighbors of the selected atom
-    const int jnum = h_numneigh_short[i];
+    const int jnum = d_numneigh[i];
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
     copymode = 0;
@@ -359,18 +368,10 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     p -= m;
     p = MIN(p, 1.0);
 
-    h_rhoi(ii) = rhoi;
+    d_rhoi(ii) = rhoi;
     E_total += Ei;
 
-  }
-
-  k_rhoi.template modify<LMPHostType>();
-  k_rhoi.template sync<DeviceType>();
-  auto d_rhoi = k_rhoi.template view<DeviceType>();
-
-  k_ids.template modify<LMPHostType>();
-  k_ids.template sync<DeviceType>();
-  auto d_ids = k_ids.template view<DeviceType>();
+  });
 
   Ei = 0.0; // TODO fix this Ei and Etotal, can you sum into an already existing variable
 

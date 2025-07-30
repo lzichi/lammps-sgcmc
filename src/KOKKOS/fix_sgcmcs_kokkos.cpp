@@ -460,7 +460,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum, h_numneigh_short);
+  Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
   // Calculate new per-atom energy of selected atom
 
   atom->type[flipAtom] = newSpecies;
@@ -478,7 +478,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum, h_numneigh_short);
+  Enew = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
   atomKK->sync(execution_space,datamask_read);
