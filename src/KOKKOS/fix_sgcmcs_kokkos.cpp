@@ -95,24 +95,22 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::post_force(int /*vflag*/)
 template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors() 
 {
-     atomKK->sync(execution_space,datamask_read);
-     atomKK->modified(execution_space,F_MASK);
+    atomKK->sync(execution_space,datamask_read);
+    atomKK->modified(execution_space,F_MASK);
 
-   x = atomKK->k_x.view<DeviceType>();
-   type = atomKK->k_type.view<DeviceType>();
+    x = atomKK->k_x.view<DeviceType>();
+    type = atomKK->k_type.view<DeviceType>();
 
     NeighListKokkos<DeviceType>* k_list = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
 
     // allocate views as necessary
     int temp_nmax = atom->nlocal + atom->nghost;
     if (temp_nmax > nmax) {
-        //printf("inum = %d, numneigh length = %d, nghost = %d\n", neighborList->inum, k_list->d_numneigh.extent(0), atom->nghost);
         nmax = temp_nmax;
         k_numneigh_short = DAT::tdual_int_1d("fix:numneigh", nmax);
         k_ilist_short = DAT::tdual_int_1d("fix:ilist", nmax);
-        
     }
-    
+
     int temp_maxj = k_list->d_neighbors.extent(1);
     if (temp_maxj > maxj) {
         maxj = temp_maxj;
@@ -123,7 +121,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
     d_neighbors_short = k_neighbors_short.template view<DeviceType>();
     d_ilist_short = k_ilist_short.template view<DeviceType>();
 
-    d_ilist = k_list->d_ilist; // TODO: how do i do this correctly
+    d_ilist = k_list->d_ilist; 
     d_neighbors = k_list->d_neighbors;
     d_numneigh = k_list->d_numneigh;
 
@@ -132,7 +130,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
     h_ilist_short = k_ilist_short.h_view;
 
     copymode = 1;
-    // fill views with atoms within the cutoff
+    
     Kokkos::parallel_for("fix:filter_neighbors", Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorFilterNeigh>(0, nmax), *this);
     copymode = 0;
 
@@ -159,7 +157,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrand
     int inside = 0;
     for (int jj = 0; jj < jnum; jj++) {
         int j = d_neighbors(i,jj);
-        //j &= NEIGHMASK;
+        j &= NEIGHMASK;
 
         const X_FLOAT delx = xtmp - x(j, 0);
         const X_FLOAT dely = ytmp - x(j, 1);
@@ -272,7 +270,6 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrand
 template<class DeviceType>
 void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC() 
 {
-
   const int *mask = atom->mask;
 
   // Reset counters.
@@ -324,8 +321,6 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
         // Choose a random atom from the pool of atoms that are inside the sampling window.
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
-
-        //printf("index = %d, selectedAtom = %d", index, selectedAtomNL);
 
         // Get the real atom index.
         selectedAtom = h_ilist_short[selectedAtomNL];
@@ -450,16 +445,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   double Eold, Enew, deltaE;
 
   // Calculate old atomic energy of selected atom
-//   Eold = force->pair->compute_atomic_energy(flipAtom, neighborList);
-
-  // calculate the old per-atom energy of neighbors
-
-//   d_neighbors = k_listneigh->d_neighbors;
-//   int jnum = k_listneigh->d_numneigh[flipAtom];
-//printf("inside of computeEnergyChangeEatom \n");
-
   int jnum = h_numneigh_short[flipAtom];
-  
 
   if (jnum > ids_size) {
     ids_size = jnum + 1;
@@ -472,17 +458,11 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
   }
   ids[jnum] = flipAtom;
 
-  //printf("inside kokkos computeEnergyChangeEatom, i = %d, jnum = %d \n", flipAtom, jnum);
-
   Eold = force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
-  // Calculate new per-atom energy of selected atom
 
   atom->type[flipAtom] = newSpecies;
-  // TODO: do i need to sync kokkos?
   atomKK->sync(execution_space,datamask_read);
   atomKK->modified(execution_space,F_MASK);
-
-  //Enew = force->pair->compute_atomic_energy(flipAtom, neighborList);
 
   // calculate the new per-atom energy of neighbors
 

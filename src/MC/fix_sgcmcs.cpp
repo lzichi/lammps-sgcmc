@@ -371,8 +371,6 @@ void FixSemiGrandCanonicalMCSector::doMC()
         int index = (int)(localRandom->uniform() * (double)num_atoms_per_sector[j_sector]);
         selectedAtomNL = atoms_in_sector[index + offset];
 
-        //printf("index = %d, selectedAtom = %d", index, selectedAtomNL);
-
         // Get the real atom index.
         selectedAtom = neighborList->ilist[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
@@ -650,8 +648,6 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
-  //printf("inside computeEnergyChangeEatom, i = %d, jnum = %d \n", flipAtom, jnum);
-
   if (jnum > ids_size) {
     ids_size = jnum;
     memory->grow(ids, ids_size, "sgcmcs:ids");
@@ -662,7 +658,6 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
     ids[jj] = j;
     Eold += force->pair->compute_atomic_energy(j, neighborList);
   }
-  //Eold += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   // Calculate new per-atom energy of selected atom
 
@@ -677,7 +672,6 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
     Enew += force->pair->compute_atomic_energy(j, neighborList);
     ids[jj] = j;
   }
-  //Enew += force->pair->compute_atomic_energy_batch(ids, neighborList, jnum);
 
   atom->type[flipAtom] = oldSpecies;
 

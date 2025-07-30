@@ -365,7 +365,7 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
 
     // loop over all neighbors of the selected atom
     const int jnum = h_numneigh_view[i];
-    //printf("i = %d, h_numneigh_view[i] = %d \n", i, h_numneigh_view[i]);
+
     copymode = 1;
     Kokkos::parallel_reduce(Kokkos::RangePolicy<DeviceType, TagPairEAMFSKernelD>(0, jnum), *this, Ei, rhoi);
     copymode = 0;
