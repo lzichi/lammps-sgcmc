@@ -648,6 +648,8 @@ double FixSemiGrandCanonicalMCSector::computeEnergyChangeEatom(int flipAtom, int
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
+  printf("inside computeEnergyChangeEatom, i = %d, jnum = %d", flipAtom, jnum);
+
   if (jnum > ids_size) {
     ids_size = jnum;
     memory->grow(ids, ids_size, "sgcmcs:ids");
