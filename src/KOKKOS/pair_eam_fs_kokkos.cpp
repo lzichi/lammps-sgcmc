@@ -324,6 +324,7 @@ template<class DeviceType>
 double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, NeighList *neighborList, int size)
 {
   double E_total = 0.0;
+  double Ei_partial = 0.0;
   double Ei;
 
   NeighListKokkos<DeviceType>* k_listneigh = static_cast<NeighListKokkos<DeviceType>*>(neighborList);
@@ -348,6 +349,8 @@ double PairEAMFSKokkos<DeviceType>::compute_atomic_energy_batch(int * ids, Neigh
     d_numneigh_view[ii] = jnum;
   });
   copymode = 0;
+  k_rhoi.template modify<DeviceType>();
+  k_rhoi.template sync<LMPHostType>();
 
   for (int ii = 0; ii < size; ii++) {
     int i = ids[ii];

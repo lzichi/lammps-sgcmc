@@ -372,6 +372,7 @@ double PairEAM::compute_atomic_energy(int i, NeighList *neighborList)
     double delz = zi - atom->x[j][2];
     double rsq = delx*delx + dely*dely + delz*delz;
     if(rsq >= cutforcesq) continue;
+    //printf("inside eam, cutforcesq %g \n", cutforcesq);
 
     int jtype = atom->type[j];
     double r = sqrt(rsq);

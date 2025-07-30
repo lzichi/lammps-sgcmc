@@ -117,6 +117,7 @@ FixSemiGrandCanonicalMC::FixSemiGrandCanonicalMC(LAMMPS *_lmp, int narg, char **
   for (int i = 2; i <= atom->ntypes; i++, iarg++) {
     if (iarg >= narg) error->all(FLERR, "Too few chemical potentials specified");
     deltamu[i] = utils::numeric(FLERR, arg[iarg], false, lmp);
+    printf("inside input deltamu = %g, i = %d \n", deltamu[i], i);
     if (comm->me == 0)
       utils::logmesg(lmp, "  SGC - Chemical potential of species {}: {}\n", i, deltamu[i]);
   }
@@ -387,6 +388,7 @@ void FixSemiGrandCanonicalMC::doMC()
         selectedAtom = neighborList->ilist[selectedAtomNL];
         oldSpecies = atom->type[selectedAtom];
 
+
         // Choose the new type for the swapping atom by random.
         if (atom->ntypes > 2) {
           // Use a random number to choose the new species if there are three or more atom types.
@@ -418,9 +420,11 @@ void FixSemiGrandCanonicalMC::doMC()
         double dm = 0.0;
         if (serialMode && kappa != 0.0) {
           for (int i = 2; i <= atom->ntypes; i++)
+            //printf("serialMode && kappa != 0.0, inside of inner acceptance deltamu = %g, i = %d \n", deltamu[i], i);
             dm += (deltamu[i] + kappa / atom->natoms * (2.0 * speciesCounts[i] + deltaN[i])) * deltaN[i];
         } else {
           for (int i = 2; i <= atom->ntypes; i++)
+            //printf("inside of inner acceptance deltamu = %g, i = %d \n", deltamu[i], i);
             dm += deltamu[i] * deltaN[i];
         }
         double deltaB = -(deltaE + dm) * beta;
@@ -469,6 +473,9 @@ void FixSemiGrandCanonicalMC::doMC()
       // Make accepted atom swap permanent.
       if (selectedAtom >= 0) {
         if(atomicenergyflag) {
+                  if(oldSpecies == 2) {
+          printf("flipping atom of type 2! \n");
+        }
           flipAtomEatom(selectedAtom, oldSpecies, newSpecies);
         } else {
           //if (pairEAM)
@@ -1038,9 +1045,22 @@ double FixSemiGrandCanonicalMC::computeEnergyChangeEatom(int flipAtom, int oldSp
   int* jlist = neighborList->firstneigh[flipAtom];
   int jnum = neighborList->numneigh[flipAtom];
 
+  int i = flipAtom;
+  double ix = atom->x[i][0];
+  double iy = atom->x[i][1];
+  double iz = atom->x[i][2];
+
+  
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
-    Eold += force->pair->compute_atomic_energy(j, neighborList);
+    double delx = ix - atom->x[j][0];
+    double dely = iy - atom->x[j][1];
+    double delz = iz - atom->x[j][2];
+
+    double rsq = delx*delx + dely*dely + delz*delz;
+    //if(rsq < 58) {
+      Eold += force->pair->compute_atomic_energy(j, neighborList);
+    //}
   }
 
   // Calculate new per-atom energy of selected atom
@@ -1053,7 +1073,14 @@ double FixSemiGrandCanonicalMC::computeEnergyChangeEatom(int flipAtom, int oldSp
 
   for(int jj = 0; jj < jnum; jj++) {
     int j = jlist[jj];
-    Enew += force->pair->compute_atomic_energy(j, neighborList);
+    double delx = ix - atom->x[j][0];
+    double dely = iy - atom->x[j][1];
+    double delz = iz - atom->x[j][2];
+
+    double rsq = delx*delx + dely*dely + delz*delz;
+    //if(rsq < 58) {
+      Enew += force->pair->compute_atomic_energy(j, neighborList);
+    //}
   }
 
   atom->type[flipAtom] = oldSpecies;

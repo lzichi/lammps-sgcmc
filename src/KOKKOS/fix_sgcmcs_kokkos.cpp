@@ -133,8 +133,14 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::filter_neighbors()
     // fill views with atoms within the cutoff
     Kokkos::parallel_for("fix:filter_neighbors", Kokkos::RangePolicy<DeviceType, TagFixSemiGrandCanonicalMCSectorFilterNeigh>(0, nmax), *this);
     copymode = 0;
-    
 
+    k_numneigh_short.template modify<DeviceType>();
+    k_neighbors_short.template modify<DeviceType>();
+    k_ilist_short.template modify<DeviceType>();
+
+    k_numneigh_short.template sync<LMPHostType>();
+    k_neighbors_short.template sync<LMPHostType>();
+    k_ilist_short.template sync<LMPHostType>();
 }
 
 template<class DeviceType>
@@ -158,7 +164,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::operator()(TagFixSemiGrand
         const X_FLOAT delz = ztmp - x(j, 2);
         const F_FLOAT rsq = delx*delx + dely*dely + delz*delz;
 
-        if (rsq < cutoff) {
+        if (rsq < cutoff*cutoff) {
             d_neighbors_short(i, inside) = j;
             inside++;
         }
@@ -337,7 +343,7 @@ void FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::doMC()
 
         // Atomic energy method:
         if(atomicenergyflag) {
-          deltaE = computeEnergyChangeEatom(selectedAtomNL, oldSpecies, newSpecies);
+          deltaE = computeEnergyChangeEatom(selectedAtom, oldSpecies, newSpecies);
         // Slow generic method:
         } else {
             deltaE = computeEnergyChangeGeneric(selectedAtom, oldSpecies, newSpecies);
@@ -446,6 +452,7 @@ double FixSemiGrandCanonicalMCSectorKokkos<DeviceType>::computeEnergyChangeEatom
 
 //   d_neighbors = k_listneigh->d_neighbors;
 //   int jnum = k_listneigh->d_numneigh[flipAtom];
+//printf("inside of computeEnergyChangeEatom \n");
 
   int jnum = h_numneigh_short[flipAtom];
 

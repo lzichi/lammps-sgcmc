@@ -93,7 +93,8 @@ protected:
  typename AT::t_neighbors_2d d_neighbors;
  typename AT::t_int_1d d_numneigh;
 
- int nmax, maxj, cutoff;
+ int nmax, maxj;
+ double cutoff;
 
  typename AT::t_x_array x;
  typename AT::t_int_1d type;
