@@ -94,9 +94,9 @@ class FixSemiGrandCanonicalMCSector : public Fix {
   // Map atom coordinates to assigned sector
   int coords2sector(double *);
 
-  void setup_pre_neighbor() override;
+  void setup_post_neighbor() override;
 
-  void pre_neighbor() override;
+  void post_neighbor() override;
 
  private:
   // The number of MD steps between each MC cycle.

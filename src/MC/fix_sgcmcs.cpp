@@ -200,7 +200,7 @@ int FixSemiGrandCanonicalMCSector::setmask()
   int mask = 0;
   mask |= POST_FORCE;
   mask |= POST_FORCE_RESPA;
-  mask |= PRE_NEIGHBOR;
+  mask |= POST_NEIGHBOR;
 
   return mask;
 }
@@ -802,12 +802,12 @@ int FixSemiGrandCanonicalMCSector::coords2sector(double *x)
 }
 
 /*********************************************************************
- *  setup pre_neighbor()
+ *  setup post_neighbor()
  *********************************************************************/
 
-void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
+void FixSemiGrandCanonicalMCSector::setup_post_neighbor()
 {
-  pre_neighbor();
+  post_neighbor();
 }
 
 /*********************************************************************
@@ -815,7 +815,7 @@ void FixSemiGrandCanonicalMCSector::setup_pre_neighbor()
  *  parallelism with the sectoring method
  *********************************************************************/
 
-void FixSemiGrandCanonicalMCSector::pre_neighbor()
+void FixSemiGrandCanonicalMCSector::post_neighbor()
 {
 
   double **x = atom->x;
