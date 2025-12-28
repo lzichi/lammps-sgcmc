@@ -18,7 +18,8 @@ cimport cython
 from cpython.ref cimport PyObject
 from libc.stdlib cimport malloc, free
 from libc.string cimport memcpy
-
+from libcpp.string cimport string 
+cimport numpy as cnp
 
 cdef extern from "lammps.h" namespace "LAMMPS_NS":
     cdef cppclass LAMMPS:
@@ -87,6 +88,12 @@ cdef extern from "mliap_data_kokkos.h" namespace "LAMMPS_NS":
         void forward_exchange[CommType]  (CommType * copy_from, CommType * copy_to, int vec_len) except +
         void reverse_exchange[CommType] (CommType * copy_from, CommType * copy_to, int vec_len) except +
 
+    void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *data,
+                                        const string& name,
+                                        const double* values,
+                                        const long* shape,
+                                        int ndim) except +
+
 cdef extern from "mliap_unified_kokkos.h" namespace "LAMMPS_NS":
     cdef cppclass MLIAPDummyDescriptor:
         MLIAPDummyDescriptor(PyObject *, LAMMPS *) except +
@@ -149,6 +156,44 @@ cdef create_array(device, void *pointer, shape,is_int):
 # Automatically converts between C arrays and numpy when needed
 cdef class MLIAPDataPy:
     cdef MLIAPDataKokkosDevice * data
+
+    def set_custom_output(self, name: str, arr):
+        """
+        Store a custom array into the host-side MLIAPData object
+        via the C++ helper mliap_kokkos_set_custom_output().
+        """
+        if self.data is NULL:
+            raise ValueError("MLIAPDataPy: data pointer is NULL")
+
+        # Declarations
+        cdef cnp.ndarray[cnp.double_t, ndim=2] a
+        cdef int ndim, i
+        cdef long *shape
+        cdef string cname
+
+        # Prepare array
+        a = np.ascontiguousarray(arr, dtype=np.float64)
+        ndim = a.ndim
+        cname = name.encode("utf-8")
+
+        shape = <long*> malloc(ndim * sizeof(long))
+        if not shape:
+            raise MemoryError("failed to allocate shape array")
+
+        try:
+            for i in range(ndim):
+                shape[i] = a.shape[i]
+
+            mliap_kokkos_set_custom_output(
+                self.data,
+                cname,
+                <const double*> a.data,
+                <const long*> shape,
+                ndim,
+            )
+        finally:
+            free(shape)
+
 
     def __cinit__(self):
         self.data = NULL

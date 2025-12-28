@@ -37,6 +37,8 @@ class PairMLIAP : public Pair {
   double init_one(int, int) override;
   double memory_usage() override;
 
+  MLIAPData* get_data() const { return data; }
+ 
  protected:
   virtual void allocate();
 

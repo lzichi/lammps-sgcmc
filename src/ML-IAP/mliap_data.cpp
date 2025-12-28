@@ -16,6 +16,8 @@
 ------------------------------------------------------------------------- */
 
 #include "mliap_data.h"
+#include <pybind11/pybind11.h>
+#include <torch/extension.h>
 
 #include "atom.h"
 #include "error.h"
@@ -25,7 +27,31 @@
 #include "neigh_list.h"
 
 using namespace LAMMPS_NS;
+void MLIAPData::set_custom_output(const std::string& name, const torch::Tensor& tensor) {
+    custom_outputs_[name] = tensor.clone();
+}
 
+torch::Tensor MLIAPData::get_custom_output(const std::string& name) const {
+    auto it = custom_outputs_.find(name);
+    if (it == custom_outputs_.end())
+        throw std::runtime_error("MLIAPData: custom output '" + name + "' not found");
+    return it->second;
+}
+
+void MLIAPData::set_custom_output_array(const std::string& name,
+                                        const double* data,
+                                        const long* shape,
+                                        int ndim) {
+    if (ndim <= 0)
+        throw std::runtime_error("set_custom_output_array: ndim must be > 0");
+
+    std::vector<int64_t> sizes(ndim);
+    for (int i = 0; i < ndim; ++i) sizes[i] = static_cast<int64_t>(shape[i]);
+
+    auto options = torch::TensorOptions().dtype(torch::kFloat64);
+    torch::Tensor view = torch::from_blob(const_cast<double*>(data), sizes, options);
+    custom_outputs_[name] = view.clone();  // clone to own memory
+}
 MLIAPData::MLIAPData(LAMMPS *lmp, int gradgradflag_in, int *map_in, class MLIAPModel *model_in,
                      class MLIAPDescriptor *descriptor_in, class PairMLIAP *pairmliap_in) :
     Pointers(lmp),

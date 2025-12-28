@@ -15,6 +15,10 @@
 #define LMP_MLIAPDATA_H
 
 #include "pointers.h"
+#include <torch/torch.h>
+#include <string>
+#include <unordered_map>
+
 
 namespace LAMMPS_NS {
 
@@ -80,6 +84,17 @@ class MLIAPData : protected Pointers {
   int eflag;                     // indicates if energy is needed
   int vflag;                     // indicates if virial is needed
   class PairMLIAP *pairmliap;    // access to pair tally functions
+    
+  // Store and fetch tensors
+  void set_custom_output(const std::string& name, const torch::Tensor& tensor);
+  torch::Tensor get_custom_output(const std::string& name) const;
+
+  // Shim for Cython/Numpy interop
+  void set_custom_output_array(const std::string& name,
+                                 const double* data,
+                                 const long* shape,
+                                 int ndim);
+  std::unordered_map<std::string, torch::Tensor> custom_outputs_;
 
  protected:
   class MLIAPModel *model;

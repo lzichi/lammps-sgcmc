@@ -4,12 +4,13 @@
 import pickle
 import numpy as np
 import lammps.mliap
-
+cimport numpy as cnp
 cimport cython
 from cpython.ref cimport PyObject
 from libc.stdlib cimport malloc, free
 from libc.string cimport memcpy
-
+from libcpp.string cimport string
+from cpython.ref cimport PyObject
 
 cdef extern from "lammps.h" namespace "LAMMPS_NS":
     cdef cppclass LAMMPS:
@@ -73,6 +74,10 @@ cdef extern from "mliap_data.h" namespace "LAMMPS_NS":
         int eflag               # indicates if energy is needed
         int vflag               # indicates if virial is needed
 
+        void set_custom_output_array(const string& name,
+                                     const double* data,
+                                     const long* shape,
+                                     int ndim) except +
 
 cdef extern from "mliap_unified.h" namespace "LAMMPS_NS":
     cdef cppclass MLIAPDummyDescriptor:
@@ -112,6 +117,37 @@ def write_only_property(fset):
 # Automatically converts between C arrays and numpy when needed
 cdef class MLIAPDataPy:
     cdef MLIAPData * data
+    
+    def set_custom_output(self, name: str, arr):
+        """
+        Store a custom quantity from Python (NumPy array) into MLIAPData.
+        """
+        if self.data is NULL:
+            raise ValueError("MLIAPDataPy: data pointer is NULL")
+
+        # Convert to contiguous float64 array
+        cdef cnp.ndarray[cnp.double_t] a = np.ascontiguousarray(arr, dtype=np.float64)
+
+        # Declare all C variables up front
+        cdef int ndim = a.ndim
+        cdef long* shape = <long*> malloc(ndim * sizeof(long))
+        cdef string cname
+
+        if not shape:
+            raise MemoryError("failed to allocate shape array")
+
+        # Fill shape array and call into C++
+        try:
+            for i in range(ndim):
+                shape[i] = <long>a.shape[i]
+            cname = name.encode('utf-8')
+            self.data.set_custom_output_array(cname,
+                                          <const double*> a.data,
+                                              <const long*> shape,
+                                              ndim)
+        finally:
+            free(shape)
+
 
     def __cinit__(self):
         self.data = NULL
@@ -123,6 +159,7 @@ cdef class MLIAPDataPy:
     def update_pair_forces(self, fij):
         cdef double[:, ::1] fij_arr = fij
         update_pair_forces(self.data, &fij_arr[0][0])
+
 
     @property
     def f(self):
