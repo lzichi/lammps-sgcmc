@@ -605,12 +605,15 @@ faces (*bflag1* value 1), or both (*bflag1* value 3).
 
 -------------
 
-Visualizing ellipsoid particles
--------------------------------
+Visualizing ellipsoid and superellipsoid particles
+--------------------------------------------------
+
+.. versionadded:: 11Feb2026
 
 Ellipsoidal particles are a generalization of spheres that may have
-three different radii to define the shape.  They can be modeled using
-pair styles :doc:`gayberne <pair_gayberne>` or :doc:`resquared
+three different radii to define the shape.  Superellipsoids are in turn
+a generalization of ellipsoids.  They can be modeled using pair styles
+like :doc:`gayberne <pair_gayberne>` or :doc:`resquared
 <pair_resquared>`.  The regular :doc:`dump custom <dump>` command can
 output the center of those bodies, the shape parameters and the
 orientation as quaternions.  If one follows the required conventions and
@@ -618,47 +621,77 @@ follows the documented steps, those trajectory dump files can be
 `imported and visualized in OVITO
 <https://www.ovito.org/manual/advanced_topics/aspherical_particles.html>`_
 
-As an alternative, the ellipsoid particles can be visualized directly
-with :doc:`dump image <dump_image>` using the *ellipsoid* keyword.  The
-color and transparency settings can be changed by settings those
-properties for the corresponding atom types.  It is also possible to
-represent the ellipsoids via generating a triangle mesh and visualizing
-it as either wireframes (*eflag* value 2), planar faces (*eflag* value
-1), or both (*eflag* value 3), same as demonstrated for body particles
-above.  The use of a triangle mesh is currently required since the
-rasterizer built into LAMMPS does not offer a suitable graphics
-primitive for ellipsoids.  The mesh is constructed by iteratively
-refining a triangle mesh representing an octahedron where each triangle
-is replaced by four triangles.  For a smooth representation a refinement
-level of 5 or 6 is required, which will cause a significant slowdown of
-the rendering of the image.  Also, some artifacts can happen due to
-rounding which can be somewhat minimized using FSAA (which causes
-further slowdown of the rendering).
+.. versionchanged:: 30Mar2026
 
-.. |ellipsoid1| image:: img/ellipsoid-level2.png
-   :width: 33%
-.. |ellipsoid2| image:: img/ellipsoid-level4.png
-   :width: 33%
-.. |ellipsoid3| image:: img/ellipsoid-level6.png
-   :width: 33%
+   Now uses curved triangles instead of flat ones; "both" option is removed; support for superellipsoids was added
 
-|ellipsoid1|  |ellipsoid2|  |ellipsoid3|
+As an alternative, the ellipsoid and superellipsoid particles can be
+visualized directly with :doc:`dump image <dump_image>` using the
+*ellipsoid* keyword.  The color and transparency settings can be changed
+by setting those properties for the corresponding atom types.  It is
+also possible to represent the ellipsoids via generating a triangle mesh
+and visualizing it as either wireframes (*eflag* value 2) or rounded
+triangle faces (*eflag* value 1).  The use of a triangle mesh is
+currently required since the rasterizer built into LAMMPS does not offer
+suitable graphics primitives for ellipsoids or superellipsoids.  The
+mesh is constructed by iteratively refining a triangle mesh representing
+an icosahedron, where each triangle is replaced by four triangles in
+each iteration.  For a smooth representation a refinement level of 4
+seems sufficient, but high resolution images may benefit from a higher
+level (maximum is 6, see example images below).  A high refinement level
+can cause a significant slowdown of the rendering of the image due to
+the large number of triangles that need to be computed and drawn.  This
+slowdown will be more pronounced when enabling FSAA or SSAO or both.
+
+.. |ellipsoid1| image:: img/ellipsoid-mesh.png
+   :width: 24%
+.. |ellipsoid2| image:: img/ellipsoid-level2.png
+   :width: 24%
+.. |ellipsoid3| image:: img/ellipsoid-level4.png
+   :width: 24%
+.. |ellipsoid4| image:: img/ellipsoid-level6.png
+   :width: 24%
+
+|ellipsoid1|  |ellipsoid2|  |ellipsoid3|  |ellipsoid4|
 
 .. raw:: html
 
-   <center>(Ellipsoid particle visualization examples for different mesh refinement levels.
-   left: level 2, center: level 4, right: level 6. Click to see the full-size images)</center><br>
+   <center>(Ellipsoid particle visualization examples for different mesh
+         levels.  from left to right: wireframe level 3, triangles level
+         2, triangles level 4, triangles level 6. Click to see the
+         full-size images)</center><br>
 
 These images were created by adding the following :doc:`dump image and dump_modify <dump_image>`
 commands to the ``in.ellipse.resquared`` input example:
 
 .. code-block:: LAMMPS
 
-   #                                                       change + this
-   dump viz all image 1000 image-*.png type type ellipsoid type 3 4 0.05 &
-         size 600 600 zoom 2.2 shiny 0.1 fsaa yes view 80 -10 box yes 0.025 &
-         axes no 0.0 0.0 center s 0.5 0.5 0.5 ssao yes 32185474 0.6
-   dump_modify viz pad 9 boxcolor white backcolor gray adiam 1 4 adiam 2 7
+   #                                                   change /V\ this
+   dump viz all image 1000 image-*.png x type ellipsoid atom 1 4 0.2 &
+        size 600 600 zoom 1.331 view 80 20 box yes 0.025 shiny 0.2 fsaa yes
+   dump_modify viz pad 6 boxcolor goldenrod backcolor black backcolor2 white &
+        color map1 0.459 0.055 0.075 color map2 0.000 0.227 0.427 &
+        amap min max cf 0.0 5 min map1 0.1 map1 0.5 white 0.9 map2 max map2
+
+.. versionadded:: 30Mar2026
+
+The visualization of superellipsoids works exactly the same way as for
+ellipsoids by creating a triangle mesh of an icosahedron and refining
+and deforming it.  The difference is merely internally the applied
+deformation function and the corresponding computation of the surface
+normals.  LAMMPS will auto-detect which function to use.  Some
+visualizations of the ``in.drop_test``, the ``in.bowling``, and the
+``in.super_table`` examples from the
+``examples/ASPHERE/superellipsoid_gran`` folder are shown below.
+
+.. |superellipsoid1| image:: img/superellipsoids-drop.png
+   :width: 23%
+.. |superellipsoid2| image:: img/superellipsoids-bowl.png
+   :width: 41%
+.. |superellipsoid3| image:: img/superellipsoids-zoo.png
+   :width: 31%
+
+|superellipsoid1|  |superellipsoid2|  |superellipsoid3|
 
 -------------
 
@@ -779,13 +812,16 @@ and fix styles:
 .. table_from_list::
    :columns: 4
 
+   * :doc:`compute chunk/atom <compute_chunk_atom>`
    * :doc:`compute hbond/local <compute_hbond_local>`
    * :doc:`fix graphics/arrows <fix_graphics_arrows>`
+   * :doc:`fix graphics/chunk <fix_graphics_chunk>`
    * :doc:`fix graphics/isosurface <fix_graphics_isosurface>`
    * :doc:`fix graphics/labels <fix_graphics_labels>`
    * :doc:`fix graphics/lines <fix_graphics_lines>`
    * :doc:`fix graphics/objects <fix_graphics_objects>`
    * :doc:`fix graphics/periodic <fix_graphics_periodic>`
+   * :doc:`fix graphics/replica <fix_graphics_replica>`
    * :doc:`fix atom/swap <fix_atom_swap>`
    * :doc:`fix bond/break <fix_bond_break>`
    * :doc:`fix bond/create <fix_bond_create>`
@@ -951,14 +987,9 @@ and a transparent white triangle surface to represent those molecules.
           fcolor membrane darkgreen ftrans membrane 1.0 ftrans water 0.5 &
           element H H H H H H H H H C C C C C C C C C C C C C N N N N N N N O O O O S S &
                   H H H H H C C C C C C N O O O P Cl Na H H H N C C C C C C C C C C C &
-          adiam 1 1.92 adiam 2 1.92 adiam 3 1.92 adiam 5 1.92 adiam 6 1.92 adiam 7 1.92 adiam 8 1.92 &
-          adiam 9 1.92 adiam 10 2.72 adiam 11 2.72 adiam 12 2.72 adiam 13 2.72 adiam 14 2.72 &
-          adiam 15 2.72 adiam 16 2.72 adiam 17 2.72 adiam 18 2.72 adiam 19 2.72 adiam 20 2.72 &
-          adiam 21 2.72 adiam 22 2.72 adiam 23 2.48 adiam 24 2.48 adiam 25 2.48 adiam 26 2.48 &
-          adiam 27 2.48 adiam 28 2.48 adiam 29 2.48 adiam 30 2.432 adiam 31 2.432 adiam 32 2.432 &
-          adiam 34 2.88 adiam 35 2.88 adiam 52 3.632 adiam 53 2.176 adiam 54 1.92 adiam 55 1.92 &
-          adiam 56 1.92 adiam 57 2.48 adiam 58 2.72 adiam 59 2.72 adiam 60 2.72 adiam 61 2.72 &
-          adiam 62 2.72 adiam 63 2.72 adiam 64 2.72 adiam 65 2.72 adiam 66 2.72 adiam 67 2.72 adiam 68 2.72
+          adiam 1*9 1.92 adiam 10*22 2.72 adiam 23*29 2.48 adiam 30*33 2.432 adiam 34*35 2.88 &
+          adiam 36*40 1.92 adiam 41*46 2.72 adiam 47 2.48 adiam 48*50 2.432 adiam 51 2.88 &
+          adiam 52 3.632 adiam 53 2.176 adiam 54*56 1.92 adiam 57 2.48 adiam 58*68 2.72
 
 .. |isosurface1| image:: img/rhodo-all.png
    :width: 49%

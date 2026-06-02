@@ -86,6 +86,8 @@
 /dump_movie.h
 /fix_graphics_arrows.cpp
 /fix_graphics_arrows.h
+/fix_graphics_chunk.cpp
+/fix_graphics_chunk.h
 /fix_graphics_isosurface.cpp
 /fix_graphics_isosurface.h
 /fix_graphics_labels.cpp
@@ -542,6 +544,8 @@
 /angle_class2.h
 /angle_class2_p6.cpp
 /angle_class2_p6.h
+/angle_class2xe.cpp
+/angle_class2xe.h
 /angle_cosine_buck6d.cpp
 /angle_cosine_buck6d.h
 /angle_cosine.cpp
@@ -622,6 +626,8 @@
 /bond_gaussian.h
 /bond_gromos.cpp
 /bond_gromos.h
+/bond_gromos_kokkos.cpp
+/bond_gromos_kokkos.h
 /bond_harmonic.cpp
 /bond_harmonic.h
 /bond_harmonic_restrain.cpp
@@ -640,6 +646,8 @@
 /bond_oxdna_fene.h
 /bond_oxdna2_fene.cpp
 /bond_oxdna2_fene.h
+/bond_oxdna3_fene.cpp
+/bond_oxdna3_fene.h
 /bond_oxrna2_fene.cpp
 /bond_oxrna2_fene.h
 /bond_quartic.cpp
@@ -778,6 +786,8 @@
 /dihedral_charmm.h
 /dihedral_class2.cpp
 /dihedral_class2.h
+/dihedral_class2xe.cpp
+/dihedral_class2xe.h
 /dihedral_cosine_shift_exp.cpp
 /dihedral_cosine_shift_exp.h
 /dihedral_cosine_squared_restricted.cpp
@@ -841,6 +851,8 @@
 /dump_yaml.h
 /dynamical_matrix.cpp
 /dynamical_matrix.h
+/esp.cpp
+/esp.h
 /ewald.cpp
 /ewald.h
 /ewald_cg.cpp
@@ -875,6 +887,8 @@
 /fix_atc.h
 /fix_ave_correlate_long.cpp
 /fix_ave_correlate_long.h
+/fix_baoab.cpp
+/fix_baoab.h
 /fix_bocs.cpp
 /fix_bocs.h
 /fix_bond_break.cpp
@@ -1046,6 +1060,8 @@
 /fix_orient_eco.h
 /fix_orient_fcc.cpp
 /fix_orient_fcc.h
+/fix_oxdna_lrf.cpp
+/fix_oxdna_lrf.h
 /fix_peri_neigh.cpp
 /fix_peri_neigh.h
 /fix_phonon.cpp
@@ -1200,6 +1216,10 @@
 /kissfft.h
 /lj_spica_common.h
 /math_complex.h
+/math_extra_superellipsoids.cpp
+/math_extra_superellipsoids.h
+/math_pswf.cpp
+/math_pswf.h
 /math_vector.h
 /message.cpp
 /message.h
@@ -1279,6 +1299,8 @@
 /pair_cosine_squared.h
 /pair_coul_diel.cpp
 /pair_coul_diel.h
+/pair_coul_esp.cpp
+/pair_coul_esp.h
 /pair_coul_exclude.cpp
 /pair_coul_exclude.h
 /pair_coul_long.cpp
@@ -1337,6 +1359,8 @@
 /pair_gayberne.h
 /pair_granular.cpp
 /pair_granular.h
+/pair_granular_superellipsoid.cpp
+/pair_granular_superellipsoid.h
 /pair_gran_easy.cpp
 /pair_gran_easy.h
 /pair_gran_hertz_history.cpp
@@ -1405,12 +1429,16 @@
 /pair_lj_coul.h
 /pair_coul_cut_soft.cpp
 /pair_coul_cut_soft.h
+/pair_coul_cut_soft_gapsys.cpp
+/pair_coul_cut_soft_gapsys.h
 /pair_coul_long_soft.cpp
 /pair_coul_long_soft.h
 /pair_lj_cut_coul_cut_soft.cpp
 /pair_lj_cut_coul_cut_soft.h
 /pair_lj_cut_tip4p_cut.cpp
 /pair_lj_cut_tip4p_cut.h
+/pair_lj_cut_coul_esp.cpp
+/pair_lj_cut_coul_esp.h
 /pair_lj_cut_coul_long.cpp
 /pair_lj_cut_coul_long.h
 /pair_lj_cut_coul_long_soft.cpp
@@ -1483,9 +1511,12 @@
 /pair_oxdna_*.h
 /pair_oxdna2_*.cpp
 /pair_oxdna2_*.h
+/pair_oxdna3_*.cpp
+/pair_oxdna3_*.h
 /pair_oxrna2_*.cpp
 /pair_oxrna2_*.h
 /mf_oxdna.h
+/nucleotide_oxdna.h
 /pair_pedone.cpp
 /pair_pedone.h
 /pair_peri.cpp
@@ -1729,6 +1760,8 @@
 /fix_drude.h
 /fix_drude_transform.cpp
 /fix_drude_transform.h
+/fix_graphics_replica.cpp
+/fix_graphics_replica.h
 /fix_langevin_drude.cpp
 /fix_langevin_drude.h
 /fix_mol_swap.cpp

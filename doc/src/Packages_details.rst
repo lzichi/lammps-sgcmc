@@ -80,6 +80,7 @@ gives those details.
    * :ref:`MGPT <PKG-MGPT>`
    * :ref:`MISC <PKG-MISC>`
    * :ref:`ML-HDNNP <PKG-ML-HDNNP>`
+   * :ref:`ML-RUNNER <PKG-ML-RUNNER>`
    * :ref:`ML-IAP <PKG-ML-IAP>`
    * :ref:`ML-PACE <PKG-ML-PACE>`
    * :ref:`ML-POD <PKG-ML-POD>`
@@ -253,8 +254,8 @@ ASPHERE package
 
 **Contents:**
 
-Computes, time-integration fixes, and pair styles for aspherical
-particle models including ellipsoids, 2d lines, and 3d triangles.
+Computes, time-integration fixes, and pair styles for aspherical particle models
+including ellipsoids, granular superellipsoids, 2d lines, and 3d triangles.
 
 **Supporting info:**
 
@@ -265,6 +266,7 @@ particle models including ellipsoids, 2d lines, and 3d triangles.
 * :doc:`pair_style ylz <pair_ylz>`
 * :doc:`pair_style line/lj <pair_line_lj>`
 * :doc:`pair_style tri/lj <pair_tri_lj>`
+* :doc:`pair_style granular/superellipsoid <pair_granular_superellipsoid>`
 * `doc/PDF/pair_gayberne_extra.pdf <PDF/pair_gayberne_extra.pdf>`_
 * `doc/PDF/pair_resquared_extra.pdf <PDF/pair_resquared_extra.pdf>`_
 * ``examples/ASPHERE``
@@ -408,9 +410,11 @@ and :ref:`ASPHERE <PKG-ASPHERE>` packages are installed.
 * ``src/CG-DNA/README``
 * :doc:`pair_style oxdna/\* <pair_oxdna>`
 * :doc:`pair_style oxdna2/\* <pair_oxdna2>`
+* :doc:`pair_style oxdna3/\* <pair_oxdna3>`
 * :doc:`pair_style oxrna2/\* <pair_oxrna2>`
 * :doc:`bond_style oxdna/\* <bond_oxdna>`
 * :doc:`bond_style oxdna2/\* <bond_oxdna>`
+* :doc:`bond_style oxdna3/\* <bond_oxdna>`
 * :doc:`bond_style oxrna2/\* <bond_oxdna>`
 * :doc:`fix nve/dotc/langevin <fix_nve_dotc_langevin>`
 * ``examples/PACKAGES/cgdna``
@@ -1026,6 +1030,7 @@ package in ``tools/fep``; see its ``README`` file.
 * :doc:`fix adapt/fep <fix_adapt_fep>`
 * :doc:`compute fep <compute_fep>`
 * :doc:`pair_style \*/soft <pair_fep_soft>`
+* :doc:`pair_style coul/cut/soft/gapsys <pair_fep_soft>`
 * ``examples/PACKAGES/fep``
 * tools/fep/README
 * tools/fep
@@ -1826,6 +1831,38 @@ This package has :ref:`specific installation instructions <ml-hdnnp>` on the
 * ``lib/hdnnp/README``
 * :doc:`pair_style hdnnp <pair_hdnnp>`
 * ``examples/PACKAGES/hdnnp``
+
+----------
+
+.. _PKG-ML-RUNNER:
+
+ML-RUNNER package
+------------------
+**Contents:**
+A :doc:`pair_style runner <pair_runner>` command for the efficient evaluation of
+second-, third-, and fourth-generation high-dimensional neural network
+potentials (HDNNPs).
+
+.. _runner: https://www.theochem2.ruhr-uni-bochum.de/tc/software/runner.html.en
+
+To use this package you must have the `RuNNer <runner_>`_ library compiled on
+your system.
+
+**Authors:** K. Nikolas Lausch, Alexander L. M. Knoll, Moritz R. Schaefer,
+             Gunnar Schmitz, Joerg Behler (Ruhr-University Bochum)
+
+**Install:**
+
+This package has :ref:`specific installation instructions <ml-runner>` on the
+:doc:`Build extras <Build_extras>` page.
+
+.. versionadded:: TBD
+
+**Supporting info:**
+
+* ``src/ML-RUNNER``: filenames -> commands
+* :doc:`pair_style runner <pair_runner>`
+* ``examples/PACKAGES/ml-runner`` (see README.txt)
 
 ----------
 
