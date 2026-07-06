@@ -22,6 +22,9 @@ PairStyle(mliap,PairMLIAP);
 
 #include "pair.h"
 
+#include <string>
+#include <unordered_map>
+
 namespace LAMMPS_NS {
 
 class PairMLIAP : public Pair {
@@ -36,6 +39,9 @@ class PairMLIAP : public Pair {
   void init_style() override;
   double init_one(int, int) override;
   double memory_usage() override;
+  void *extract_peratom(const char *, int &) override;
+
+  MLIAPData *get_data() const { return data; }
 
  protected:
   virtual void allocate();

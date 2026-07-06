@@ -222,6 +222,11 @@ public:
 #endif
 };
 
+  void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *dev,
+                                      const std::string &name,
+                                      const double *values,
+                                      const long *shape,
+                                      int ndim);
 
 }    // namespace LAMMPS_NS
 #endif

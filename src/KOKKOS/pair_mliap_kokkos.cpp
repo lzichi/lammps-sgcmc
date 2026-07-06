@@ -73,6 +73,8 @@ void PairMLIAPKokkos<DeviceType>::compute(int eflag, int vflag)
   atomKK->sync(execution_space,X_MASK | TYPE_MASK );
   MLIAPDataKokkos<DeviceType> *k_data = (MLIAPDataKokkos<DeviceType>*)(data);
 
+  if (data) data->clear_custom_outputs();
+
   int is_kokkos_model = (dynamic_cast<MLIAPModelKokkos<DeviceType>*>(model)) != nullptr;
   int is_kokkos_descriptor = (dynamic_cast<MLIAPDescriptorKokkos<DeviceType>*>(descriptor)) != nullptr;
   auto model_space = is_kokkos_model ? execution_space : Host;
@@ -131,6 +133,8 @@ void PairMLIAPKokkos<DeviceType>::compute(int eflag, int vflag)
   descriptor->compute_forces(data);
 
   e_tally(data);
+
+  sync_custom_outputs_from_data();
 
   if (evflag) {
     atomKK->modified(descriptor_space,F_MASK | ENERGY_MASK | VIRIAL_MASK);

@@ -313,3 +313,44 @@ double MLIAPData::memory_usage()
 
   return bytes;
 }
+
+const MLIAPData::CustomOutput *MLIAPData::get_custom_output(const std::string &name) const
+{
+  auto it = custom_outputs_.find(name);
+  if(it == custom_outputs_.end()) return nullptr;
+  return &it->second;
+}
+
+const std::unordered_map<std::string, MLIAPData::CustomOutput> &MLIAPData::get_custom_outputs() const
+{
+  return custom_outputs_;
+}
+
+void MLIAPData::clear_custom_outputs() { custom_outputs_.clear(); }
+
+void MLIAPData::set_custom_output_array(const std::string &name,
+                                        const double *data,
+                                        const long *shape,
+                                        int ndim)
+{
+  const long nrows = shape[0];
+  const int ncols = (ndim == 1) ? 0 : static_cast<int>(shape[1]);
+
+  CustomOutput output;
+  output.nrows = static_cast<int>(nrows);
+  output.ncols = ncols;
+
+  const long nelem = (ndim == 1) ? nrows : nrows * shape[1];
+  output.values.assign(data, data + nelem);
+
+  if (ncols > 0) {
+    output.rows.resize(output.nrows);
+    for (int i = 0; i < output.nrows; i++) {
+      output.rows[i] = output.values.data() + static_cast<long>(i) * ncols;
+    }
+  }
+
+  custom_outputs_[name] = std::move(output);
+
+}
+

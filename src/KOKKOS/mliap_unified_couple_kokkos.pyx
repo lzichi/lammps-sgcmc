@@ -86,6 +86,7 @@ cdef extern from "mliap_data_kokkos.h" namespace "LAMMPS_NS":
 
         void forward_exchange[CommType]  (CommType * copy_from, CommType * copy_to, int vec_len) except +
         void reverse_exchange[CommType] (CommType * copy_from, CommType * copy_to, int vec_len) except +
+        void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *data, const string& name, const double* values, const long* shape, int ndim) except +
 
 cdef extern from "mliap_unified_kokkos.h" namespace "LAMMPS_NS":
     cdef cppclass MLIAPDummyDescriptor:
@@ -254,7 +255,42 @@ cdef class MLIAPDataPy:
                 self.data.reverse_exchange( <double*>copy_from_ptr, <double*>copy_to_ptr, vec_len)
             else:
                 raise TypeError(f"Unsupported comms type: ({copy_from_dtype})")
-        
+    
+    def set_custom_output(self, name: str, arr):
+        if self.data is NULL:
+            raise ValueError("MLIAPDataPy: data pointer is NULL")
+
+        cdef cnp.ndarray[cnp.double_t] a
+        cdef int ndim, i
+        cdef long *shape
+        cdef string cname
+
+        a = np.contiguousarray(arr, dtype=np.float64)
+        ndim = a.dim
+
+        if ndim != 1 and ndim != 2:
+            raise ValueError("set_custom_output only supports 1D or 2D arrays")
+
+        cname = name.encode("utf-8")
+
+        shape = <long*> malloc(ndim * sizeof(long))
+        if not shape:
+            raise MemoryError("failed to allocate shape array")
+
+        try: 
+            for i in range(ndim):
+                shape[i] = a.shape[i]
+
+            mliap_kokkos_set_custom_output(
+                self.data,
+                cname,
+                <const double*> a.data,
+                <const long*> shape,
+                ndim
+            )
+        finally:
+            free(shape)
+
     @property
     def f(self):
         if self.data.f is NULL:

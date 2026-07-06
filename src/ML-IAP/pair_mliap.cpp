@@ -384,3 +384,19 @@ double PairMLIAP::memory_usage()
   return bytes;
 }
 
+/* ----------------------------------------------------------------------
+   For FixPair
+------------------------------------------------------------------------- */
+
+void *PairMLIAP::extract_peratom(const char *str, int &ncol)
+{
+  if (!data) return nullptr;
+
+  const auto *output = data->get_custom_output(str);
+  if (!output) return nullptr;
+
+  ncol = output->ncols;
+  if (ncol == 0) return (void *) output->values.data();
+  return (void *) output->rows.data();
+}
+

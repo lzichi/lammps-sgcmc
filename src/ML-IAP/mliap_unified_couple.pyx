@@ -73,6 +73,11 @@ cdef extern from "mliap_data.h" namespace "LAMMPS_NS":
         int eflag               # indicates if energy is needed
         int vflag               # indicates if virial is needed
 
+        void set_custom_output_array(const string& name,
+                                const double* data,
+                                const long* shape,
+                                int ndim) except +
+
 
 cdef extern from "mliap_unified.h" namespace "LAMMPS_NS":
     cdef cppclass MLIAPDummyDescriptor:
@@ -312,6 +317,34 @@ cdef class MLIAPDataPy:
     @property
     def vflag(self):
         return self.data.vflag
+
+    def set_custom_output(self, name: str, arr):
+        if self.data is NULL:
+            raise ValueError("MLIAPDataPy: data pointer is NULL")
+        
+        cdef cnp.ndarray[cnp.double_t] a = np.ascontiguousarray(arr, dtype=np.float64)
+        cdef int ndim = a.ndim
+        cdef log* shape = <long*> malloc(ndim * sizeof(long))
+        cdef string cname
+
+        if ndim != 1 and ndim !=2:
+            raise ValueError("set_custom_output only supports 1D or 2D arrays")
+
+        if not shape: 
+            raise MemoryError("failed to allocate shape array")
+
+        try: 
+            for i in range(ndim):
+                shape[i] = <long>a.shape[i]
+            cname = name.encode('utf-8')
+            self.data.set_custom_output_array(
+                cname,
+                <const double*> a.data.
+                <const long*> shape,
+                ndim
+            )
+        finally:
+            free(shape)
 
 
 # Interface between C and Python compute functions

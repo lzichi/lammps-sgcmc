@@ -21,6 +21,14 @@ namespace LAMMPS_NS {
 class MLIAPData : protected Pointers {
 
  public:
+  // Custom outputs from MLIAP     
+  struct CustomOutput {
+      int ncols = 0;
+      int nrows = 0;
+      std::vector<double> values;
+      std::vector<double*> rows;
+  };
+
   MLIAPData(class LAMMPS *, int, int *, class MLIAPModel *, class MLIAPDescriptor *,
             class PairMLIAP * = nullptr);
   ~MLIAPData() override;
@@ -81,6 +89,11 @@ class MLIAPData : protected Pointers {
   int vflag;                     // indicates if virial is needed
   class PairMLIAP *pairmliap;    // access to pair tally functions
 
+  void set_custom_output_array(const std::string &name, const double *data, const long *shape, int ndim);
+  const CustomOutput *get_custom_output(const std::string &) const;
+  const std::unordered_map<std::string, CustomOutput> &get_custom_outputs() const;
+  void clear_custom_outputs();
+
  protected:
   class MLIAPModel *model;
   class MLIAPDescriptor *descriptor;
@@ -88,6 +101,8 @@ class MLIAPData : protected Pointers {
   int nmax;
   class NeighList *list;    // LAMMPS neighbor list
   int *map;                 // map LAMMPS types to [0,nelements)
+
+  std::unordered_map<std::string, CustomOutput> custom_outputs_;   
 };
 
 }    // namespace LAMMPS_NS

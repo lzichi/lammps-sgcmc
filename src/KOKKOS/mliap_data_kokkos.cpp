@@ -361,6 +361,19 @@ void MLIAPDataKokkos<DeviceType>::sync(ExecutionSpace space, uint64_t mask, bool
 
 /* ---------------------------------------------------------------------- */
 
+void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *dev, 
+                                    const std::string &name,
+                                    const double *values,
+                                    const long *shape,
+                                    int ndim)
+{
+  auto *pair = dev->pairmliap;
+  MLIAPData *base = pair->degt_data();
+  base->set_custom_output_array(name, values, shape, ndim);
+}
+
+/* ---------------------------------------------------------------------- */
+
 template class MLIAPDataKokkos<LMPDeviceType>;
 #ifdef LMP_KOKKOS_GPU
 template class MLIAPDataKokkos<LMPHostType>;
