@@ -3,12 +3,14 @@
 
 import pickle
 import numpy as np
+cimport numpy as cnp
 import lammps.mliap
 
 cimport cython
 from cpython.ref cimport PyObject
 from libc.stdlib cimport malloc, free
 from libc.string cimport memcpy
+from libcpp.string cimport string
 
 
 cdef extern from "lammps.h" namespace "LAMMPS_NS":
@@ -324,7 +326,7 @@ cdef class MLIAPDataPy:
         
         cdef cnp.ndarray[cnp.double_t] a = np.ascontiguousarray(arr, dtype=np.float64)
         cdef int ndim = a.ndim
-        cdef log* shape = <long*> malloc(ndim * sizeof(long))
+        cdef long* shape = <long*> malloc(ndim * sizeof(long))
         cdef string cname
 
         if ndim != 1 and ndim !=2:
@@ -339,7 +341,7 @@ cdef class MLIAPDataPy:
             cname = name.encode('utf-8')
             self.data.set_custom_output_array(
                 cname,
-                <const double*> a.data.
+                <const double*> cnp.PyArray_DATA(a),
                 <const long*> shape,
                 ndim
             )

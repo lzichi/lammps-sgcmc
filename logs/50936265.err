@@ -1,0 +1,1415 @@
+
+Currently Loaded Modules:
+  1) gmp/6.3.0-fasrc01    5) cuda/12.9.1-fasrc01
+  2) mpfr/4.2.1-fasrc01   6) cmake/4.2.3-fasrc01
+  3) mpc/1.3.1-fasrc02    7) cudnn/9.10.2.21_cuda12-fasrc01
+  4) gcc/14.2.0-fasrc01   8) openmpi/5.0.5-fasrc01
+
+ 
+
+CMake Deprecation Warning at CMakeLists.txt:22 (cmake_policy):
+  The OLD behavior for policy CMP0109 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+
+
+CMake Deprecation Warning at CMakeLists.txt:26 (cmake_policy):
+  The OLD behavior for policy CMP0135 will be removed from a future version
+  of CMake.
+
+  The cmake-policies(7) manual explains that the OLD behaviors of all
+  policies are deprecated and that a policy should be set to OLD only under
+  specific short-term circumstances.  Projects should be ported to the NEW
+  behavior and not rely on setting a policy to OLD.
+
+
+CMake Warning at CMakeLists.txt:241 (add_library):
+  Cannot generate a safe runtime search path for target lammps because files
+  in some directories may conflict with libraries in implicit directories:
+
+    runtime library [libgomp.so.1] in /n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib64 may be hidden by files in:
+      /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib
+
+  Some of these libraries may not be found correctly.
+
+
+CMake Warning at CMakeLists.txt:255 (add_executable):
+  Cannot generate a safe runtime search path for target lmp because files in
+  some directories may conflict with libraries in implicit directories:
+
+    runtime library [libgomp.so.1] in /n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib64 may be hidden by files in:
+      /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib
+
+  Some of these libraries may not be found correctly.
+
+
+performance hint: mliap_model_python_couple_kokkos.pyx:98:5: Exception check on 'MLIAPPYKokkos_unload_model' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'MLIAPPYKokkos_unload_model' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'MLIAPPYKokkos_unload_model' to allow an error code to be returned.
+performance hint: mliap_model_python_couple_kokkos.pyx:136:5: Exception check on 'MLIAPPYKokkos_compute_gradients' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'MLIAPPYKokkos_compute_gradients' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'MLIAPPYKokkos_compute_gradients' to allow an error code to be returned.
+performance hint: mliap_model_python_couple.pyx:91:5: Exception check on 'MLIAPPY_unload_model' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'MLIAPPY_unload_model' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'MLIAPPY_unload_model' to allow an error code to be returned.
+performance hint: mliap_model_python_couple.pyx:103:5: Exception check on 'MLIAPPY_compute_gradients' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'MLIAPPY_compute_gradients' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'MLIAPPY_compute_gradients' to allow an error code to be returned.
+performance hint: mliap_unified_couple_kokkos.pyx:512:5: Exception check on 'compute_gradients_python_kokkos' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_gradients_python_kokkos' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_gradients_python_kokkos' to allow an error code to be returned.
+performance hint: mliap_unified_couple_kokkos.pyx:518:5: Exception check on 'compute_descriptors_python_kokkos' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_descriptors_python_kokkos' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_descriptors_python_kokkos' to allow an error code to be returned.
+performance hint: mliap_unified_couple_kokkos.pyx:524:5: Exception check on 'compute_forces_python_kokkos' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_forces_python_kokkos' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_forces_python_kokkos' to allow an error code to be returned.
+performance hint: mliap_unified_couple.pyx:373:5: Exception check on 'compute_gradients_python' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_gradients_python' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_gradients_python' to allow an error code to be returned.
+performance hint: mliap_unified_couple.pyx:379:5: Exception check on 'compute_descriptors_python' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_descriptors_python' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_descriptors_python' to allow an error code to be returned.
+performance hint: mliap_unified_couple.pyx:385:5: Exception check on 'compute_forces_python' will always require the GIL to be acquired.
+Possible solutions:
+	1. Declare 'compute_forces_python' as 'noexcept' if you control the definition and you're sure you don't want the function to raise exceptions.
+	2. Use an 'int' return type on 'compute_forces_python' to allow an error code to be returned.
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21601): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21616): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24412): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24432): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24513): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24514): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24541): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24566): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26633): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26637): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26747): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21291): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21292): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21293): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21601): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(21616): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24412): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24432): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24513): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24514): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24541): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24566): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26633): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26637): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26747): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(830): warning #177-D: function "__Pyx__IsSameCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(29370): warning #177-D: function "__Pyx_PyObject_AsString" was declared but never referenced
+  static inline const char* __Pyx_PyObject_AsString(PyObject* o) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(29365): warning #177-D: function "__Pyx_PyByteArray_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyByteArray_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(29360): warning #177-D: function "__Pyx_PyUnicode_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyUnicode_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(29444): warning #177-D: function "__Pyx_PyObject_IsTrueAndDecref" was declared but never referenced
+  static inline int __Pyx_PyObject_IsTrueAndDecref(PyObject* x) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(29584): warning #177-D: function "__Pyx_PyIndex_AsHash_t" was declared but never referenced
+  static inline Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject* o) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1494): warning #177-D: function "__Pyx_pretend_to_initialize" was declared but never referenced
+  static inline void __Pyx_pretend_to_initialize(void* ptr) { (void)ptr; }
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1499): warning #550-D: variable "__pyx_lineno" was set but never used
+  static int __pyx_lineno;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1500): warning #550-D: variable "__pyx_clineno" was set but never used
+  static int __pyx_clineno = 0;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(1502): warning #550-D: variable "__pyx_filename" was set but never used
+  static const char *__pyx_filename;
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(22608): warning #177-D: function "__Pyx_PyList_FromArray" was declared but never referenced
+  __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(22595): warning #177-D: function "__Pyx_PyTuple_FromArray" was declared but never referenced
+  __Pyx_PyTuple_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(22622): warning #177-D: function "__Pyx_PyBytes_Equals" was declared but never referenced
+  static inline int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24052): warning #177-D: function "__Pyx_get_tp_dict_version" was declared but never referenced
+                                  __Pyx_get_tp_dict_version(PyObject *obj) {
+                                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24068): warning #177-D: function "__Pyx_object_dict_version_matches" was declared but never referenced
+  static inline int __Pyx_object_dict_version_matches(PyObject* obj, 
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(24679): warning #177-D: function "__Pyx_PyErr_GivenExceptionMatches2" was declared but never referenced
+  static inline int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObject *exc_type1, PyObject *exc_type2) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(2416): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(2420): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16LE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(2424): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16BE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26334): warning #177-D: function "__Pyx__IsSameCyOrCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCyOrCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(26338): warning #177-D: function "__Pyx__CyFunction_SetClassObj" was declared but never referenced
+  static inline void __Pyx__CyFunction_SetClassObj(__pyx_CyFunctionObject* f, PyObject* classobj) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27302): warning #177-D: function "__Pyx_CyFunction_InitDefaults" was declared but never referenced
+  static inline void *__Pyx_CyFunction_InitDefaults(PyObject *func, size_t size, int pyobjects) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27312): warning #177-D: function "__Pyx_CyFunction_SetDefaultsTuple" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsTuple(PyObject *func, PyObject *tuple) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27317): warning #177-D: function "__Pyx_CyFunction_SetDefaultsKwDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27322): warning #177-D: function "__Pyx_CyFunction_SetAnnotationsDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetAnnotationsDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27681): warning #177-D: function "__pyx_memview_get_double" was declared but never referenced
+  static inline PyObject *__pyx_memview_get_double(const char *itemp) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27684): warning #177-D: function "__pyx_memview_set_double" was declared but never referenced
+  static inline int __pyx_memview_set_double(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27693): warning #177-D: function "__pyx_memview_get_int" was declared but never referenced
+  static inline PyObject *__pyx_memview_get_int(const char *itemp) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(27696): warning #177-D: function "__pyx_memview_set_int" was declared but never referenced
+  static inline int __pyx_memview_set_int(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(28642): warning #177-D: function "__pyx_add_acquisition_count_locked" was declared but never referenced
+  __pyx_add_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(28652): warning #177-D: function "__pyx_sub_acquisition_count_locked" was declared but never referenced
+  __pyx_sub_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.cpp(11366): warning #177-D: function "__pyx_memoryview_check" was declared but never referenced
+  static inline int __pyx_memoryview_check(PyObject *__pyx_v_o) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31683): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31698): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34869): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34889): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34970): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34971): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34998): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(35023): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37362): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37366): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37476): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31289): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31290): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31291): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31491): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31492): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31493): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31683): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(31698): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34869): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34889): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34970): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34971): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34998): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(35023): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37362): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37366): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37476): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(830): warning #177-D: function "__Pyx__IsSameCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(40627): warning #177-D: function "__Pyx_PyByteArray_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyByteArray_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(40622): warning #177-D: function "__Pyx_PyUnicode_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyUnicode_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(40706): warning #177-D: function "__Pyx_PyObject_IsTrueAndDecref" was declared but never referenced
+  static inline int __Pyx_PyObject_IsTrueAndDecref(PyObject* x) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(40866): warning #177-D: function "__Pyx_PyInt_FromSize_t" was declared but never referenced
+  static inline PyObject * __Pyx_PyInt_FromSize_t(size_t ival) {
+                           ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(40846): warning #177-D: function "__Pyx_PyIndex_AsHash_t" was declared but never referenced
+  static inline Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject* o) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(1508): warning #550-D: variable "__pyx_lineno" was set but never used
+  static int __pyx_lineno;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(1509): warning #550-D: variable "__pyx_clineno" was set but never used
+  static int __pyx_clineno = 0;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(1511): warning #550-D: variable "__pyx_filename" was set but never used
+  static const char *__pyx_filename;
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38859): warning #177-D: function "__pyx_t_float_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_float_complex __pyx_t_float_complex_from_parts(float x, float y) {
+                                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(39013): warning #177-D: function "__pyx_t_double_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_double_complex __pyx_t_double_complex_from_parts(double x, double y) {
+                                           ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(39167): warning #177-D: function "__pyx_t_long_double_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_long_double_complex __pyx_t_long_double_complex_from_parts(long double x, long double y) {
+                                                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(33065): warning #177-D: function "__Pyx_PyList_FromArray" was declared but never referenced
+  __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(33052): warning #177-D: function "__Pyx_PyTuple_FromArray" was declared but never referenced
+  __Pyx_PyTuple_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(33079): warning #177-D: function "__Pyx_PyBytes_Equals" was declared but never referenced
+  static inline int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34250): warning #177-D: function "__Pyx_GetItemInt_List_Fast" was declared but never referenced
+  static inline PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34509): warning #177-D: function "__Pyx_get_tp_dict_version" was declared but never referenced
+                                  __Pyx_get_tp_dict_version(PyObject *obj) {
+                                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(34525): warning #177-D: function "__Pyx_object_dict_version_matches" was declared but never referenced
+  static inline int __Pyx_object_dict_version_matches(PyObject* obj, 
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(35136): warning #177-D: function "__Pyx_PyErr_GivenExceptionMatches2" was declared but never referenced
+  static inline int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObject *exc_type1, PyObject *exc_type2) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(2703): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(2707): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16LE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(2711): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16BE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37063): warning #177-D: function "__Pyx__IsSameCyOrCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCyOrCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(37067): warning #177-D: function "__Pyx__CyFunction_SetClassObj" was declared but never referenced
+  static inline void __Pyx__CyFunction_SetClassObj(__pyx_CyFunctionObject* f, PyObject* classobj) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38031): warning #177-D: function "__Pyx_CyFunction_InitDefaults" was declared but never referenced
+  static inline void *__Pyx_CyFunction_InitDefaults(PyObject *func, size_t size, int pyobjects) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38041): warning #177-D: function "__Pyx_CyFunction_SetDefaultsTuple" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsTuple(PyObject *func, PyObject *tuple) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38046): warning #177-D: function "__Pyx_CyFunction_SetDefaultsKwDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38765): warning #177-D: function "__pyx_memview_get_double" was declared but never referenced
+    static inline PyObject *__pyx_memview_get_double(const char *itemp) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38768): warning #177-D: function "__pyx_memview_set_double" was declared but never referenced
+  static inline int __pyx_memview_set_double(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38822): warning #177-D: function "__pyx_memview_get_int" was declared but never referenced
+    static inline PyObject *__pyx_memview_get_int(const char *itemp) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(38825): warning #177-D: function "__pyx_memview_set_int" was declared but never referenced
+  static inline int __pyx_memview_set_int(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(39451): warning #177-D: function "__pyx_add_acquisition_count_locked" was declared but never referenced
+  __pyx_add_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(39461): warning #177-D: function "__pyx_sub_acquisition_count_locked" was declared but never referenced
+  __pyx_sub_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19356): warning #177-D: function "__pyx_f_5numpy_5dtype_8itemsize_itemsize" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_5dtype_8itemsize_itemsize(PyArray_Descr *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19390): warning #177-D: function "__pyx_f_5numpy_5dtype_9alignment_alignment" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_5dtype_9alignment_alignment(PyArray_Descr *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19424): warning #177-D: function "__pyx_f_5numpy_5dtype_6fields_fields" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_5dtype_6fields_fields(PyArray_Descr *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19466): warning #177-D: function "__pyx_f_5numpy_5dtype_5names_names" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_5dtype_5names_names(PyArray_Descr *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19542): warning #177-D: function "__pyx_f_5numpy_5dtype_5flags_flags" was declared but never referenced
+  static inline npy_uint64 __pyx_f_5numpy_5dtype_5flags_flags(PyArray_Descr *__pyx_v_self) {
+                           ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19576): warning #177-D: function "__pyx_f_5numpy_9broadcast_7numiter_numiter" was declared but never referenced
+  static inline int __pyx_f_5numpy_9broadcast_7numiter_numiter(PyArrayMultiIterObject *__pyx_v_self) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19610): warning #177-D: function "__pyx_f_5numpy_9broadcast_4size_size" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_9broadcast_4size_size(PyArrayMultiIterObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19644): warning #177-D: function "__pyx_f_5numpy_9broadcast_5index_index" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_9broadcast_5index_index(PyArrayMultiIterObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19678): warning #177-D: function "__pyx_f_5numpy_9broadcast_2nd_nd" was declared but never referenced
+  static inline int __pyx_f_5numpy_9broadcast_2nd_nd(PyArrayMultiIterObject *__pyx_v_self) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19712): warning #177-D: function "__pyx_f_5numpy_9broadcast_10dimensions_dimensions" was declared but never referenced
+  static inline npy_intp *__pyx_f_5numpy_9broadcast_10dimensions_dimensions(PyArrayMultiIterObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19746): warning #177-D: function "__pyx_f_5numpy_9broadcast_5iters_iters" was declared but never referenced
+  static inline void **__pyx_f_5numpy_9broadcast_5iters_iters(PyArrayMultiIterObject *__pyx_v_self) {
+                       ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19780): warning #177-D: function "__pyx_f_5numpy_7ndarray_4base_base" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_7ndarray_4base_base(PyArrayObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19814): warning #177-D: function "__pyx_f_5numpy_7ndarray_5descr_descr" was declared but never referenced
+  static inline PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr_descr(PyArrayObject *__pyx_v_self) {
+                               ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19924): warning #177-D: function "__pyx_f_5numpy_7ndarray_7strides_strides" was declared but never referenced
+  static inline npy_intp *__pyx_f_5numpy_7ndarray_7strides_strides(PyArrayObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19958): warning #177-D: function "__pyx_f_5numpy_7ndarray_4size_size" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_7ndarray_4size_size(PyArrayObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(19992): warning #177-D: function "__pyx_f_5numpy_7ndarray_4data_data" was declared but never referenced
+  static inline char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__pyx_v_self) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20026): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew1" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__pyx_v_a) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20076): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew2" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__pyx_v_a, PyObject *__pyx_v_b) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20126): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew3" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20176): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew4" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20226): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew5" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_e) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20276): warning #177-D: function "__pyx_f_5numpy_PyDataType_SHAPE" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__pyx_v_d) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20352): warning #177-D: function "__pyx_f_5numpy_set_array_base" was declared but never referenced
+  static inline void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_arr, PyObject *__pyx_v_base) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20399): warning #177-D: function "__pyx_f_5numpy_get_array_base" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__pyx_v_arr) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20480): warning #177-D: function "__pyx_f_5numpy_import_array" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_array(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20612): warning #177-D: function "__pyx_f_5numpy_import_umath" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_umath(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20744): warning #177-D: function "__pyx_f_5numpy_import_ufunc" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_ufunc(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20876): warning #177-D: function "__pyx_f_5numpy_is_timedelta64_object" was declared but never referenced
+  static inline int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20910): warning #177-D: function "__pyx_f_5numpy_is_datetime64_object" was declared but never referenced
+  static inline int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20944): warning #177-D: function "__pyx_f_5numpy_get_datetime64_value" was declared but never referenced
+  static inline npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *__pyx_v_obj) {
+                             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(20978): warning #177-D: function "__pyx_f_5numpy_get_timedelta64_value" was declared but never referenced
+  static inline npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject *__pyx_v_obj) {
+                              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.cpp(21012): warning #177-D: function "__pyx_f_5numpy_get_datetime64_unit" was declared but never referenced
+  static inline NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObject *__pyx_v_obj) {
+                                 ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(21): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<LMPDeviceType>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::begin(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 188 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_cudathrust(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, MaybeComparator &&...) [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>, MaybeComparator=<const LAMMPS_NS::AtomKokkos::MyComp &>]" at line 382 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_device_view_with_comparator(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, const ComparatorType &) [with ComparatorType=LAMMPS_NS::AtomKokkos::MyComp, DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 106 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &, const ComparatorType &) [with ExecutionSpace=LMPDeviceType, ComparatorType=LAMMPS_NS::AtomKokkos::MyComp, DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 212 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_map_kokkos.cpp
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(31): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<LMPDeviceType>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::end(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 189 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_cudathrust(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, MaybeComparator &&...) [with DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>, MaybeComparator=<const LAMMPS_NS::AtomKokkos::MyComp &>]" at line 382 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_device_view_with_comparator(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, const ComparatorType &) [with ComparatorType=LAMMPS_NS::AtomKokkos::MyComp, DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 106 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &, const ComparatorType &) [with ExecutionSpace=LMPDeviceType, ComparatorType=LAMMPS_NS::AtomKokkos::MyComp, DataType=LAMMPS_NS::AtomKokkos::KeyValue *, Properties=<Kokkos::Cuda::array_layout, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 212 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_map_kokkos.cpp
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(21): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=int *, Properties=<Kokkos::HostSpace::memory_space>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::begin(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::Serial::array_layout, Kokkos::Device<Kokkos::HostSpace::execution_space, Kokkos::HostSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 48 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &) [with ExecutionSpace=LMPHostType, DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::Serial::array_layout, Kokkos::Device<Kokkos::HostSpace::execution_space, Kokkos::HostSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 1130 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+            instantiation of "void LAMMPS_NS::CommKokkos::exchange_device<DeviceType>() [with DeviceType=LMPHostType]" at line 951 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(31): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=int *, Properties=<Kokkos::HostSpace::memory_space>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::end(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::Serial::array_layout, Kokkos::Device<Kokkos::HostSpace::execution_space, Kokkos::HostSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 49 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &) [with ExecutionSpace=LMPHostType, DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::Serial::array_layout, Kokkos::Device<Kokkos::HostSpace::execution_space, Kokkos::HostSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 1130 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+            instantiation of "void LAMMPS_NS::CommKokkos::exchange_device<DeviceType>() [with DeviceType=LMPHostType]" at line 951 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(21): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=int *, Properties=<Kokkos::LayoutRight, LMPDeviceType>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::begin(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 188 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_cudathrust(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, MaybeComparator &&...) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>, MaybeComparator=<>]" at line 324 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_device_view_without_comparator(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 52 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &) [with ExecutionSpace=LMPDeviceType, DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 1130 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+            instantiation of "void LAMMPS_NS::CommKokkos::exchange_device<DeviceType>() [with DeviceType=LMPDeviceType]" at line 952 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/std_algorithms/Kokkos_BeginEnd.hpp(31): warning #1444-D: type "Kokkos::ViewTraits<DataType, Properties...>::scalar_array_type [with DataType=int *, Properties=<Kokkos::LayoutRight, LMPDeviceType>]" was declared deprecated ("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after 5.0 release")
+    using it_t =
+          ^
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/core/src/View/Kokkos_ViewTraits.hpp(506): note #3287-D: because of a "deprecated" attribute
+    using scalar_array_type [[deprecated("Only supported with KOKKOS_ENABLE_IMPL_VIEW_LEGACY, to be removed after " "5.0 release")]]
+                              ^
+          detected during:
+            instantiation of "auto Kokkos::Experimental::end(const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 189 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_cudathrust(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &, MaybeComparator &&...) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>, MaybeComparator=<>]" at line 324 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/./impl/Kokkos_SortImpl.hpp
+            instantiation of "void Kokkos::Impl::sort_device_view_without_comparator(const Kokkos::Cuda &, const Kokkos::View<DataType, Properties...> &) [with DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 52 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/algorithms/src/sorting/Kokkos_SortPublicAPI.hpp
+            instantiation of "void Kokkos::sort(const ExecutionSpace &, const Kokkos::View<DataType, Properties...> &) [with ExecutionSpace=LMPDeviceType, DataType=LAMMPS_NS::tagint *, Properties=<Kokkos::LayoutRight, Kokkos::Device<Kokkos::CudaSpace::execution_space, Kokkos::CudaSpace::memory_space>, Kokkos::MemoryTraits<0U>>]" at line 1130 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+            instantiation of "void LAMMPS_NS::CommKokkos::exchange_device<DeviceType>() [with DeviceType=LMPDeviceType]" at line 952 of /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22410): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22425): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25314): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25334): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25415): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25416): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25443): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25468): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27607): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27611): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27721): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22100): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22101): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22102): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22410): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(22425): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25314): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25334): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25415): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25416): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25443): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25468): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27607): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27611): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27721): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(830): warning #177-D: function "__Pyx__IsSameCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(30344): warning #177-D: function "__Pyx_PyObject_AsString" was declared but never referenced
+  static inline const char* __Pyx_PyObject_AsString(PyObject* o) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(30339): warning #177-D: function "__Pyx_PyByteArray_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyByteArray_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(30334): warning #177-D: function "__Pyx_PyUnicode_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyUnicode_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(30558): warning #177-D: function "__Pyx_PyIndex_AsHash_t" was declared but never referenced
+  static inline Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject* o) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1494): warning #177-D: function "__Pyx_pretend_to_initialize" was declared but never referenced
+  static inline void __Pyx_pretend_to_initialize(void* ptr) { (void)ptr; }
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1499): warning #550-D: variable "__pyx_lineno" was set but never used
+  static int __pyx_lineno;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1500): warning #550-D: variable "__pyx_clineno" was set but never used
+  static int __pyx_clineno = 0;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(1502): warning #550-D: variable "__pyx_filename" was set but never used
+  static const char *__pyx_filename;
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(23510): warning #177-D: function "__Pyx_PyList_FromArray" was declared but never referenced
+  __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(23497): warning #177-D: function "__Pyx_PyTuple_FromArray" was declared but never referenced
+  __Pyx_PyTuple_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(23524): warning #177-D: function "__Pyx_PyBytes_Equals" was declared but never referenced
+  static inline int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(24954): warning #177-D: function "__Pyx_get_tp_dict_version" was declared but never referenced
+                                  __Pyx_get_tp_dict_version(PyObject *obj) {
+                                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(24970): warning #177-D: function "__Pyx_object_dict_version_matches" was declared but never referenced
+  static inline int __Pyx_object_dict_version_matches(PyObject* obj, 
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(25581): warning #177-D: function "__Pyx_PyErr_GivenExceptionMatches2" was declared but never referenced
+  static inline int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObject *exc_type1, PyObject *exc_type2) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(2416): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(2420): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16LE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(2424): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16BE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27308): warning #177-D: function "__Pyx__IsSameCyOrCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCyOrCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(27312): warning #177-D: function "__Pyx__CyFunction_SetClassObj" was declared but never referenced
+  static inline void __Pyx__CyFunction_SetClassObj(__pyx_CyFunctionObject* f, PyObject* classobj) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28276): warning #177-D: function "__Pyx_CyFunction_InitDefaults" was declared but never referenced
+  static inline void *__Pyx_CyFunction_InitDefaults(PyObject *func, size_t size, int pyobjects) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28286): warning #177-D: function "__Pyx_CyFunction_SetDefaultsTuple" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsTuple(PyObject *func, PyObject *tuple) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28291): warning #177-D: function "__Pyx_CyFunction_SetDefaultsKwDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28296): warning #177-D: function "__Pyx_CyFunction_SetAnnotationsDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetAnnotationsDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28655): warning #177-D: function "__pyx_memview_get_int" was declared but never referenced
+  static inline PyObject *__pyx_memview_get_int(const char *itemp) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28658): warning #177-D: function "__pyx_memview_set_int" was declared but never referenced
+  static inline int __pyx_memview_set_int(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28667): warning #177-D: function "__pyx_memview_get_double" was declared but never referenced
+  static inline PyObject *__pyx_memview_get_double(const char *itemp) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(28670): warning #177-D: function "__pyx_memview_set_double" was declared but never referenced
+  static inline int __pyx_memview_set_double(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(29616): warning #177-D: function "__pyx_add_acquisition_count_locked" was declared but never referenced
+  __pyx_add_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(29626): warning #177-D: function "__pyx_sub_acquisition_count_locked" was declared but never referenced
+  __pyx_sub_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.cpp(11446): warning #177-D: function "__pyx_memoryview_check" was declared but never referenced
+  static inline int __pyx_memoryview_check(PyObject *__pyx_v_o) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34915): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34930): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38297): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38317): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38398): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38399): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38426): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38451): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40868): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40872): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40982): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(1146): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+       module
+       ^
+
+Remark: The warnings can be suppressed with "-diag-suppress <warning-number>"
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34521): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34522): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34523): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34723): warning #550-D: variable "__pyx_lineno" was set but never used
+    int __pyx_lineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34724): warning #550-D: variable "__pyx_filename" was set but never used
+    const char *__pyx_filename = 
+                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34725): warning #550-D: variable "__pyx_clineno" was set but never used
+    int __pyx_clineno = 0;
+        ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34915): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+      module = PyModule_NewObject(modname);
+      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(34930): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38297): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+                  module = PyImport_ImportModuleLevelObject(
+                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38317): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+              module = PyImport_ImportModuleLevelObject(
+              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38398): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38399): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = submodule;
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38426): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38451): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40868): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+          module = PyImport_ImportModuleLevelObject(__pyx_mstate_global->__pyx_n_s_asyncio_coroutines, 
+          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40872): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+         module
+         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40982): warning #3189-D: "module" is parsed as an identifier rather than a keyword because the tokens that follow it do not match those of a preprocessor directive
+     module
+     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(830): warning #177-D: function "__Pyx__IsSameCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(44400): warning #177-D: function "__Pyx_PyByteArray_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyByteArray_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(44395): warning #177-D: function "__Pyx_PyUnicode_FromString" was declared but never referenced
+  static inline PyObject* __Pyx_PyUnicode_FromString(const char* c_str) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(44619): warning #177-D: function "__Pyx_PyIndex_AsHash_t" was declared but never referenced
+  static inline Py_hash_t __Pyx_PyIndex_AsHash_t(PyObject* o) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(1509): warning #550-D: variable "__pyx_lineno" was set but never used
+  static int __pyx_lineno;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(1510): warning #550-D: variable "__pyx_clineno" was set but never used
+  static int __pyx_clineno = 0;
+             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(1512): warning #550-D: variable "__pyx_filename" was set but never used
+  static const char *__pyx_filename;
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42365): warning #177-D: function "__pyx_t_float_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_float_complex __pyx_t_float_complex_from_parts(float x, float y) {
+                                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42519): warning #177-D: function "__pyx_t_double_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_double_complex __pyx_t_double_complex_from_parts(double x, double y) {
+                                           ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42673): warning #177-D: function "__pyx_t_long_double_complex_from_parts" was declared but never referenced
+      static inline __pyx_t_long_double_complex __pyx_t_long_double_complex_from_parts(long double x, long double y) {
+                                                ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(36493): warning #177-D: function "__Pyx_PyList_FromArray" was declared but never referenced
+  __Pyx_PyList_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(36480): warning #177-D: function "__Pyx_PyTuple_FromArray" was declared but never referenced
+  __Pyx_PyTuple_FromArray(PyObject *const *src, Py_ssize_t n)
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(36507): warning #177-D: function "__Pyx_PyBytes_Equals" was declared but never referenced
+  static inline int __Pyx_PyBytes_Equals(PyObject* s1, PyObject* s2, int equals) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(37678): warning #177-D: function "__Pyx_GetItemInt_List_Fast" was declared but never referenced
+  static inline PyObject *__Pyx_GetItemInt_List_Fast(PyObject *o, Py_ssize_t i,
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(37937): warning #177-D: function "__Pyx_get_tp_dict_version" was declared but never referenced
+                                  __Pyx_get_tp_dict_version(PyObject *obj) {
+                                  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(37953): warning #177-D: function "__Pyx_object_dict_version_matches" was declared but never referenced
+  static inline int __Pyx_object_dict_version_matches(PyObject* obj, 
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(38564): warning #177-D: function "__Pyx_PyErr_GivenExceptionMatches2" was declared but never referenced
+  static inline int __Pyx_PyErr_GivenExceptionMatches2(PyObject *err, PyObject *exc_type1, PyObject *exc_type2) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(2710): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(2714): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16LE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16LE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(2718): warning #177-D: function "__Pyx_PyUnicode_DecodeUTF16BE" was declared but never referenced
+  static inline PyObject *__Pyx_PyUnicode_DecodeUTF16BE(const char *s, Py_ssize_t size, const char *errors) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40569): warning #177-D: function "__Pyx__IsSameCyOrCFunction" was declared but never referenced
+  static inline int __Pyx__IsSameCyOrCFunction(PyObject *func, void *cfunc) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(40573): warning #177-D: function "__Pyx__CyFunction_SetClassObj" was declared but never referenced
+  static inline void __Pyx__CyFunction_SetClassObj(__pyx_CyFunctionObject* f, PyObject* classobj) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(41537): warning #177-D: function "__Pyx_CyFunction_InitDefaults" was declared but never referenced
+  static inline void *__Pyx_CyFunction_InitDefaults(PyObject *func, size_t size, int pyobjects) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(41547): warning #177-D: function "__Pyx_CyFunction_SetDefaultsTuple" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsTuple(PyObject *func, PyObject *tuple) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(41552): warning #177-D: function "__Pyx_CyFunction_SetDefaultsKwDict" was declared but never referenced
+  static inline void __Pyx_CyFunction_SetDefaultsKwDict(PyObject *func, PyObject *dict) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42024): warning #177-D: function "__pyx_memview_get_int" was declared but never referenced
+    static inline PyObject *__pyx_memview_get_int(const char *itemp) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42027): warning #177-D: function "__pyx_memview_set_int" was declared but never referenced
+  static inline int __pyx_memview_set_int(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42036): warning #177-D: function "__pyx_memview_get_double" was declared but never referenced
+    static inline PyObject *__pyx_memview_get_double(const char *itemp) {
+                            ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42039): warning #177-D: function "__pyx_memview_set_double" was declared but never referenced
+  static inline int __pyx_memview_set_double(const char *itemp, PyObject *obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42957): warning #177-D: function "__pyx_add_acquisition_count_locked" was declared but never referenced
+  __pyx_add_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(42967): warning #177-D: function "__pyx_sub_acquisition_count_locked" was declared but never referenced
+  __pyx_sub_acquisition_count_locked(std::atomic_int *acquisition_count,
+  ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19618): warning #177-D: function "__pyx_f_5numpy_5dtype_8itemsize_itemsize" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_5dtype_8itemsize_itemsize(PyArray_Descr *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19652): warning #177-D: function "__pyx_f_5numpy_5dtype_9alignment_alignment" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_5dtype_9alignment_alignment(PyArray_Descr *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19686): warning #177-D: function "__pyx_f_5numpy_5dtype_6fields_fields" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_5dtype_6fields_fields(PyArray_Descr *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19728): warning #177-D: function "__pyx_f_5numpy_5dtype_5names_names" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_5dtype_5names_names(PyArray_Descr *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19804): warning #177-D: function "__pyx_f_5numpy_5dtype_5flags_flags" was declared but never referenced
+  static inline npy_uint64 __pyx_f_5numpy_5dtype_5flags_flags(PyArray_Descr *__pyx_v_self) {
+                           ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19838): warning #177-D: function "__pyx_f_5numpy_9broadcast_7numiter_numiter" was declared but never referenced
+  static inline int __pyx_f_5numpy_9broadcast_7numiter_numiter(PyArrayMultiIterObject *__pyx_v_self) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19872): warning #177-D: function "__pyx_f_5numpy_9broadcast_4size_size" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_9broadcast_4size_size(PyArrayMultiIterObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19906): warning #177-D: function "__pyx_f_5numpy_9broadcast_5index_index" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_9broadcast_5index_index(PyArrayMultiIterObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19940): warning #177-D: function "__pyx_f_5numpy_9broadcast_2nd_nd" was declared but never referenced
+  static inline int __pyx_f_5numpy_9broadcast_2nd_nd(PyArrayMultiIterObject *__pyx_v_self) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(19974): warning #177-D: function "__pyx_f_5numpy_9broadcast_10dimensions_dimensions" was declared but never referenced
+  static inline npy_intp *__pyx_f_5numpy_9broadcast_10dimensions_dimensions(PyArrayMultiIterObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20008): warning #177-D: function "__pyx_f_5numpy_9broadcast_5iters_iters" was declared but never referenced
+  static inline void **__pyx_f_5numpy_9broadcast_5iters_iters(PyArrayMultiIterObject *__pyx_v_self) {
+                       ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20042): warning #177-D: function "__pyx_f_5numpy_7ndarray_4base_base" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_7ndarray_4base_base(PyArrayObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20076): warning #177-D: function "__pyx_f_5numpy_7ndarray_5descr_descr" was declared but never referenced
+  static inline PyArray_Descr *__pyx_f_5numpy_7ndarray_5descr_descr(PyArrayObject *__pyx_v_self) {
+                               ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20186): warning #177-D: function "__pyx_f_5numpy_7ndarray_7strides_strides" was declared but never referenced
+  static inline npy_intp *__pyx_f_5numpy_7ndarray_7strides_strides(PyArrayObject *__pyx_v_self) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20220): warning #177-D: function "__pyx_f_5numpy_7ndarray_4size_size" was declared but never referenced
+  static inline npy_intp __pyx_f_5numpy_7ndarray_4size_size(PyArrayObject *__pyx_v_self) {
+                         ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20254): warning #177-D: function "__pyx_f_5numpy_7ndarray_4data_data" was declared but never referenced
+  static inline char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__pyx_v_self) {
+                      ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20288): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew1" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew1(PyObject *__pyx_v_a) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20338): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew2" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew2(PyObject *__pyx_v_a, PyObject *__pyx_v_b) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20388): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew3" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew3(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20438): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew4" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew4(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20488): warning #177-D: function "__pyx_f_5numpy_PyArray_MultiIterNew5" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyArray_MultiIterNew5(PyObject *__pyx_v_a, PyObject *__pyx_v_b, PyObject *__pyx_v_c, PyObject *__pyx_v_d, PyObject *__pyx_v_e) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20538): warning #177-D: function "__pyx_f_5numpy_PyDataType_SHAPE" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_PyDataType_SHAPE(PyArray_Descr *__pyx_v_d) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20614): warning #177-D: function "__pyx_f_5numpy_set_array_base" was declared but never referenced
+  static inline void __pyx_f_5numpy_set_array_base(PyArrayObject *__pyx_v_arr, PyObject *__pyx_v_base) {
+                     ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20661): warning #177-D: function "__pyx_f_5numpy_get_array_base" was declared but never referenced
+  static inline PyObject *__pyx_f_5numpy_get_array_base(PyArrayObject *__pyx_v_arr) {
+                          ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20742): warning #177-D: function "__pyx_f_5numpy_import_array" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_array(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(20874): warning #177-D: function "__pyx_f_5numpy_import_umath" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_umath(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21006): warning #177-D: function "__pyx_f_5numpy_import_ufunc" was declared but never referenced
+  static inline int __pyx_f_5numpy_import_ufunc(void) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21138): warning #177-D: function "__pyx_f_5numpy_is_timedelta64_object" was declared but never referenced
+  static inline int __pyx_f_5numpy_is_timedelta64_object(PyObject *__pyx_v_obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21172): warning #177-D: function "__pyx_f_5numpy_is_datetime64_object" was declared but never referenced
+  static inline int __pyx_f_5numpy_is_datetime64_object(PyObject *__pyx_v_obj) {
+                    ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21206): warning #177-D: function "__pyx_f_5numpy_get_datetime64_value" was declared but never referenced
+  static inline npy_datetime __pyx_f_5numpy_get_datetime64_value(PyObject *__pyx_v_obj) {
+                             ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21240): warning #177-D: function "__pyx_f_5numpy_get_timedelta64_value" was declared but never referenced
+  static inline npy_timedelta __pyx_f_5numpy_get_timedelta64_value(PyObject *__pyx_v_obj) {
+                              ^
+
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.cpp(21274): warning #177-D: function "__pyx_f_5numpy_get_datetime64_unit" was declared but never referenced
+  static inline NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObject *__pyx_v_obj) {
+                                 ^
+
+* Getting build dependencies for wheel...
+* Building wheel...
+error: [Errno 39] Directory not empty: 'build/bdist.linux-x86_64/wheel/./lammps-2026.7.4-py3.11.egg-info'
+TIP pass --env-dir and --sdist-extract-dir to keep the build environment and sources, then see https://build.pypa.io/en/stable/how-to/troubleshooting.html#debug-a-failed-build for help debugging a failed build
+ERROR Backend subprocess exited when trying to invoke build_wheel
+Traceback (most recent call last):
+  File "/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/python/install.py", line 153, in <module>
+    txt = subprocess.check_output([py_exe, '-m', 'pip', 'install', '--force-reinstall', wheel], stderr=subprocess.STDOUT, shell=False)
+                                                                                        ^^^^^
+NameError: name 'wheel' is not defined
+make[3]: *** [CMakeFiles/install-python.dir/build.make:71: CMakeFiles/install-python] Error 1
+make[2]: *** [CMakeFiles/Makefile2:1967: CMakeFiles/install-python.dir/all] Error 2
+make[1]: *** [CMakeFiles/Makefile2:1974: CMakeFiles/install-python.dir/rule] Error 2
+make: *** [Makefile:768: install-python] Error 2

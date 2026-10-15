@@ -368,7 +368,7 @@ void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *dev,
                                     int ndim)
 {
   auto *pair = dev->pairmliap;
-  MLIAPData *base = pair->degt_data();
+  MLIAPData *base = pair->get_data();
   base->set_custom_output_array(name, values, shape, ndim);
 }
 

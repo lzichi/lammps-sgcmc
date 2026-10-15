@@ -1,0 +1,855 @@
+Python:
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/bin/python
+Torch:
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/__init__.py
+/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/share/cmake
+TORCH_PREFIX=/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/share/cmake
+TORCH_ROOT=/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch
+TORCH_DIR=/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/share/cmake/Torch
+NUMPY_INCLUDE=/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/numpy/_core/include
+-- The CXX compiler identification is GNU 14.2.0
+-- The C compiler identification is GNU 14.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/bin/nvcc_wrapper - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/bin/gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Found Git: /usr/bin/git (found version "2.43.7")
+-- Appending /n/sw/helmod-rocky8/apps/Comp/gcc/14.2.0-fasrc01/openmpi/5.0.5-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/cudnn/9.10.2.21_cuda12-fasrc01/lib:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/extras/CUPTI/lib64:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/lib64:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/lib:/n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib:/n/sw/helmod-rocky8/apps/Core/mpc/1.3.1-fasrc02/lib64:/n/sw/helmod-rocky8/apps/Core/mpfr/4.2.1-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/gmp/6.3.0-fasrc01/lib64 to CMAKE_LIBRARY_PATH: /n/sw/helmod-rocky8/apps/Comp/gcc/14.2.0-fasrc01/openmpi/5.0.5-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/cudnn/9.10.2.21_cuda12-fasrc01/lib:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/extras/CUPTI/lib64:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/lib64:/n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/lib:/n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/lib:/n/sw/helmod-rocky8/apps/Core/mpc/1.3.1-fasrc02/lib64:/n/sw/helmod-rocky8/apps/Core/mpfr/4.2.1-fasrc01/lib64:/n/sw/helmod-rocky8/apps/Core/gmp/6.3.0-fasrc01/lib64
+-- Running check for auto-generated files from make-based build system
+-- Found MPI_CXX: /n/sw/helmod-rocky8/apps/Comp/gcc/14.2.0-fasrc01/openmpi/5.0.5-fasrc01/lib64/libmpi.so (found version "3.1")
+-- Found MPI: TRUE (found version "3.1") found components: CXX
+-- Looking for C++ include omp.h
+-- Looking for C++ include omp.h - found
+-- Found OpenMP_CXX: -fopenmp (found version "4.5")
+-- Found OpenMP: TRUE (found version "4.5") found components: CXX
+-- Found GZIP: /usr/bin/gzip
+-- Found Python: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/bin/python3.11 (found version "3.11.0") found components: Interpreter Development Development.Module Development.Embed
+-- Found Cythonize: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/bin/cythonize
+-- Found Python: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/include/python3.11 (found version "3.11.0") found components: NumPy Interpreter Development.Module
+-- Using double precision for KOKKOS package
+-- Using legacy view layout for KOKKOS package
+-- Setting default Kokkos CXX standard to 20
+-- Kokkos version: 5.1.99
+-- The project name is: Kokkos
+-- Kokkos is configured for CMake languages CXX compilation (using NVIDIA version 12.9.86)
+-- Using -std=c++20 for C++20 standard as feature
+-- SIMD: AVX512 detected
+-- Built-in Execution Spaces:
+--     Device Parallel: Kokkos::Cuda
+--     Host Parallel: NoTypeDefined
+--       Host Serial: SERIAL
+-- 
+-- Architectures:
+--  NATIVE
+--  AMPERE80
+-- Found CUDAToolkit: /n/sw/helmod-rocky8/apps/Core/cuda/12.9.1-fasrc01/cuda/targets/x86_64-linux/include (found version "12.9.86")
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE
+-- Using bundled desul_atomics copy (desul/desul@68f8e83926657f2669712a12e97ec71fd59b72a6)
+-- Performing Test KOKKOS_LINK_OPTIONS_CHECK
+-- Performing Test KOKKOS_LINK_OPTIONS_CHECK - Success
+-- Performing Test KOKKOS_COMPILE_OPTIONS_CHECK
+-- Performing Test KOKKOS_COMPILE_OPTIONS_CHECK - Success
+-- Using bundled mdspan copy (kokkos/mdspan@5d4eb209c77f4744980c0b0c2af44636cc81b08b)
+-- Kokkos Backends: SERIAL;CUDA
+-- Generating style headers...
+-- Generating package headers...
+-- Generating lmpinstalledpkgs.h...
+-- Found Python: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/bin/python3.11 (found version "3.11.0") found components: Interpreter
+-- Found Python3: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/bin/python3.11 (found version "3.11.0") found components: Interpreter
+-- The following tools and libraries have been found and configured:
+ * MPI
+ * OpenMP
+ * Cythonize
+ * Threads
+ * CUDAToolkit
+ * Python
+ * Python3
+
+-- <<< Build configuration >>>
+   LAMMPS Version:   2026.7.4.0 2b9223cae1-modified
+   Operating System: Linux Rocky 8.10
+   CMake Version:    4.2.3
+   Build type:       Release
+   Install path:     /n/home11/lzichi/.local
+   Generator:        Unix Makefiles using /usr/bin/gmake
+-- Enabled packages: KOKKOS;ML-IAP;ML-SNAP;PYTHON
+-- <<< Compilers and Flags: >>>
+-- C++ Compiler:     /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/bin/nvcc_wrapper
+      Type:          GNU
+      Version:       14.2.0
+      C++ Standard:  20
+      C++ Flags:    -march=native -ffast-math         -I/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/numpy/_core/include         -I/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/include         -I/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/include/torch/csrc/api/include -Xcudafe --diag_suppress=unrecognized_pragma,--diag_suppress=128,--diag_suppress=186 -O3 -DNDEBUG
+      Defines:       LAMMPS_SMALLBIG;LAMMPS_MEMALIGN=64;LAMMPS_OMP_COMPAT=4;LAMMPS_GZIP;LMP_PYTHON;MLIAP_PYTHON;LMP_KOKKOS_DOUBLE_DOUBLE;LMP_KOKKOS_LAYOUT_LEGACY;$<BUILD_INTERFACE:LMP_KOKKOS>
+-- C compiler:       /n/sw/helmod-rocky8/apps/Core/gcc/14.2.0-fasrc01/bin/gcc
+      Type:          GNU
+      Version:       14.2.0
+      C Flags:       -O3 -DNDEBUG
+-- <<< Linker flags: >>>
+-- Executable name:  lmp
+-- Executable linker flags: -Wl,-rpath,/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/lib
+-- Shared library flags:    -Wl,-rpath,/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/env/lib/python3.11/site-packages/torch/lib
+-- <<< MPI flags >>>
+-- MPI_defines:      MPICH_SKIP_MPICXX;OMPI_SKIP_MPICXX;_MPICC_H
+-- MPI includes:     /n/sw/helmod-rocky8/apps/Comp/gcc/14.2.0-fasrc01/openmpi/5.0.5-fasrc01/include
+-- MPI libraries:    /n/sw/helmod-rocky8/apps/Comp/gcc/14.2.0-fasrc01/openmpi/5.0.5-fasrc01/lib64/libmpi.so;
+-- Kokkos Devices: CUDA;SERIAL
+-- Kokkos Architecture: AMPERE80;NATIVE
+-- Configuring done (77.9s)
+-- Generating done (9.0s)
+-- Build files have been written to: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100
+[  0%] Generating includes/lammps/command.h
+[  0%] Generating includes/lammps/angle.h
+[  0%] Generating includes/lammps/comm.h
+[  0%] Generating includes/lammps/bond.h
+-- Git Directory: /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/.git
+[  0%] Generating includes/lammps/atom.h
+[  0%] Generating includes/lammps/citeme.h
+[  0%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Abort.cpp.o
+[  0%] Built target angle.h
+[  0%] Built target command.h
+[  0%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_CPUDiscovery.cpp.o
+[  0%] Built target atom.h
+[  0%] Built target comm.h
+[  0%] Built target bond.h
+[  0%] Built target citeme.h
+[  0%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Command_Line_Parsing.cpp.o
+[  0%] Generating includes/lammps/dihedral.h
+[  0%] Generating includes/lammps/compute.h
+[  1%] Generating includes/lammps/error.h
+[  1%] Generating includes/lammps/domain.h
+[  1%] Built target dihedral.h
+[  1%] Built target compute.h
+[  1%] Built target error.h
+[  1%] Built target domain.h
+[  1%] Generating includes/lammps/exceptions.h
+[  2%] Generating includes/lammps/fix.h
+[  2%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Core.cpp.o
+[  2%] Generating includes/lammps/force.h
+[  2%] Built target exceptions.h
+[  2%] Built target fix.h
+[  2%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Error.cpp.o
+[  2%] Built target force.h
+[  2%] Generating includes/lammps/group.h
+[  2%] Built target group.h
+[  3%] Generating includes/lammps/improper.h
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_ExecPolicy.cpp.o
+[  3%] Built target improper.h
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_HostBarrier.cpp.o
+-- Generating lmpgitversion.h...
+[  3%] Built target gitversion
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_HostSpace.cpp.o
+[  3%] Generating includes/lammps/input.h
+[  3%] Built target input.h
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_HostSpace_deepcopy.cpp.o
+[  3%] Generating includes/lammps/info.h
+[  3%] Built target info.h
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_HostThreadTeam.cpp.o
+[  3%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_MemoryPool.cpp.o
+[  4%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Profiling.cpp.o
+[  4%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_SharedAlloc.cpp.o
+[  4%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_Stacktrace.cpp.o
+[  4%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/impl/Kokkos_hwloc.cpp.o
+[  4%] Generating includes/lammps/json.h
+[  4%] Built target json.h
+[  5%] Generating includes/lammps/json_fwd.h
+[  5%] Built target json_fwd.h
+[  5%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/Cuda/Kokkos_CudaSpace.cpp.o
+[  5%] Generating includes/lammps/kspace.h
+[  5%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/Cuda/Kokkos_Cuda_Instance.cpp.o
+[  5%] Built target kspace.h
+[  5%] Generating includes/lammps/lammps.h
+[  5%] Built target lammps.h
+[  5%] Generating includes/lammps/lattice.h
+[  5%] Built target lattice.h
+[  6%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/Serial/Kokkos_Serial.cpp.o
+[  6%] Building CXX object lib/kokkos/core/src/CMakeFiles/kokkoscore.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/lib/kokkos/tpls/desul/src/Lock_Array_CUDA.cpp.o
+[  6%] Generating includes/lammps/library.h
+[  6%] Built target library.h
+[  6%] Generating includes/lammps/lmppython.h
+[  6%] Built target lmppython.h
+[  6%] Generating includes/lammps/lmptype.h
+[  6%] Built target lmptype.h
+[  6%] Generating includes/lammps/memory.h
+[  6%] Built target memory.h
+[  6%] Generating includes/lammps/modify.h
+[  6%] Built target modify.h
+[  6%] Generating includes/lammps/neighbor.h
+[  6%] Built target neighbor.h
+[  7%] Generating includes/lammps/neigh_list.h
+[  7%] Built target neigh_list.h
+[  7%] Generating includes/lammps/output.h
+[  7%] Built target output.h
+[  7%] Generating includes/lammps/pair.h
+[  7%] Built target pair.h
+[  7%] Generating includes/lammps/platform.h
+[  7%] Built target platform.h
+[  7%] Generating includes/lammps/pointers.h
+[  7%] Built target pointers.h
+[  8%] Generating includes/lammps/region.h
+[  8%] Built target region.h
+[  8%] Generating includes/lammps/timer.h
+[  8%] Built target timer.h
+[  8%] Generating includes/lammps/universe.h
+[  8%] Built target universe.h
+[  8%] Generating includes/lammps/update.h
+[  8%] Built target update.h
+[  8%] Generating includes/lammps/utils.h
+[  8%] Built target utils.h
+[  9%] Generating includes/lammps/variable.h
+[  9%] Built target variable.h
+[  9%] Generating includes/lammps/fmt/core.h
+[  9%] Built target fmt_core.h
+[  9%] Generating includes/lammps/fmt/format.h
+[  9%] Built target fmt_format.h
+[  9%] Generating includes/lammps/nlohmann/json_fwd.hpp
+[  9%] Built target json_json_fwd.hpp
+[  9%] Generating includes/lammps/nlohmann/json.hpp
+[  9%] Built target json_json.hpp
+[  9%] Linking CXX static library libkokkoscore.a
+[  9%] Built target kokkoscore
+[  9%] Building CXX object lib/kokkos/simd/src/CMakeFiles/kokkossimd.dir/Kokkos_SIMD_dummy.cpp.o
+[  9%] Building CXX object lib/kokkos/algorithms/src/CMakeFiles/kokkosalgorithms.dir/KokkosAlgorithms_dummy.cpp.o
+[  9%] Building CXX object lib/kokkos/containers/src/CMakeFiles/kokkoscontainers.dir/impl/Kokkos_UnorderedMap_impl.cpp.o
+[  9%] Linking CXX static library libkokkosalgorithms.a
+[  9%] Linking CXX static library libkokkossimd.a
+[  9%] Built target kokkosalgorithms
+[  9%] Built target kokkossimd
+[ 10%] Linking CXX static library libkokkoscontainers.a
+[ 10%] Built target kokkoscontainers
+[ 10%] Generating C++ sources with cythonize...
+[ 11%] Generating C++ sources with cythonize...
+[ 11%] Generating C++ sources with cythonize...
+[ 11%] Generating C++ sources with cythonize...
+Compiling /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.pyx because it changed.
+[1/1] Cythonizing /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple_kokkos.pyx
+Compiling /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.pyx because it changed.
+[1/1] Cythonizing /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_model_python_couple.pyx
+Compiling /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.pyx because it changed.
+[1/1] Cythonizing /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple.pyx
+Compiling /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.pyx because it changed.
+[1/1] Cythonizing /n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/build-a100/cython/mliap_unified_couple_kokkos.pyx
+[ 11%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/angle.cpp.o
+[ 11%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/angle_deprecated.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/angle_zero.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/angle_write.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/arg_info.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/angle_hybrid.cpp.o
+[ 12%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_map.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_atomic.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_body.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_charge.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_ellipsoid.cpp.o
+[ 13%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_hybrid.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_line.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_sphere.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/atom_vec_tri.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/balance.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/body.cpp.o
+[ 14%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/bond.cpp.o
+[ 15%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/bond_deprecated.cpp.o
+[ 15%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/bond_hybrid.cpp.o
+[ 15%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/bond_zero.cpp.o
+[ 15%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/change_box.cpp.o
+[ 15%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/citeme.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/comm.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/comm_brick.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/comm_tiled.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_aggregate_atom.cpp.o
+[ 16%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_angle.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_angle_local.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_angmom_chunk.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_bond.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_bond_local.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_centro_atom.cpp.o
+[ 17%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_centroid_stress_atom.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_chunk.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_chunk_atom.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_chunk_spread_atom.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_cluster_atom.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_cna_atom.cpp.o
+[ 18%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_com.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_com_chunk.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_coord_atom.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_count_type.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_deprecated.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_dihedral.cpp.o
+[ 19%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_dihedral_local.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_dipole_chunk.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_dipole.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_displace_atom.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_erotate_sphere.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_erotate_sphere_atom.cpp.o
+[ 20%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_fragment_atom.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_global_atom.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_group_group.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_gyration.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_gyration_chunk.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_heat_flux.cpp.o
+[ 21%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_improper.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_improper_local.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_inertia_chunk.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_ke.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_ke_atom.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_msd.cpp.o
+[ 22%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_msd_chunk.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_omega_chunk.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_orientorder_atom.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_pair.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_pair_local.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_pe.cpp.o
+[ 23%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_pe_atom.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_pressure.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_property_atom.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_property_chunk.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_property_grid.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_property_local.cpp.o
+[ 24%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_rdf.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_reduce.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_reduce_chunk.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_reduce_region.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_slice.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_stress_atom.cpp.o
+[ 25%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_chunk.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_com.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_deform.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_partial.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_profile.cpp.o
+[ 26%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_ramp.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_region.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_temp_sphere.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_torque_chunk.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_vacf.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_vacf_chunk.cpp.o
+[ 27%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/compute_vcm_chunk.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/create_atoms.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/create_bonds.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/create_box.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/delete_atoms.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/delete_bonds.cpp.o
+[ 28%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/deprecated.cpp.o
+[ 29%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dihedral.cpp.o
+[ 29%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dihedral_deprecated.cpp.o
+[ 29%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dihedral_hybrid.cpp.o
+[ 29%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dihedral_write.cpp.o
+[ 29%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dihedral_zero.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/displace_atoms.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/domain.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_atom.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_cfg.cpp.o
+[ 30%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_custom.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_deprecated.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_grid.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_grid_vtk.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_local.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/dump_xyz.cpp.o
+[ 31%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/error.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/finish.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_adapt.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_addforce.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_atom.cpp.o
+[ 32%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_chunk.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_correlate.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_grid.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_histo.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_histo_weight.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_ave_time.cpp.o
+[ 33%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_aveforce.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_balance.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_bond_history.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_box_relax.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_deform.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_deposit.cpp.o
+[ 34%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_deprecated.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_dt_reset.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_dummy.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_efield.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_enforce2d.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_evaporate.cpp.o
+[ 35%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_external.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_gravity.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_group.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_halt.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_heat.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_indent.cpp.o
+[ 36%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_langevin.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_lineforce.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_minimize.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_momentum.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_move.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_neigh_history.cpp.o
+[ 37%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nh.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nh_sphere.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nph.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nph_sphere.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_npt.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_npt_sphere.cpp.o
+[ 38%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nve.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nve_limit.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nve_noforce.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nve_sphere.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nvt.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nvt_sllod.cpp.o
+[ 39%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_nvt_sphere.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_pair.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_planeforce.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_press_berendsen.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_press_langevin.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_print.cpp.o
+[ 40%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_property_atom.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_read_restart.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_recenter.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_respa.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_restrain.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_set.cpp.o
+[ 41%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_setforce.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_spring.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_spring_chunk.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_spring_self.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_store_atom.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_store_force.cpp.o
+[ 42%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_store_global.cpp.o
+[ 43%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_store_local.cpp.o
+[ 43%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_store_state.cpp.o
+[ 43%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_temp_berendsen.cpp.o
+[ 43%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_temp_rescale.cpp.o
+[ 43%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_thermal_conductivity.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_vector.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_viscous.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_harmonic.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_harmonic_outside.cpp.o
+[ 44%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_lj1043.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_lj126.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_lj93.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_morse.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_reflect.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_region.cpp.o
+[ 45%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fix_wall_table.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fmtlib_format.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/fmtlib_os.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/force.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/grid2d.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/grid3d.cpp.o
+[ 46%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/group.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance_group.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance_neigh.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance_store.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance_time.cpp.o
+[ 47%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/imbalance_var.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/improper.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/improper_deprecated.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/improper_hybrid.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/improper_zero.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/info.cpp.o
+[ 48%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/input.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/integrate.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/irregular.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/kspace.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/kspace_deprecated.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/kspace_zero.cpp.o
+[ 50%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/label_map.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/lammps.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/lattice.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/library.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/lmppython.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/math_eigen.cpp.o
+[ 51%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/math_extra.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/math_special.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/memory.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_cg.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_deprecated.cpp.o
+[ 52%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_fire.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_hftn.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_linesearch.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_quickmin.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/min_sd.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/minimize.cpp.o
+[ 53%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/modify.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/molecule.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/my_page.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/my_pool_chunk.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nbin.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nbin_manual.cpp.o
+[ 54%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nbin_multi.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nbin_standard.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/neigh_list.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/neigh_request.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/neighbor.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair.cpp.o
+[ 55%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_bin.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_bin_ghost.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_copy.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_halffull.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_multi.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_nsq.cpp.o
+[ 56%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_nsq_ghost.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_respa_bin.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_respa_nsq.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_skip.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_skip_respa.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_skip_size_off2on.cpp.o
+[ 57%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_skip_size_off2on_oneside.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/npair_trim.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nstencil.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nstencil_bin.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nstencil_ghost_bin.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nstencil_manual.cpp.o
+[ 58%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/nstencil_multi.cpp.o
+[ 59%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo.cpp.o
+[ 59%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_angle_all.cpp.o
+[ 59%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_angle_partial.cpp.o
+[ 59%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_angle_template.cpp.o
+[ 59%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_bond_all.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_bond_partial.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_bond_template.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_dihedral_all.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_dihedral_partial.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_dihedral_template.cpp.o
+[ 60%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_improper_all.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_improper_partial.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ntopo_improper_template.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/output.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_born.cpp.o
+[ 61%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_buck.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_buck_coul_cut.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_coul_cut.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_coul_debye.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_coul_dsf.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_coul_wolf.cpp.o
+[ 62%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_deprecated.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_hybrid.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_hybrid_molecular.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_hybrid_overlay.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_hybrid_scaled.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_lj_cut.cpp.o
+[ 63%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_lj_cut_coul_cut.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_lj_expand.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_morse.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_soft.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_table.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_yukawa.cpp.o
+[ 64%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_zbl.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/pair_zero.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/platform.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/potential_file_reader.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/procmap.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/random_mars.cpp.o
+[ 65%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/random_park.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/rcb.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/read_data.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/read_dump.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/read_restart.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reader.cpp.o
+[ 66%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reader_native.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reader_xyz.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_block.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_cone.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_cylinder.cpp.o
+[ 67%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_deprecated.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_ellipsoid.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_intersect.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_plane.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_prism.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_sphere.cpp.o
+[ 68%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/region_union.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/replicate.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/rerun.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reset_atoms_id.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reset_atoms_image.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/reset_atoms_mol.cpp.o
+[ 69%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/respa.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/run.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/safe_pointers.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/set.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/special.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/stl_reader.cpp.o
+[ 70%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/table_file_reader.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/tabular_function.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/text_file_reader.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/thermo.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/timer.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/tokenizer.cpp.o
+[ 71%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/universe.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/update.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/utils.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/variable.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/velocity.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/verlet.cpp.o
+[ 72%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/write_coeff.cpp.o
+[ 73%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/write_data.cpp.o
+[ 73%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/write_dump.cpp.o
+[ 73%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/write_molecule.cpp.o
+[ 73%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/write_restart.cpp.o
+[ 73%] Building CXX object CMakeFiles/lammps.dir/cython/mliap_model_python_couple.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/cython/mliap_unified_couple.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/compute_mliap.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_data.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_descriptor.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_descriptor_ace.cpp.o
+[ 74%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_descriptor_snap.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_descriptor_so3.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_model.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_model_linear.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_model_nn.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_model_python.cpp.o
+[ 75%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_model_quadratic.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_so3.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/mliap_unified.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-IAP/pair_mliap.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_gaussian_grid_local.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_grid.cpp.o
+[ 76%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_grid_local.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_sna_atom.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_sna_grid.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_sna_grid_local.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_snad_atom.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_snap.cpp.o
+[ 77%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/compute_snav_atom.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/pair_snap.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/ML-SNAP/sna.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/PYTHON/fix_python_invoke.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/PYTHON/fix_python_move.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/PYTHON/pair_python.cpp.o
+[ 78%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/PYTHON/python_impl.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/kokkos.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_kokkos.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_map_kokkos.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_kokkos.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_kokkos.cpp.o
+[ 79%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/comm_tiled_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/min_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/min_linesearch_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/neighbor_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/neigh_list_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/neigh_bond_kokkos.cpp.o
+[ 80%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nh_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nh_sphere_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/nbin_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/npair_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/npair_halffull_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/domain_kokkos.cpp.o
+[ 81%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/modify_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/rand_pool_wrap_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/tune_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_data_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_descriptor_so3_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_model_linear_kokkos.cpp.o
+[ 82%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_model_python_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_unified_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/mliap_so3_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/cython/mliap_model_python_couple_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/cython/mliap_unified_couple_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/angle_hybrid_kokkos.cpp.o
+[ 83%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_atomic_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_charge_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_ellipsoid_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_hybrid_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/atom_vec_sphere_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/bond_hybrid_kokkos.cpp.o
+[ 84%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_coord_atom_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_erotate_sphere_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_orientorder_atom_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_temp_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_temp_com_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_temp_deform_kokkos.cpp.o
+[ 85%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_temp_sphere_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_gaussian_grid_local_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_sna_grid_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/compute_sna_grid_local_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/dihedral_hybrid_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_addforce_kokkos.cpp.o
+[ 86%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_aveforce_kokkos.cpp.o
+[ 87%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_deform_kokkos.cpp.o
+[ 87%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_dt_reset_kokkos.cpp.o
+[ 87%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_efield_kokkos.cpp.o
+[ 87%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_enforce2d_kokkos.cpp.o
+[ 87%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_external_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_gravity_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_langevin_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_lineforce_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_minimize_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_momentum_kokkos.cpp.o
+[ 88%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_neigh_history_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nph_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nph_sphere_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_npt_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_npt_sphere_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nve_kokkos.cpp.o
+[ 89%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nve_limit_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nve_noforce_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nve_sphere_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nvt_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nvt_sllod_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_nvt_sphere_kokkos.cpp.o
+[ 90%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_planeforce_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_property_atom_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_recenter_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_setforce_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_spring_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_spring_self_kokkos.cpp.o
+[ 91%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_temp_berendsen_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_temp_rescale_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_viscous_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_harmonic_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_lj1043_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_lj126_kokkos.cpp.o
+[ 92%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_lj93_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_morse_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_reflect_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/fix_wall_region_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/improper_hybrid_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/verlet_kokkos.cpp.o
+[ 93%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/min_cg_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/min_fire_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/npair_copy_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/npair_skip_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/npair_trim_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_born_kokkos.cpp.o
+[ 94%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_buck_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_buck_coul_cut_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_coul_cut_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_coul_debye_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_coul_dsf_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_coul_wolf_kokkos.cpp.o
+[ 95%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_hybrid_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_hybrid_overlay_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_hybrid_scaled_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_lj_cut_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_lj_cut_coul_cut_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_lj_expand_kokkos.cpp.o
+[ 96%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_morse_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_soft_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_table_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_yukawa_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_zbl_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_mliap_kokkos.cpp.o
+[ 97%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/pair_snap_kokkos.cpp.o
+[ 98%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/region_block_kokkos.cpp.o
+[ 98%] Building CXX object CMakeFiles/lammps.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/KOKKOS/region_sphere_kokkos.cpp.o
+[ 98%] Linking CXX shared library liblammps.so
+[ 98%] Built target lammps
+[100%] Building CXX object CMakeFiles/lmp.dir/n/netscratch/kozinsky_lab/Lab/lzichi/Oct/lammps-custom-output/git/lammps-sgcmc/src/main.cpp.o
+[100%] Linking CXX executable lmp
+[100%] Built target lmp
+Installing LAMMPS Python module
+Requirement already satisfied: pip in ./buildwheel/lib/python3.11/site-packages (22.3)
+Collecting pip
+  Using cached pip-26.2.1-py3-none-any.whl (1.8 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 22.3
+    Uninstalling pip-22.3:
+      Successfully uninstalled pip-22.3
+Successfully installed pip-26.2.1
+Requirement already satisfied: pip in ./buildwheel/lib/python3.11/site-packages (from -r wheel_requirements.txt (line 1)) (26.2.1)
+Collecting build (from -r wheel_requirements.txt (line 2))
+  Using cached build-1.6.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting wheel (from -r wheel_requirements.txt (line 3))
+  Using cached wheel-0.48.0-py3-none-any.whl.metadata (2.3 kB)
+Requirement already satisfied: setuptools in ./buildwheel/lib/python3.11/site-packages (from -r wheel_requirements.txt (line 4)) (65.5.0)
+Collecting setuptools (from -r wheel_requirements.txt (line 4))
+  Using cached setuptools-84.0.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting packaging>=24.0 (from build->-r wheel_requirements.txt (line 2))
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pyproject_hooks (from build->-r wheel_requirements.txt (line 2))
+  Using cached pyproject_hooks-1.3.3-py3-none-any.whl.metadata (1.3 kB)
+Using cached build-1.6.1-py3-none-any.whl (31 kB)
+Using cached wheel-0.48.0-py3-none-any.whl (33 kB)
+Using cached setuptools-84.0.0-py3-none-any.whl (818 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Using cached pyproject_hooks-1.3.3-py3-none-any.whl (10 kB)
+Installing collected packages: setuptools, pyproject_hooks, packaging, wheel, build
+  Attempting uninstall: setuptools
+    Found existing installation: setuptools 65.5.0
+    Uninstalling setuptools-65.5.0:
+      Successfully uninstalled setuptools-65.5.0
+
+Successfully installed build-1.6.1 packaging-26.3 pyproject_hooks-1.3.3 setuptools-84.0.0 wheel-0.48.0
+running egg_info
+creating lammps.egg-info
+writing lammps.egg-info/PKG-INFO
+writing dependency_links to lammps.egg-info/dependency_links.txt
+writing top-level names to lammps.egg-info/top_level.txt
+writing manifest file 'lammps.egg-info/SOURCES.txt'
+reading manifest file 'lammps.egg-info/SOURCES.txt'
+writing manifest file 'lammps.egg-info/SOURCES.txt'
+running bdist_wheel
+running build
+running build_py
+creating build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/__init__.py -> build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/constants.py -> build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/core.py -> build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/data.py -> build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/formats.py -> build/lib.linux-x86_64-cpython-311/lammps
+copying lammps/numpy_wrapper.py -> build/lib.linux-x86_64-cpython-311/lammps
+creating build/lib.linux-x86_64-cpython-311/lammps/mliap
+copying lammps/mliap/__init__.py -> build/lib.linux-x86_64-cpython-311/lammps/mliap
+copying lammps/mliap/loader.py -> build/lib.linux-x86_64-cpython-311/lammps/mliap
+copying lammps/mliap/mliap_unified_abc.py -> build/lib.linux-x86_64-cpython-311/lammps/mliap
+copying lammps/mliap/mliap_unified_lj.py -> build/lib.linux-x86_64-cpython-311/lammps/mliap
+copying lammps/mliap/pytorch.py -> build/lib.linux-x86_64-cpython-311/lammps/mliap
+creating build/lib.linux-x86_64-cpython-311/lammps/ipython
+copying lammps/ipython/__init__.py -> build/lib.linux-x86_64-cpython-311/lammps/ipython
+copying lammps/ipython/magics.py -> build/lib.linux-x86_64-cpython-311/lammps/ipython
+copying lammps/ipython/wrapper.py -> build/lib.linux-x86_64-cpython-311/lammps/ipython
+copying lammps/liblammps.so -> build/lib.linux-x86_64-cpython-311/lammps
+running build_ext
+installing to build/bdist.linux-x86_64/wheel
+running install
+running install_lib
+creating build/bdist.linux-x86_64/wheel
+creating build/bdist.linux-x86_64/wheel/lammps
+copying build/lib.linux-x86_64-cpython-311/lammps/__init__.py -> build/bdist.linux-x86_64/wheel/./lammps
+copying build/lib.linux-x86_64-cpython-311/lammps/constants.py -> build/bdist.linux-x86_64/wheel/./lammps
+copying build/lib.linux-x86_64-cpython-311/lammps/core.py -> build/bdist.linux-x86_64/wheel/./lammps
+copying build/lib.linux-x86_64-cpython-311/lammps/data.py -> build/bdist.linux-x86_64/wheel/./lammps
+copying build/lib.linux-x86_64-cpython-311/lammps/formats.py -> build/bdist.linux-x86_64/wheel/./lammps
+creating build/bdist.linux-x86_64/wheel/lammps/ipython
+copying build/lib.linux-x86_64-cpython-311/lammps/ipython/__init__.py -> build/bdist.linux-x86_64/wheel/./lammps/ipython
+copying build/lib.linux-x86_64-cpython-311/lammps/ipython/magics.py -> build/bdist.linux-x86_64/wheel/./lammps/ipython
+copying build/lib.linux-x86_64-cpython-311/lammps/ipython/wrapper.py -> build/bdist.linux-x86_64/wheel/./lammps/ipython
+copying build/lib.linux-x86_64-cpython-311/lammps/liblammps.so -> build/bdist.linux-x86_64/wheel/./lammps
+creating build/bdist.linux-x86_64/wheel/lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/mliap/__init__.py -> build/bdist.linux-x86_64/wheel/./lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/mliap/loader.py -> build/bdist.linux-x86_64/wheel/./lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/mliap/mliap_unified_abc.py -> build/bdist.linux-x86_64/wheel/./lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/mliap/mliap_unified_lj.py -> build/bdist.linux-x86_64/wheel/./lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/mliap/pytorch.py -> build/bdist.linux-x86_64/wheel/./lammps/mliap
+copying build/lib.linux-x86_64-cpython-311/lammps/numpy_wrapper.py -> build/bdist.linux-x86_64/wheel/./lammps
+running install_egg_info
+running egg_info
+writing lammps.egg-info/PKG-INFO
+writing dependency_links to lammps.egg-info/dependency_links.txt
+writing top-level names to lammps.egg-info/top_level.txt
+reading manifest file 'lammps.egg-info/SOURCES.txt'
+writing manifest file 'lammps.egg-info/SOURCES.txt'
+Copying lammps.egg-info to build/bdist.linux-x86_64/wheel/./lammps-2026.7.4-py3.11.egg-info
+running install_scripts
+
+Building new binary wheel
+Purging existing wheels...
+
+Installing wheel into system site-packages folder

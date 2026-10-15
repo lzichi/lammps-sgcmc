@@ -260,6 +260,45 @@ cutoff manually, such as in the following example.
   on the active LAMMPS object before the pair style is defined. This call locates
   and loads the mliap-specific python module that is built into LAMMPS.
 
+Per-atom custom outputs from unified Python models
+-------------------------------------------------
+
+A unified Python model can publish per-atom values during its
+``compute_forces(data)`` call with ``data.set_custom_output(name, values)``.
+The name is a string used later by :doc:`fix pair <fix_pair>`. For use
+with ``fix pair``, pass a one-dimensional array of length ``data.nlocal``
+in LAMMPS local atom order. The method converts the values to contiguous
+``float64`` data and copies them into the pair style, so the model may
+reuse its original array after the call. ``fix pair`` exposes the result
+as one value per atom.
+
+For example, a unified Lennard-Jones model can sum half of each pair
+energy for the local atom at the center of that pair and publish the
+result as ``lj_energy``:
+
+.. code-block:: python
+
+   per_atom_energy = np.bincount(data.pair_i, weights=0.5 * eij,
+                                 minlength=data.nlocal)[:data.nlocal]
+   data.set_custom_output("lj_energy", per_atom_energy)
+
+The corresponding LAMMPS commands retrieve and dump the values:
+
+.. code-block:: LAMMPS
+
+   fix output all pair 1 mliap lj_energy 0
+   dump atoms all custom 1 atoms.dump id f_output
+
+The final ``0`` in the ``fix pair`` command indicates that the output
+does not require a trigger flag. The name passed to ``fix pair`` must
+match the name passed to ``set_custom_output``. When the model computes
+on a GPU, copy the output array to host memory before calling
+``set_custom_output``; for example, use ``cupy.asnumpy(per_atom_energy)``.
+See ``examples/mliap/lj`` for a complete input that also compares the
+custom output with :doc:`compute pe/atom <compute_pe_atom>`.
+From that example directory, run the Kokkos variant with a GPU-enabled
+LAMMPS build using ``lmp -k on g 1 -sf kk -in in.lj``.
+
 ----------
 
 .. include:: accel_styles.rst

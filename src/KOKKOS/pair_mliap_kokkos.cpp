@@ -134,8 +134,6 @@ void PairMLIAPKokkos<DeviceType>::compute(int eflag, int vflag)
 
   e_tally(data);
 
-  sync_custom_outputs_from_data();
-
   if (evflag) {
     atomKK->modified(descriptor_space,F_MASK | ENERGY_MASK | VIRIAL_MASK);
     atomKK->sync(execution_space,F_MASK | ENERGY_MASK | VIRIAL_MASK);

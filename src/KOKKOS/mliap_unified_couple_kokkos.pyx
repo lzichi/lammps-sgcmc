@@ -3,6 +3,7 @@
 
 import pickle
 import numpy as np
+cimport numpy as cnp
 import lammps.mliap
 try:
     import cupy
@@ -13,6 +14,7 @@ try:
 except ImportError:
     pass
 from libc.stdint cimport uintptr_t
+from libcpp.string cimport string
 
 cimport cython
 from cpython.ref cimport PyObject
@@ -86,7 +88,8 @@ cdef extern from "mliap_data_kokkos.h" namespace "LAMMPS_NS":
 
         void forward_exchange[CommType]  (CommType * copy_from, CommType * copy_to, int vec_len) except +
         void reverse_exchange[CommType] (CommType * copy_from, CommType * copy_to, int vec_len) except +
-        void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *data, const string& name, const double* values, const long* shape, int ndim) except +
+
+    void mliap_kokkos_set_custom_output(MLIAPDataKokkosDevice *data, const string& name, const double* values, const long* shape, int ndim) except +
 
 cdef extern from "mliap_unified_kokkos.h" namespace "LAMMPS_NS":
     cdef cppclass MLIAPDummyDescriptor:
@@ -265,8 +268,8 @@ cdef class MLIAPDataPy:
         cdef long *shape
         cdef string cname
 
-        a = np.contiguousarray(arr, dtype=np.float64)
-        ndim = a.dim
+        a = np.ascontiguousarray(arr, dtype=np.float64)
+        ndim = a.ndim
 
         if ndim != 1 and ndim != 2:
             raise ValueError("set_custom_output only supports 1D or 2D arrays")
@@ -284,7 +287,7 @@ cdef class MLIAPDataPy:
             mliap_kokkos_set_custom_output(
                 self.data,
                 cname,
-                <const double*> a.data,
+                <const double*> cnp.PyArray_DATA(a),
                 <const long*> shape,
                 ndim
             )
